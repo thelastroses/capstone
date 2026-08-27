@@ -1,1 +1,4 @@
 date,start,end,hours,phase,hat,task,estimate_hours,blocked_hours,notes
+2026-08-24,15:45,18:00,2.25,inception,project-manager,read chapter 1 and did in page quiz + create repo + scaffold docs/ tree + README.md file, 0.50, 0.00, underestimated the creation of git repo after not doing it for a while
+2026-08-25,15:45,18:00,2.25,inception,project-manager,recreate the repository + create a new GitHub project with board columns with WIP limit + create 6 cards on it, 2.00, 0.00, ran into a few problem with repository and underestimated how lot it would take to write the 6 cards
+2026-08-26,12:30,17:15,4.75,inception,project-manager,added hours-log.csv and pasted in the hours_report.py + did most of the charter.md, 5.00, 0.00, things went smoothly finished sooner then expected; 3 & 7 still need updated inputs
