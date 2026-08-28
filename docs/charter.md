@@ -9,7 +9,7 @@
   than a charter that has always been right.
 -->
 
-**Owner:** Jennifer Spencer · **Course:** Capstone · **Started:** 2026-08-24 · **Last revised:** 2026-08-26
+**Owner:** Jennifer Spencer · **Course:** Capstone · **Started:** 2026-08-24 · **Last revised:** 2026-08-27
 
 ## 1. Purpose
 
@@ -27,7 +27,7 @@ This capstone exists for me as a way have to build and ship a system that someon
 |---|---|
 | Hours available per week | 36 |
 | Total hours budgeted | 240 |
-| Weeks that are already broken (and where those hours move) | --------------------------------------------- DO |
+| Weeks that are already broken (and where those hours move) | Weeks 8 and 14 are my broken weeks: the broken hours are dispersed throughout the entire 13 work weeks |
 | Machine (OS, RAM, disk) | Windows, 32GB, 157GB free|
 | Administrator rights on that machine? | Yes |
 | Money I will spend on this project |  $100 MAX|
@@ -61,11 +61,11 @@ This capstone exists for me as a way have to build and ship a system that someon
 
 ## 7. Working agreement
 
-- **Sessions:** <days and times you are blocking on a real calendar>
+- **Sessions:** Sunday and Saturday work hours is 1-5pm; Monday-Friday work hours are 2-4pm; Weeks 8 and 14 are my broken weeks: the broken hours are dispersed throughout the entire 13 work weeks
 - **Logging:** every session ends with a row in `docs/hours-log.csv`, written before I close the laptop.
 - **Board:** work-in-progress limit of 2; nothing moves to Done without its stopping condition met.
 - **Commits:** requirement identifier first in the subject line; one logical change per commit.
-- **When I fall behind, I cut in this order:** <ranked, decided now, while it is cheap>
+- **When I fall behind, I cut in this order:** <ranked, decided now, while it is cheap> -------------------------------DO
 - **AI use:** governed by `docs/ai-usage.md`; every Amber-zone use is logged the day it happens.
 
 ## 8. Signature

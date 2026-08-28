@@ -1,0 +1,35 @@
+# Dependencies
+node_modules/
+
+# Next.js
+.next/
+
+# Production
+build/
+
+# Environment files
+.env
+.env*
+
+# Vercel
+.vercel/
+
+# Keep an example environment file
+!.env.example
+
+# TypeScript
+*.tsbuildinfo
+next-env.d.ts
+
+# Testing and coverage
+coverage/
+
+# Debug logs
+*.log
+
+# IDE settings
+.vscode/
+
+# OS files
+.DS_Store
+Thumbs.db
