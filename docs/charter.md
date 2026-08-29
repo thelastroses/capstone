@@ -9,7 +9,7 @@
   than a charter that has always been right.
 -->
 
-**Owner:** Jennifer Spencer · **Course:** Capstone · **Started:** 2026-08-24 · **Last revised:** 2026-08-28
+**Owner:** Jennifer Spencer · **Course:** Capstone · **Started:** 2026-08-24 · **Last revised:** 2026-08-29
 
 ## 1. Purpose
 
@@ -65,7 +65,7 @@ This capstone exists for me as a way have to build and ship a system that anothe
 - **Logging:** every session ends with a row in `docs/hours-log.csv`, written before I close the laptop.
 - **Board:** work-in-progress limit of 2; nothing moves to Done without its stopping condition met.
 - **Commits:** requirement identifier first in the subject line; one logical change per commit.
-- **When I fall behind, I cut in this order:** Any UI features that are mainly for aesthetic purposes will be cut first and then any unnecessary features that do not add onto the core elements of the project will be cut second, core features and documentation will not be cut.
+- **When I fall behind, I cut in this order:** Any UI features that are mainly for aesthetic purposes will be cut first and then any unnecessary features that do not add onto the core elements of the project will be cut second, the third thing that I will cut is cutting down a feature to be less complex and more simple. This will ensure that the core features are still implemented, it is just a simpler version of it. Core features and documentation will not be cut.
 - **AI use:** governed by `docs/ai-usage.md`; every Amber-zone use is logged the day it happens.
 
 ## 8. Signature
