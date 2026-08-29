@@ -9,11 +9,11 @@
   than a charter that has always been right.
 -->
 
-**Owner:** Jennifer Spencer · **Course:** Capstone · **Started:** 2026-08-24 · **Last revised:** 2026-08-27
+**Owner:** Jennifer Spencer · **Course:** Capstone · **Started:** 2026-08-24 · **Last revised:** 2026-08-28
 
 ## 1. Purpose
 
-This capstone exists for me as a way have to build and ship a system that someone other than me can clone easily and run based off the README. By the end of the project it should follow the requirments, design, test, and handoff documents a professional team would expect with the project. I will learn valuable skills and understand the different roles that come and are involved in a full time software development job.
+This capstone exists for me as a way have to build and ship a system that another developer can clone easily from the repository and run based off the README instructions. By the end of the project it should follow the requirments, design, test, and handoff documents that another devloper can run and work off of without any additional help from me. 
 
 ## 2. Project (filled in Week 2, after the scoping decision)
 
@@ -65,7 +65,7 @@ This capstone exists for me as a way have to build and ship a system that someon
 - **Logging:** every session ends with a row in `docs/hours-log.csv`, written before I close the laptop.
 - **Board:** work-in-progress limit of 2; nothing moves to Done without its stopping condition met.
 - **Commits:** requirement identifier first in the subject line; one logical change per commit.
-- **When I fall behind, I cut in this order:** <ranked, decided now, while it is cheap> -------------------------------DO
+- **When I fall behind, I cut in this order:** Any UI features that are mainly for aesthetic purposes will be cut first and then any unnecessary features that do not add onto the core elements of the project will be cut second, core features and documentation will not be cut.
 - **AI use:** governed by `docs/ai-usage.md`; every Amber-zone use is logged the day it happens.
 
 ## 8. Signature

@@ -1,6 +1,6 @@
 # ai-usage
 
-# AI Usage Log — <project name>
+# AI Usage Log — Capstone Project
 
 <!--
   Milestone 1 template. Copy this file into your repository as docs/ai-usage.md.
