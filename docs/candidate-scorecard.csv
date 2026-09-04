@@ -1,0 +1,8 @@
+candidate,features,integrations,auth,persistence,deploy,data,new_tech
+ArtGallery (first draft),5,3,no,yes,yes,moderate,2
+SafeMiles (first draft),5,3,no,yes,yes,complex,3
+BabyEssentials (first draft),5,3,no,yes,yes,complex,1
+
+ArtGallery (cut - 2 features & 1 integration),3,2,no,yes,yes,moderate,2
+SafeMiles (rejected + cut - 2 features & 1 integration),3,2,no,yes,yes,complex,3
+BabyEssentials (rejected - the 2 features & 1 integration cut seemed to be larger more crucial to the program then art gallery),3,2,no,yes,yes,complex,1

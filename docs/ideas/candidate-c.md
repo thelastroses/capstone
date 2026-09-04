@@ -55,8 +55,8 @@ testing and documentation, which are graded.
 | **Ship** — a named deployment target, terms read | pass / fail | <target + pricing page read on YYYY-MM-DD> |
 | **Show** — a stranger sees it work in 10 minutes | pass / fail | <the ten steps, written down> |
 
-**Technologies:** <name> (known/new) · <name> (known/new) · <name> (known/new)
-**Novelty load:** <count of "new">
+**Technologies:** Next.js (known) · API like Amazon Creators API but do not need to be a approved member of Amazon Associates program (new) · Tailwind CSS (known)
+**Novelty load:** 1
 
 ## 6. The one hard part
 
