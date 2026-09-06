@@ -1,8 +1,9 @@
 # Dependencies
 node_modules/
 
-# Next.js
-.next/
+# Vite
+dist/
+.vite/
 
 # Production
 build/
@@ -16,10 +17,6 @@ build/
 
 # Keep an example environment file
 !.env.example
-
-# TypeScript
-*.tsbuildinfo
-next-env.d.ts
 
 # Testing and coverage
 coverage/

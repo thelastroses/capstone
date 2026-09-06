@@ -3,23 +3,22 @@
 # Project Charter — Jennifer Spencer
 
 <!--
-  In Week 2, after the scoping decision, you add the project itself in §2 and
-  re-date the file. Never delete the original text; strike it through or keep
+  Never delete the original text; strike it through or keep
   it in a "superseded" block. A charter with a visible history is worth more
   than a charter that has always been right.
 -->
 
-**Owner:** Jennifer Spencer · **Course:** Capstone · **Started:** 2026-08-24 · **Last revised:** 2026-08-29
+**Owner:** Jennifer Spencer · **Course:** Capstone · **Started:** 2026-08-24 · **Last revised:** 2026-09-06
 
 ## 1. Purpose
 
 This capstone exists for me as a way have to build and ship a system that another developer can clone easily from the repository and run based off the README instructions. By the end of the project it should follow the requirments, design, test, and handoff documents that another devloper can run and work off of without any additional help from me. 
 
-## 2. Project (filled in Week 2, after the scoping decision)
+## 2. Project
 
-- **One-sentence description:** <fill in Week 2>
-- **Primary user:** <a real person or role, not "users">
-- **The one thing it must do to be worth finishing:** <fill in Week 2>
+- **One-sentence description:** A gallery to keep all artworks and information in an interactive space.
+- **Primary user:** Artists
+- **The one thing it must do to be worth finishing:** Display an artist's artwork in an interactive way, the 3-D scene feature.
 
 ## 3. Capacity and constraints
 

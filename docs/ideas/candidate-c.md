@@ -11,8 +11,8 @@ For              About to be mothers with no family support
 who              About to be mothers need to buy specific items for the baby that also aligns with their material preferences, money sitation, wants, needs, and baby complications/no complications situation
 the problem is   When a women gives birth she does not always have all the items she needs, she is are already in pain and does not have the time or energy to find the items that are right for her
 which costs      Mothers buy unnessary items trying to find what is right for their babies costing them thousands, wasting at least 3 hours a week trying to find the right items, forgetting to buy at least 5 items because their is no specifc list made for them at hand
-Today they       use Babylist as a baby registery that lets them add items all on one list from online stores such as Amazon and Target. It also lets them compare prices of an item that is found in multiple stores side by side
-which falls short because     Babylist does not make a list for them based on their preferences
+Today they       make a baby registery adding items from other stores and then comparing prices.
+which falls short because     the list is not always based on their preferences, needs, and situation
 
 
 ## 2. Evidence a user exists
@@ -30,52 +30,56 @@ which falls short because     Babylist does not make a list for them based on th
 
 | # | Feature (one vertical slice each) | Hours |
 |---|---|---:|
-| 1 | | |
-| 2 | | |
-| 3 | | |
-| 4 | | |
-| 5 | | |
-| | Walking skeleton + CI | |
-| | Deployment + clean-machine test | |
-| | **Construction total** | |
+| 1 | Compare updated prices from different stores | interface 3 h   handler 1 h   data 3 h   validation 1 h   error path 1 h  test 2 h      docs 2 h        subtotal 13 h |
+| 2 | A place to input preferences and then the personalized list from that | interface 4 h   handler 3 h   data 2 h   validation 1 h   error path 1 h  test 2 h      docs 2 h        subtotal 15 h |
+| 3 | Search feature that allows a user to directly add a item to their list | interface 2 h   handler  1 h   data 1 h   validation 1 h   error path 1 h  test 1 h      docs 2 h        subtotal 9 h  |
+| 4 | A favorites tab to remember what items they like but didn't directly add to their list | interface 1 h   handler 1 h   data 1 h   validation 1 h   error path 1 h  test 1 h      docs 2 h        subtotal 8 h |
+| 5 | A vague essential item list that most mother's think are necessary items to buy  | interface 1 h   handler 1 h   data 1 h   validation 1 h   error path 1 h  test 1 h      docs 1 h        subtotal 7 h |
+| | Walking skeleton + CI | 6 h |
+| | Deployment + clean-machine test | 2 h |
+| | **Construction total** | 60 h |
 
 Budget: plan on **60 hours**, hard ceiling **75**. Above 75 you are borrowing from
 testing and documentation, which are graded.
 
 ## 4. Out of scope — will NOT be built
 
-<At least eight, by name. This list is worth more than the one above.>
+1. The project will be kept to a single user no user account system will be added
+2. No advance AI features such as creating art with AI or an AI assistant
+3. I will not create social media features (liking, commenting)
+4. I will not build a store to purchase baby items
+5. I will not build an API
+6. It will not be a mobile app, web only
+7. I will not build a messaging system built directly into the program, only a link for the email is okay
+8. I will not build both a dark and light mode only dark
 
 ## 5. Feasibility screen
 
 | Gate | Verdict | Evidence (dated) |
 |---|---|---|
-| **Build** — novelty load ≤ 2 | pass / fail | <technology list, each marked known/new> |
-| **Get** — every dependency exercised for real | pass / fail | <status code, saved response, date> |
-| **Ship** — a named deployment target, terms read | pass / fail | <target + pricing page read on YYYY-MM-DD> |
-| **Show** — a stranger sees it work in 10 minutes | pass / fail | <the ten steps, written down> |
+| **Build** — novelty load ≤ 2 | pass | Vite.js with React (known) · API like Amazon Creators API but do not need to be a approved member of Amazon Associates program (new) · Tailwind CSS (known) |
+| **Get** — every dependency exercised for real | fail | unverified - could not find an API that did not have for example, you need to be an approved member of the Amazon Associates program in order to use it. If the API was free it did not fit exactly with what I was looking for. Vite and React, Tailwind CSS were all successfully installed and tested. The page loaded with styling applied, 2026-09-05 |
+| **Ship** — a named deployment target, terms read | pass | Using Vercel to deploy, the project pricing page read on 2026-09-05 |
+| **Show** — a stranger sees it work in 10 minutes | pass | <the ten steps, written down> |
 
-**Technologies:** Next.js (known) · API like Amazon Creators API but do not need to be a approved member of Amazon Associates program (new) · Tailwind CSS (known)
+**Technologies:** Vite.js with React (known) · API like Amazon Creators API but do not need to be a approved member of Amazon Associates program (new) · Tailwind CSS (known)
 **Novelty load:** 1
 
 ## 6. The one hard part
 
-<Name exactly one. Say what makes it hard in two sentences. If you can name three,
-you have three projects.>
+The one hard part is finding a good API that does not require you to be an approved member of a program. Then using that API to compare prices live from different stores where the purchase relies on that API's data.
 
 ## 7. Scorecard (1–5 each; weight in parentheses)
 
 | Criterion | (w) | Score | Weighted |
 |---|---:|---:|---:|
-| Evidence a user exists | 3 | | |
-| Fits ~45 hours of features | 3 | | |
-| Novelty load | 2 | | |
-| Dependencies verified | 2 | | |
-| Demonstrable in ten minutes | 1 | | |
-| **Total (max 55)** | | | |
+| Evidence a user exists | 3 | 4 | 12 |
+| Fits ~45 hours of features | 3 | 3 | 9 |
+| Novelty load | 2 | 5 | 10 |
+| Dependencies verified | 2 | 1 | 2 |
+| Demonstrable in ten minutes | 1 | 5 | 5 |
+| **Total (max 55)** | | | 38 |
 
 ## 8. If this candidate is rejected
 
-<Write the rejection paragraph NOW, while you still like the idea. Name the gate it
-failed, the number that killed it, and the condition under which you would revisit
-it — or say plainly that it is closed, not deferred.>
+The gate it failed was the Get gate because I could not find an API that did not have for example, you need to be an approved member of the Amazon Associates program in order to use it. If the API was free it did not fit exactly with what I was looking for. The dependency score on the score card got a 1 out of 5 because of this. I think that the idea is good but it fully depends on having an very good API. I could not revisit it until I found an API I could use.
