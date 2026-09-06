@@ -37,10 +37,10 @@ This capstone exists for me as a way have to build and ship a system that anothe
 ## 4. Definition of finished
 
 - System runs without any intial present errors
-- Majority if not all components are completed and work
-- Main function of system completes the project idea with additional extra components
-- Meets all requirments of capstone project
-- The system must be cloneable and testable
+- Components run without error and have each must have feature, that is listed in the documentation
+- The system completes the project idea with additional extra components
+- The system meets the requirments that are presented in the capstone project rubrics
+- The system passes a clean clone check of cloning the repository and following the README to build the system successfully
 
 ## 5. Non-goals — what I will NOT build or do
 

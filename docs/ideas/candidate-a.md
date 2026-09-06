@@ -29,11 +29,11 @@ which falls short because     photos do not keep the artwork together with all o
 
 | # | Feature (one vertical slice each) | Hours |
 |---|---|---:|
-| 1 | 2-D element - displaying artwork and listing canvas information from .procreate file (under the 2-d element) (have to write something that will extract it from the file) | interface 3 h   handler 3 h   data 5 h   validation 2 h   error path 2 h  test 2 h      docs 1 h        subtotal 18 h |
-| 2 | 3-D element - using blender with react three fiber to create dynamic enviroment that someone can easily go through each art work| interface 4 h   handler 3 h   data 2 h   validation 1 h   error path 1 h  test 3 h      docs 1 h        subtotal 15 h |
+| 1 | 2-D element - displaying artwork and listing canvas information from .procreate file (under the 3-d element) (have to write something that will extract it from the file) | interface 3 h   handler 3 h   data 5 h   validation 2 h   error path 2 h  test 2 h      docs 1 h        subtotal 18 h |
+| 2 | 3-D element - using blender with react three fiber to create dynamic environment that someone can easily go through each art work| interface 4 h   handler 3 h   data 2 h   validation 1 h   error path 1 h  test 3 h      docs 1 h        subtotal 15 h |
 | 3 | A way to upload the .procreate file of the artwork | interface 1 h   handler 1 h   data 0 h   validation 1 h   error path 1 h  test 1 h      docs 1 h        subtotal 6 h  |
 | 4 | A way to upload the .png of the artwork | interface 1 h   handler 1 h   data 0 h   validation 1 h   error path 1 h  test 1 h      docs 1 h        subtotal 6 h |
-| 5 | The website saves the data uploaded and extracted in to a database | interface 1 h   handler 1 h   data 1 h   validation 1 h   error path 1 h  test 1 h      docs 1 h        subtotal 7 h |
+| 5 | The website saves the data uploaded and extracted into a database | interface 1 h   handler 1 h   data 1 h   validation 1 h   error path 1 h  test 1 h      docs 1 h        subtotal 7 h |
 | | Walking skeleton + CI | 6 h |
 | | Deployment + clean-machine test | 2 h |
 | | **Construction total** | 60 h |
