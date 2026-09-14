@@ -2,7 +2,7 @@
 
 # Software Requirements Specification — Art Gallery
 
-**Author:** Jennifer Spencer  **Version:** 1.0  **Date:** 2026-09-08
+**Author:** Jennifer Spencer  **Version:** 1.0  **Date:** 2026-09-12
 **Status:** Baselined
 
 ---
@@ -50,6 +50,7 @@ could interpret a word two ways, it belongs here.
 | Overlay | An overlay is when an artwork with its canvas information covers a viewer's screen and in order to get out of the overlay they have to click out of it |
 | Pop up | A pop up can be something as big as an overlay or as small as a text box component that appears at the top of a viewers or artist screen to let them know of any urgent information or limitations they have met |
 | Fields | A field is each text category that displays with the artwork from when the canvas information has been extracted |
+| Procreate | Procreate is a digital drawing app that allows artists to draw for free and download the .procreate file for its data |
 
 ## 4. Assumptions and Dependencies
 
@@ -118,7 +119,7 @@ could interpret a word two ways, it belongs here.
 ### FR-UPL-06 — A place to take pictures built directly into the website
 
 **Priority:** Won't (this release)
-**Requirement:** An artist shall be able to take pictures of their artworks in the website with a camera function built to upload directly into the website in the upload tab.
+**Requirement:** An artist shall be able to take pictures of their artworks in the upload tab after using the website's built in camera function and have it upload the artwork into the gallery without needing to leave the website.
 **Rationale:** Having a place to take pictures built directly into the website will allow artists that hand draw their artworks to do so with more convenience. Stella always struggled with the uploading process of artworks and by having a way to upload and take a picture directly built into the app would save her a lot of time and hassle.
 
 **Source:** Interview with Stella, 2026-09-09
@@ -150,7 +151,7 @@ could interpret a word two ways, it belongs here.
 ### FR-DATA-02 — The amount of artworks an artist can save and upload into the database will be capped.
 
 **Priority:** Must
-**Requirement:** Artist's artworks shall be able to save into the database but will be capped at a certain amount of uploads to save space and the amount of money spent on the database.
+**Requirement:** Artist's artworks shall be able to save into the database but will be capped at 20 uploads of artworks which means 20 artworks can be displayed total on the website to save space and the amount of money spent on the database.
 **Rationale:** It is important to limit the amount that can be saved into the database so that an artist can not use the gallery as a photo app database when they run out of space on their computers. It is my decision because in this current release I have a limited amount of money that I can spend. The uploading of artworks needs a way to not get out of hand and used for its intended purpose.
 **Acceptance criteria:**
 - Given an artist, when they upload an artwork in the upload tab, then if they have under 20 artworks then they will be able to upload their artwork and save it successfully into the database.
@@ -162,7 +163,7 @@ could interpret a word two ways, it belongs here.
 ### FR-GALL-01 — History Overview
 
 **Priority:** Won't (this release)
-**Requirement:** An artist shall be able to see their artworks in a year's timeline after uploading it and specifying to specifically put it in the timeline. 
+**Requirement:** An artist shall be able to see their artworks in a year's timeline after uploading it and specifically put it in the timeline. 
 **Rationale:** Gives an overview of the years they worked on their artwork showing the highlight pictures from each year and ensuring viewers can see the progression of their artwork throughout the years. Stella enjoyed seeing the progress she made with her artworks and seeing how much she grew over the years.
 
 **Source:** Interview with Stella, 2026-09-09
@@ -185,7 +186,7 @@ could interpret a word two ways, it belongs here.
 ### FR-GALL-03 — Contact Component
 
 **Priority:** Should
-**Requirement:** A viewer shall be able to contact the artist through a component when viewing the right bar of the 2D scene page.
+**Requirement:** A viewer shall be able to contact the artist through a link in the 2D gallery that will open the artist's email address in the user's g-mail.
 **Rationale:** Communication and art often go together especially when collaborating on an art piece. It is important for some viewers such as recruiters to get in contact with the artist for job offers. Stella often collaborates on her art pieces needing a way to get in contact with her to get a collaboration started.
 **Acceptance criteria:**
 - Given a viewer wants to start a collaboration or a recruiter wants to offer a job, when the viewer scrolls down into the 2D scene, then the viewer should see a component to get in contact with the artist in the 2D scene.
@@ -221,7 +222,7 @@ could interpret a word two ways, it belongs here.
 ### FR-TDG-02 — Zoom into 3D scene
 
 **Priority:** Must
-**Requirement:** A viewer shall be able to zoom into the 3D scene when clicking into the scene; Zooming in with the scroll bar slowly makes the scene look bigger.
+**Requirement:** A viewer shall be able to zoom into the 3D scene when clicking into the scene; Zooming in with the scroll bar slowly making the 3D scene look bigger increasing the size of the artworks in the scene.
 **Rationale:** In order to look more closely at the 3D scene/gallery it is important for viewers to feel like they are interacting with the artwork and viewing it in a real museum. It is my decision because without the interaction then the viewer will feel less engaged and it will not be a good scene to be the first thing the viewer sees when viewing the website.
 **Acceptance criteria:**
 - Given the viewer wants to view the 3D scene, when the viewer clicks into the 3D scene, then they will be able to scroll back and forth to view each artworks in the 3D scene.
@@ -287,7 +288,7 @@ with one line of reasoning. A short list here means you have not thought hard en
 | Not building | Why not | Revisit when |
 |---|---|---|
 | User/artist account system | It is too much extra work that adds over 10 hours of time since I have not made one before | I would need to revisit it after the capstone in the future when I have a lot of extra time, it would probably be one of the first things I'd revisit |
-| Artwork store | An artstore would be fun to look and browser through as a viewer however I want to focus more of the showing of the artworks, it would also take a significant amount of time to complete | I would need to revisit when I have more viewers looking at the gallery and when I have people specifically tell me they want to buy the artwork shown; and of course I would need the time to implement it in the future|
+| Artwork store | An artstore would be fun to look and browser through as a viewer, viewing the artists artworks as prints that they have displayed in the gallery scenes. However I want to focus more of the showing off the artworks and it would also take a significant amount of time to complete | I would need to revisit when I have more viewers looking at the gallery and when I have people specifically tell me they want to buy the artwork shown; and of course I would need the time to implement it in the future|
 | Rearranging artworks in the 3D | I want enough time to make the main components of the gallery first and ensure it is not rushed through, I would also preferably want more time to make sure it is thoroughly tested | I would revisit when the capstone is done and in the future when I have the time after making the user/artist account system |
 |  Light and dark mode | While this function seems easy to implement at first there can be small bugs and mistakes that take up an unknown amount of time where I could be using that time to implement core features further | I would do this right after the capstone when I had time to mess around with the different light and dark color schemes and weird bugs |
 | A place to take pictures built directly into the website | This would require the viewer to allow access to their camera which not many want to do nowadays and it would probably work better for a website that is built specifically for mobile devices since the camera is better. It would also require a lot of time to implement. |  I would revisit when the website is more prepared for mobile devices and when more time is available after all the other features listed above were done too. |
@@ -304,3 +305,4 @@ with one line of reasoning. A short list here means you have not thought hard en
 | Date | Version | Change | Reason |
 |---|---|---|---|
 | 2026-09-11 | 1.0 | Initial specification | Milestone 3 |
+| 2026-09-12 | 1.0 | Edited 6 sentences that could be inferred that two different programs could satisfy it | Ambiguity pass after external read |

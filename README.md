@@ -1,7 +1,10 @@
 # Capstone — Capstone Project
 
-Senior capstone by Jennifer Spencer, Fall 2026. **Status: Week 1 — engineering system only.
-No application code yet.** The project idea is chosen in Week 2.
+Senior capstone by Jennifer Spencer, Fall 2026. **Status: Week 3 — Software requirements specification, v1 **
+
+## Project idea
+The project is an art gallery that is able to take artists artwork and upload it into a 3D and 2D gallery. The galllery allows interactivity and extra information from an uploaded .procreate file when the artwork is uploaded to the website.
+
 
 ## What is here
 - `docs/charter.md` — scope, constraints, non-goals, risks, working agreement
