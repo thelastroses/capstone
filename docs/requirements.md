@@ -45,7 +45,7 @@ could interpret a word two ways, it belongs here.
 | Gallery | Gallery can mean both the 2D or 3D scene it is essentially the place wherever the artworks and its canvas information lay |
 | Digital recognition tool | A digital recognition tool is a tool that helps to improve hand drawn artworks to look more detailed, sometimes to be improved with the help of AI |
 | Canvas information | Canvas information refers to the extracted canvas data from the .procreate file |
-| Viewer | A viewer is someone that does not upload their artworks they simply view the artworks shown to them by the artist, a viewer is typically someone such as a friend, family member, or teacher; An artist can play the role as a viewer as long as they are simple viewing it for themselves not making adjustments |
+| Viewer | A viewer is someone that does not upload their artworks they simply view the artworks shown to them by the artist, a viewer is typically someone such as a friend, family member, or teacher; An artist can play the role as a viewer as long as they are simply viewing it for themselves not making adjustments |
 | Picture | A picture in this document is the artwork that the artist will upload to their gallery |
 | Overlay | An overlay is when an artwork with its canvas information covers a viewer's screen and in order to get out of the overlay they have to click out of it |
 | Pop up | A pop up can be something as big as an overlay or as small as a text box component that appears at the top of a viewers or artist screen to let them know of any urgent information or limitations they have met |
@@ -172,7 +172,7 @@ could interpret a word two ways, it belongs here.
 ### FR-GALL-02 — Artwork Overview
 
 **Priority:** Must
-**Requirement:** An artist or viewer shall be able to see an overview of all their artworks under the 3D scene after uploading it.
+**Requirement:** An artist shall be able to see an overview of all their artworks under the 3D scene after uploading it.
 **Rationale:** An artist that can see all their artworks after uploading can view each artwork with no duplicates for themselves or to show others easily. Stella enjoys having a way to show her teachers and friends all the artwork she has made in one view.
 **Acceptance criteria:**
 - Given an artwork they want in their gallery, when an artist uploads and clicks the 2D scene selection, then the artwork will show up under the 3D scene, if it is not a duplicate and a valid artwork file such as a .png.
