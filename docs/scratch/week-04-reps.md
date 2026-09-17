@@ -93,3 +93,51 @@ Rep 4 — The data inventory
 Name the two rows where you genuinely do not know the answer. For each, name the primary source you would read to find out — a vendor’s terms page, your hosting provider’s docs — and put it on your Week-5 list. Do not guess. Do not ask a chatbot and write down what it says.
 - The row: email address, where I genuinely did not know what to answer was how long you kept and how a user gets rid of it. Since I am not saving the email address into my Supabase I wasn't sure what to put N/A or something else for the how a user gets rid of it. Then for the how long you keep it since I am not saving that data would I need to put or read g-mail's terms or do would I just put N/A again?
 
+## Rep 5 - The mouse-unplugged pass
+
+- I could not figure out how to get to compose button on the g-mail page until I switched over to my laptop keyboard instead of the keyboard I had plugged in. For some reason it would only work in that circumstance. 
+- It took a lot of tabbing to get back to the place I actually wanted to use if I had tabbed too much out of one section.
+- Getting to the settings icon was also hard/ time consuming because it required a lot of tabbing, I feel like it should have taken less takes to get there.
+
+| ID | Requirement (metric · threshold · condition) | Priority | How it is measured |
+|---|---|---|---|
+| NFR-TAB-01 | A viewer must be able to move around each component in at most 20 tabs total with only using a keyboard, no mouse on Chrome | Must | Only using a keyboard a viewer should be able to reach the gallery and the upload tab in at most 20 tabs, record if each spot was reached |
+| NFR-TAB-02 | When using the tab key the viewer should not lose their place on the website, the indicator should be at least 50% opacity of a black when something has been tab to and it is hovering over a button/component it should be visible on the website on Chrome | Must | When using tab to go through the website each component and button tabbed to, should be outlined of a 50% opacity of a black for key indication that it has been tabbed too |
+| NFR-TAB-03 | A viewer must be able to tab through the website in a logical order with 0 components and buttons skipped when using tab and shift + tab on Chrome | Must | Using the tab key to move foward and shift + tab to move backwards it goes in a logical order missing 0/not missing any component or button, record if it was clear to do so |
+
+## Rep 6 - Contrast and grayscale
+
+Does not make sense for current state of project because the page is only one color and does not have other components or core features added in yet.
+
+## Rep 7 - The prohibitions, and the history check
+
+Five security requirements as prohibition:
+
+- There must not be any Supabase keys, passwords and secrets in the repository being saved from the gallery. Ensure that .env is in the .gitignore and the .env.example only has example values. Run a search on the fully history not just the working tree to ensure that there are no secrets.
+
+- The gallery must not have any security vulnerabilites and must be deployed using HTTPS. Ensure that there are no vulnerabilites by running npm audit in CI and that the deloped website uses HTTPS not HTTP. 
+
+- A viewer and artist must not be able to input an artwork file that changes a query or command. It is measured by ensuring that no input from the artwork files is put into the database query or HTML and that there are no injection attacks possible.
+
+- If there are anys failure to upload artwork and database errors they must be recorded and they should not be seen by the viewer and artist. To ensure that the website is safe test in the upload tab by uploading a invaild artwork file type and test a failure to the database. Make sure that each error is logged and is not shown directly to the viewer and artist only a simple error message.
+
+- A gallery must not save artwork files that are corrupt and duplicate artwork files. To ensure this upload artwork files two times and make sure that the artwork can canvas information all display correcly and that the duplicate files are not kept.
+
+## Rep 8 - Sort the pile
+
+Here are twelve items from a real student’s “notes” section. Sort each into constraint, assumption, or dependency. Some are trickier than they look.
+
+a. The course ends in Week 16.
+b. The barcode API's free tier allows 1,000 calls per day.
+c. I have no administrator rights on my laptop.
+d. The hosting provider will still have a free tier in December.
+e. The app needs a hosted database.
+f. I can only work about 15 hours a week.
+g. My roommates will test the app in Week 11.
+h. The charting library I want to use is GPL-licensed.
+i. CI minutes on my provider's free plan.
+j. I must demo live in a 30-minute session.
+k. Two hundred pantry items is a realistic maximum for one household.
+l. The framework's auth module handles password hashing for me.
+
+
