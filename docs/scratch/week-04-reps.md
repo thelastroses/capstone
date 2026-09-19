@@ -101,9 +101,9 @@ Name the two rows where you genuinely do not know the answer. For each, name the
 
 | ID | Requirement (metric · threshold · condition) | Priority | How it is measured |
 |---|---|---|---|
-| NFR-TAB-01 | A viewer must be able to move around each component in at most 20 tabs total with only using a keyboard, no mouse on Chrome | Must | Only using a keyboard a viewer should be able to reach the gallery and the upload tab in at most 20 tabs, record if each spot was reached |
-| NFR-TAB-02 | When using the tab key the viewer should not lose their place on the website, the indicator should be at least 50% opacity of a black when something has been tab to and it is hovering over a button/component it should be visible on the website on Chrome | Must | When using tab to go through the website each component and button tabbed to, should be outlined of a 50% opacity of a black for key indication that it has been tabbed too |
-| NFR-TAB-03 | A viewer must be able to tab through the website in a logical order with 0 components and buttons skipped when using tab and shift + tab on Chrome | Must | Using the tab key to move foward and shift + tab to move backwards it goes in a logical order missing 0/not missing any component or button, record if it was clear to do so |
+| NFR-ACC-01 | A viewer must be able to move around each component in at most 20 tabs total with only using a keyboard, no mouse on Chrome | Must | Only using a keyboard a viewer should be able to reach the gallery and the upload tab in at most 20 tabs, record if each spot was reached |
+| NFR-ACC-02 | When using the tab key the viewer should not lose their place on the website, the indicator should be at least 50% opacity of a black when something has been tab to and it is hovering over a button/component it should be visible on the website on Chrome | Must | When using tab to go through the website each component and button tabbed to, should be outlined of a 50% opacity of a black for key indication that it has been tabbed too |
+| NFR-ACC-03 | A viewer must be able to tab through the website in a logical order with 0 components and buttons skipped when using tab and shift + tab on Chrome | Must | Using the tab key to move foward and shift + tab to move backwards it goes in a logical order missing 0/not missing any component or button, record if it was clear to do so |
 
 ## Rep 6 - Contrast and grayscale
 
@@ -127,17 +127,43 @@ Five security requirements as prohibition:
 
 Here are twelve items from a real student’s “notes” section. Sort each into constraint, assumption, or dependency. Some are trickier than they look.
 
+Constraints:
 a. The course ends in Week 16.
-b. The barcode API's free tier allows 1,000 calls per day.
 c. I have no administrator rights on my laptop.
-d. The hosting provider will still have a free tier in December.
-e. The app needs a hosted database.
 f. I can only work about 15 hours a week.
+h. The charting library I want to use is GPL-licensed. (h) is a dependency and an obligation: you depend on the library, and its license imposes conditions on how you may distribute what you build with it.
+j. I must demo live in a 30-minute session.
+
+Assumptions:
+b. The barcode API's free tier allows 1,000 calls per day.
+d. The hosting provider will still have a free tier in December.
 g. My roommates will test the app in Week 11.
+k. Two hundred pantry items is a realistic maximum for one household.
+l. The framework's auth module handles password hashing for me. (l) is an assumption right now and becomes a dependency the moment you verify it in the docs — which is a good picture of how assumptions are supposed to die.
+
+Dependencies:
+e. The app needs a hosted database.
 h. The charting library I want to use is GPL-licensed.
 i. CI minutes on my provider's free plan.
-j. I must demo live in a 30-minute session.
-k. Two hundred pantry items is a realistic maximum for one household.
-l. The framework's auth module handles password hashing for me.
 
 
+Constraints: a, c, f, j — you did not choose them and cannot change them. 
+Assumptions: b, d, g, k, l — every one could turn out false, and each needs an owner and a verify-by date. 
+Dependencies: e, i — outside your control, needing a pinned plan, a failure mode, and a fallback.
+
+Rest of rep 8 is in requirements.md
+
+## Rep 9 - Verify one obligation at the source
+
+Write: did the primary source say what you expected? Name one thing you learned that you would not have guessed. If it said exactly what you expected, say so plainly — that is a real result too.
+
+The one thing that I learned that I would not have guessed is that Supabase allows you to set a maximum upload size so that it prevents "users from uploading and then downloading excessively large files". This is good to know because it will help to manage how much is being uploaded into the database since artworks are typically not a set size and artworks can get pretty big if they include a lot of layers, strokes, or is a larger canvas size. It seemed like an obvious thing at after I read it, that Supabase would let you set an image but that simple detail is easy to forget when it comes to images.
+
+Storage Docs:
+https://supabase.com/docs/guides/storage/production/scaling 
+
+Rest of rep 9 is in requirements.md
+
+## Rep 10 - The enumeration pass, and the cull
+
+Rep 10 is in requirements.md and ai-usage.md

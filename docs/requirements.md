@@ -97,7 +97,6 @@ could interpret a word two ways, it belongs here.
 **Source:** My decision
 
 
-
 ### FR-UPL-04 — Multiple Artist Upload
 
 **Priority:** Won't (this release)
@@ -277,8 +276,54 @@ could interpret a word two ways, it belongs here.
 
 ## 6. Non-Functional Requirements
 
-Placeholder for Week 4. Do not write vague quality words here now; write nothing
-and fill it in when you can make each one measurable.
+### 6.1 Performance
+
+| ID | Requirement (metric · threshold · condition) | Priority | How it is measured |
+|---|---|---|---|
+| NFR-PERF-01 | An artist when running the application shall load the website in a p95 under 25 seconds when there are 20 artworks in the galleries with throttled 3G internet in Chrome. | Should | Measured with 20 artworks in the gallery loaded and record p95 in `docs/measurements.md`. |
+| NFR-PERF-02 | The 3D scene must maintain at minimum 30 FPS for 95% of a 60 second viewing session with 20 artwokrs in Chrome | Must | Measure the fps when loading, zooming, and clicking onto artworks. |
+
+### 6.2 Reliability & Availability
+
+| ID | Requirement | Priority | How it is measured |
+|---|---|---|---|
+| NFR-REL-01 | A viewer will not see a single/0 unhandled exceptions, anything that fails they will get a message saying what happened and what to do next with throttled 3G internet in Chrome. | Must | Measured if there is a message for every failure possibility and results are recorded, error-path test list is in the test plan with 1 test per failure mode |
+| NFR-AVA-02 | An artist when running the system shall have 19 of the 20 artworks display when viewing 20 artworks in the galleries with throttled 3G internet in Chrome. | Must | Measured with successful artworks displayed and results recorded. |
+
+
+### 6.3 Security
+
+| ID | Requirement | Priority | How it is measured |
+|---|---|---|---|
+| NFR-SEC-01 | There must not be any/0 Supabase keys, passwords and secrets in the repository being saved from the gallery in any commit. | Must | Measured by ensuring that .env is in the .gitignore and the .env.example only has example values. Run a search on the fully history not just the working tree to ensure that there are no secrets/0 secrets.|
+| NFR-SEC-02 | There must not be any files names, titles, and fields that have been extracted, 0 of these that are able to execute HTML or scripts when displayed | Must | Measured by using unsafe titles and uploads that contain HTML and ensure that 0 payloads execute, and change the page to display unexpected alerts or redirects to the viewer |
+
+### 6.4 Privacy & Data Handling
+
+| ID | Requirement | Priority | How it is measured |
+|---|---|---|---|
+| NFR-PRIV-01 | When a artist uploads an artwork they must be able to delete the artworks and canvas information and it must not stay in the database, their must be 0 deleted artworks and canvas information left in the database, 0 rows, with only one action | Must | To measure this upload 20 artworks and canvas informations and ensure that all of them are deleted and delted from every table in the database make sure that when querying every table for the artworks and canvas information their must be 0 rows |
+| NFR-DATA-01 | When a artist uploads artworks into the gallery, the gallery must not save artwork files that are corrupt and duplicate artwork files, 0 corrupt and duplicate files should be saved in the database or on website. | Must |  To measure this upload artwork files two times and make sure that the artwork can canvas information all display correctly and that the duplicate files are not kept/ 0 corrupt or duplicate artworks are kept. |
+| NFR-DATA-02 | If any part of the muti-step upload fails it must leave 0 artworks and files and remove any incomplete records by that upload | Must | Test a failed upload at each stage and ensure that it has 0 incomplete records in the database and in the gallery  |
+
+### 6.5 Accessibility
+
+| ID | Requirement | Priority | How it is measured |
+|---|---|---|---|
+| NFR-ACC-01 | A artist must be able to move around each component in at most 20 tabs total with only using a keyboard, no mouse on Chrome | Must | Only using a keyboard a artist should be able to reach the gallery and the upload tab/the 3 core tasks in at most 20 tabs without a mouse, record if each spot was reached |
+| NFR-ACC-02 | When using the tab key the artist should not lose their place on the website, the indicator should be at least 50% opacity of a black when something has been tab to and it is hovering over a button/component it should be visible on the website on Chrome | Must | When using tab to go through the website each component and button tabbed to, should be outlined of a 50% opacity of a black for key indication that it has been tabbed too |
+| NFR-ACC-03 | A artist must be able to tab through the website in a logical order with 0 components and buttons skipped when using tab and shift + tab on Chrome | Must | Using the tab key to move foward and shift + tab to move backwards it goes in a logical order missing 0/not missing any component or button, record if it was clear to do so |
+
+### 6.6 Usability · 6.7 Maintainability · 6.8 Portability
+
+| ID | Requirement | Priority | How it is measured |
+|---|---|---|---|
+| NFR-USE-01 |  A first time viewer when running the website shall be able to navigate the artwork galleries with any component in 3 minutes without outside help with throttled 3G internet in Chrome. | Must | Measured with if the viewer is able navigate without outside help in their first session, record how long it takes and if it was completed successfully. |
+| NFR-USE-02 | The interface must have 0 clipped and overlapping text or unusable overlays in the most common Chrome viewport sizes | Must | Ensure that the primary workflows at the viewport size works properly with 0 clipped and overlapping text and record results |
+| NFR-MNT-01 | Successful clean clone check with 1 build fully successful under 10 minutes with using only the README, 0 seeded artworks, throttled "Fast 3G", Chrome | Must | Clone the repository following the README on a clean machine, time it and record results |
+| NFR-PORT-01 | 
+Why this category does not apply to this project:
+Portability does not apply to this project because it will focus on the Chrome browser because it is one of the most common browsers used out there and there is a limit in of 240 hours of capstone time.
 
 ## 7. Out of Scope (the Won't-Have List)
 
@@ -306,3 +351,39 @@ with one line of reasoning. A short list here means you have not thought hard en
 |---|---|---|---|
 | 2026-09-11 | 1.0 | Initial specification | Milestone 3 |
 | 2026-09-12 | 1.0 | Edited 6 sentences that could be inferred that two different programs could satisfy it | Ambiguity pass after external read |
+17?
+
+## 10. Constraints  <things you did NOT choose and cannot change>
+
+| ID | Constraint | Where it comes from | What it rules out |
+|---|---|---|---|
+| CON-01 | The amount of effort and work for this project is capped at ~240 hours across 16 weeks | course | There would be no time for two different application such as a moblie app and no extra features such as light/darkmode, and liking/commenting |
+| CON-02 | The website will only be able to handle one artist in this release | scoping decision | There will be no user account system and the website will not be able to do artwork collaborations |
+| CON-03 | The website is focused on the gallery aspect rather than an artwork print shop | scoping decision | There will be no store or abilites to checkout prints |
+| CON-04 | The website will be built to run on one browser, Chrome | scoping decision | There will be no second client application, no app, and will only run on Chrome not a browser such as Opera |
+
+
+## 11. Assumptions
+
+| ID | Assumption | Owner | Verify by | If it is false |
+|---|---|---|---|---|
+| ASM-01 | An artist will be able to upload at least 20 medium sized artworks to their gallery | me | Week 5 | I will upgrade from the free of 50MB to the pro plan in Supabase to get 500GB |
+| ASM-02 | The uploaded artwork file type will be mainly .PNG and .procreate | me | Week 5 | An other file will be rejected if it is unsupported and the artist will get a warning message to upload a supported file type |
+| ASM-03 | The gallery will be mainly viewed on a desktop, monitor/laptop screen during viewing not on a phone | me | Week 5 | If a moblie device viewer is required than there will be less functions on the moblie device than on the desktop |
+| ASM-04 | Supabase will be the database used to store canvas information and artworks | me | Week 5 | I will switch to a different database if Supabase does not end up working out |
+
+## 12. Dependencies
+
+| ID | Dependency | Version / plan pinned | Failure mode | Fallback |
+|---|---|---|---|---|
+| DEP-01 | SupaBase | Free Plan, 2026-09-17 | Storage limit is met, their is an outage, shutdown | Shows a warning to the artist saying that the database is out and to come back the next day |
+| DEP-02 | Procreate files | The file type for the upload tab | Artist uploads unsupported file type | Shows a warning that canvas information could not be uploaded and if there is only certain fields available in the canvas information it will show N/A in those fields |
+| DEP-03 | React Three Fiber | 9.7.0, 2026-09-17 | 3D scene does not render, interactions breaks | Message says that the 3D scene can not be display at the moment but the rest of the 2D scene is still available to be explored |
+
+## 13. Obligations 
+
+| Obligation | Primary source (URL) | Date checked | What it requires of me |
+|---|---|---|---|
+| Supabase scaling/storage | https://supabase.com/docs/guides/storage/production/scaling | 2026-09-17 | I should stay in the free plan limits and if I am about to exceed the amount I should upgrate to the Pro plan |
+| React Three Fiber | https://github.com/pmndrs/react-three-fiber/blob/master/LICENSE // https://github.com/pmndrs/react-three-fiber#readme | 2026-09-17 | Verify license requirements beofre distributing the application and preserve any required license and copyright notices |
+| React | https://github.com/react/react/blob/main/LICENSE | 2026-09-17 | Verify license requirements beofre distributing the application and preserve any required license and copyright notices |

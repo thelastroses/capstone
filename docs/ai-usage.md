@@ -2,14 +2,7 @@
 
 # AI Usage Log — Capstone Project
 
-<!--
-  Milestone 1 template. Copy this file into your repository as docs/ai-usage.md.
-  The policy header is written ONCE, in Week 1, before you need it. The table
-  grows one row per Amber-zone use, all semester, written the day it happens.
-  This file is a required artifact in the Week 16 submission.
--->
-
-**Owner:** Jennifer Spencer · **Policy set:** 2026-08-27 · **Last entry:** 2026-09-11
+**Owner:** Jennifer Spencer · **Policy set:** 2026-08-27 · **Last entry:** 2026-09-18
 
 ## Policy
 
@@ -49,22 +42,5 @@ memos, or the reflections is generated text.
 | 2026-08-27 | ChatGPT GPT-5.6 Luna | I pasted the sixteen-week table from §1.2 into the assistant and asked "Make me a calendar that is from August 24 to December 6 with 2-3 hour work blocks totaling 240 hours with week 8 and 14 being broken weeks with the hours moved foward" | I changed how it was formatted, how hours are dispersed throughout the week doing 1-5pm on the weekends and changed the hours on the weekdays to be 2-4pm | I verified with my Google Calendar and added up the hours to ensure I had 240 |
 | 2026-09-04 | Copilot Auto | "It is Week 16. This project failed (The Art Gallery) and I am writing the post-mortem. Give me the three most likely causes, in order of probability, each with the earliest week it would have become visible" | I kept the main paragraph that it gave me | I changed how it was formatted and had to change 2 weeks because it did not know the order in which things will be done during the 16 week span | I verified with the calendar and the hat that would be taken on during the certain weeks |
 | 2026-09-11 | Copilot Auto | "FIND THE HOLES 'Here are my 24 functional requirements. Do not rewrite them. List every situation a user could get into that none of these requirements covers, and for each, name the identifier that should have covered it.'" | I kept more so the ideas that Copilot gave and rewrote a few sentences to fill in the holes, it more so helped to point out the holes, then to write it for me | I changed how it was formatted and how sentences were laid out, I only filled in the holes that seemed the most relavent and that made sense with the requirements and the system | I verified by comparing the requirements in the sample with my requirements and then rereading my requirements with the holes listed to really make sure whatever I was adding was necessary |
-
-
-
-<!--
-  A BAD entry (do not imitate):
-    | Week 3 | ChatGPT | requirements | most of it | some | looked fine |
-
-  A GOOD entry:
-    | 2026-09-22 | <assistant + the model version you actually used>
-    | "Interview me about a household food-tracking app and list functional requirements."
-    | 6 of 19 proposed requirements, as raw material only.
-    | Rewrote all 6 into FR form with actor + condition; deleted 13 as out of scope
-      (it invented multi-household sharing and a mobile app I never mentioned).
-    | Checked each against my Week-2 scoping decision; confirmed FR-004's "3 days"
-      threshold with my actual user instead of accepting the model's default.
-
-  The good entry takes ninety seconds and is evidence of judgment.
-  The bad one is evidence of nothing.
--->
+| 2026-09-18 | Copilot Auto | "Act as a skeptical senior engineer reviewing this before a design review. List the NON-FUNCTIONAL requirements and external obligations I have not written
+down. For each: name the category; say what about MY project triggers it; propose a measurable target with metric, threshold, condition, and measurement method; and flag anything I must verify against a primary source. Do not invent vendor limits, prices, license terms, or regulations — where a claim depends on one, say "verify" and name the source I should read." and pasted in my functional requirements and charter | I kept not even half of what Copilot Auto outputted, I kept 4 of 22 of the nfrs because a lot of them seemed rather unnecessary or talked about what I had already written in a different font. I kept 2 of the 9 obigations that it outputted because it would just rewrite what I had or do duplicates of the same obligation it already mentioned. It got wrong that it needed things like rollback procedures but this seems pretty excessive for this capstone project with a time constraint. | I changed how the sentences where structured but I did like how a lot of them where concise | I verified by comparing what I had written and what I want for my project with what Copilot outputted and really made sure that anything I added was actually necessary |
