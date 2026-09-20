@@ -400,6 +400,6 @@ added | Milestone 4 |
 
 | Obligation | Primary source (URL) | Date checked | What it requires of me |
 |---|---|---|---|
-| Supabase scaling/storage | https://supabase.com/docs/guides/storage/production/scaling | 2026-09-17 | I should stay in the free plan limits and if I am about to exceed the amount I should upgrate to the Pro plan |
+| Supabase scaling/storage | https://supabase.com/docs/guides/storage/production/scaling // https://github.com/supabase/supabase/blob/master/LICENSE | 2026-09-17 | I should stay in the free plan limits and if I am about to exceed the amount I should upgrate to the Pro plan and verify license requirements before distributing the application and preserve any required license and copyright notices |
 | React Three Fiber | https://github.com/pmndrs/react-three-fiber/blob/master/LICENSE // https://github.com/pmndrs/react-three-fiber#readme | 2026-09-17 | Verify license requirements before distributing the application and preserve any required license and copyright notices |
 | React | https://github.com/react/react/blob/main/LICENSE | 2026-09-17 | Verify license requirements before distributing the application and preserve any required license and copyright notices |
