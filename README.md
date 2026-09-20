@@ -1,6 +1,6 @@
 # Capstone — Capstone Project
 
-Senior capstone by Jennifer Spencer, Fall 2026. **Status: Week 3 — Non-Functional Requirements, Constraints & Definition of Done **
+Senior capstone by Jennifer Spencer, Fall 2026. **Status: Week 4 — Non-Functional Requirements, Constraints & Definition of Done **
 
 ## Project idea
 The project is an art gallery that is able to take artists artwork and upload it into a 3D and 2D gallery. The galllery allows interactivity and extra information from an uploaded .procreate file when the artwork is uploaded to the website.
