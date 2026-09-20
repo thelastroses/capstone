@@ -12,6 +12,7 @@ The project is an art gallery that is able to take artists artwork and upload it
 - `docs/ai-usage.md` — which AI tools are used on this project, and how
 - `docs/` — one document per life-cycle phase; each header says the week it is written
 - `src/`, `tests/` — empty until Week 9
+- `docs/definition-of-done.md` — a list of items that must be completed to be have a item considered as done
 
 ## How to run it
 Nothing to run yet. From Week 9 this section is the clean-machine setup path.

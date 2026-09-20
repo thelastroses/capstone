@@ -2,7 +2,7 @@
 
 # Software Requirements Specification — Art Gallery
 
-**Author:** Jennifer Spencer  **Version:** 1.0  **Date:** 2026-09-12
+**Author:** Jennifer Spencer  **Version:** 1.1  **Date:** 2026-09-19
 **Status:** Baselined
 
 ---
@@ -31,7 +31,9 @@ GALL        Gallery                Every artwork placed next to its  canvas info
 | Persona | Who they are | What they need from the system | Evidence they exist |
 |---|---|---|---|
 | Stella S., 20, Advanced Artist | Stella has been drawing since she was 10 and has gathered quite a collection of artworks | She needs the system to input her artworks in a reasonable time such as within 5 minutes and see extra information about the artwork in a organized way | Interview 2026-09-09 |
-| The next maintainer | They will inherit this repository after the course ends | They should should be able to understand what each feature was for, from the document alone | Course requirement; Chapter 13 clear-machine test |
+| The next maintainer | They will inherit this repository after the course ends | They should be able to understand what each feature was for, from the document alone | Course requirement; Chapter 13 clear-machine test |
+| Viewer | Any person that is not the artist that is viewing the gallery someone such as a friend, family memeber, or recruiter | They need the system to look through the artworks and their details and contact the artist if they want to recruit the artist for work | Evidence from the functional requirments listed: FR-GALL-03, FR-TDG-01, FR-TDG-02, and FR-GALL-04 |
+
 
 ## 3. Definitions
 
@@ -140,9 +142,9 @@ could interpret a word two ways, it belongs here.
 **Rationale:** Saving artworks into the gallery saves time and ensures all artworks are there the next day, it would not be worth uploading to a website otherwise. Stella had troubles ensuring that her artworks were actually uploaded and saved onto the website.
 **Acceptance criteria:**
 - Given an artwork they want in their gallery, when the artist leaves the website, then the artwork should still be there the next time or next day they go into the website.
-- Given it failed to save into the database, when the artist uploads, then the viewer will be notified with a pop up for 5 seconds that it failed to save into the database and upload it again to ensure it does.
-- Given it failed to save only the artwork or only the canvas information into the database, when the artist uploads, then the viewer will be notified the entire process failed and to try again because for whichever one failed it caused the entire process to fail.
-- Given it failed to load the artworks that are in the database, when the artist is looking at the gallery, then the viewer will be notified to come back tomorrow that the database is down at the moment.
+- Given it failed to save into the database, when the artist uploads, then the artist will be notified with a pop up for 5 seconds that it failed to save into the database and upload it again to ensure it does.
+- Given it failed to save only the artwork or only the canvas information into the database, when the artist uploads, then the artist will be notified the entire process failed and to try again because for whichever one failed it caused the entire process to fail.
+- Given it failed to load the artworks that are in the database, when the artist is looking at the gallery, then the artist will be notified to come back tomorrow that the database is down at the moment.
 
 **Source:** Interview with Stella, 2026-09-09
 
@@ -172,24 +174,24 @@ could interpret a word two ways, it belongs here.
 
 **Priority:** Must
 **Requirement:** An artist shall be able to see an overview of all their artworks under the 3D scene after uploading it.
-**Rationale:** An artist that can see all their artworks after uploading can view each artwork with no duplicates for themselves or to show others easily. Stella enjoys having a way to show her teachers and friends all the artwork she has made in one view.
+**Rationale:** An artist that can see all their artworks after uploading can view each artwork with no duplicates for themselves or to show others easily. Stella enjoys having a way to show her teachers and friends all the artwork she has made in one view. The maintainer needs to understand what the gallery is showing as a whole and more information about it.
 **Acceptance criteria:**
 - Given an artwork they want in their gallery, when an artist uploads and clicks the 2D scene selection, then the artwork will show up under the 3D scene, if it is not a duplicate and a valid artwork file such as a .png.
 - Given an artist wants to view their gallery for the first time, when they look at the 3D or 2D overview, then they will either see empty canvases displayed or text saying that no artwork has been uploaded yet and to get started by going in the upload tab and uploading an artwork.
 - Given the artwork fails to display in the 2D scene, when viewing the website, then the artist will be notified with a pop up for 5 seconds of its failure and be asked to try uploading again.
-- Given the artwork fails to display all the canvas information in the gallery scenes, when viewing the canvas information, then the artist or viewer will see a N/A next to each field that could not be extracted from the uploaded file or if the artists/viewer sees no canvas information next to the artwork that means that they did not upload a .procreate file when they uploaded their artwork in the upload tab and there will be text under the artwork saying that the artist did not upload canvas information with their artwork.
+- Given the artwork fails to display all the canvas information in the gallery scenes, when viewing the canvas information, then the artist will see a N/A next to each field that could not be extracted from the uploaded file or if the artists sees no canvas information next to the artwork that means that they did not upload a .procreate file when they uploaded their artwork in the upload tab and there will be text under the artwork saying that the artist did not upload canvas information with their artwork.
 
-**Source:** Interview with Stella, 2026-09-09
+**Source:** Interview with Stella, 2026-09-09 and the next maintainer
 
 
 ### FR-GALL-03 — Contact Component
 
 **Priority:** Should
-**Requirement:** A viewer shall be able to contact the artist through a link in the 2D gallery that will open the artist's email address in the user's g-mail.
+**Requirement:** A viewer shall be able to contact the artist through on the 2D gallery without leaving the page.
 **Rationale:** Communication and art often go together especially when collaborating on an art piece. It is important for some viewers such as recruiters to get in contact with the artist for job offers. Stella often collaborates on her art pieces needing a way to get in contact with her to get a collaboration started.
 **Acceptance criteria:**
-- Given a viewer wants to start a collaboration or a recruiter wants to offer a job, when the viewer scrolls down into the 2D scene, then the viewer should see a component to get in contact with the artist in the 2D scene.
-- Given it does not direct the viewer to g-mail, when clicking the contact component in the 2D scene, then the viewer will be notified with a pop up for 5 seconds that it failed to open g-mail or that the device they are on will not allow them to be redirected.
+- Given a viewer wants to start a collaboration or a recruiter wants to offer a job, when the viewer is in the 2D scene, then the viewer should see a component to get in contact with the artist in the 2D scene.
+- Given it does not direct the viewer to g-mail, when clicking the contact component in the 2D scene, then the viewer will be notified with a pop up for 5 seconds that it failed to open or that the device they are on will not allow them to be redirected.
 
 **Source:** Interview with Stella, 2026-09-09 & My decision - scoping-decision.md (Should features)
 
@@ -221,10 +223,10 @@ could interpret a word two ways, it belongs here.
 ### FR-TDG-02 — Zoom into 3D scene
 
 **Priority:** Must
-**Requirement:** A viewer shall be able to zoom into the 3D scene when clicking into the scene; Zooming in with the scroll bar slowly making the 3D scene look bigger increasing the size of the artworks in the scene.
+**Requirement:** A viewer shall be able to make the 3D scene look bigger, increasing the size of the artworks in the scene to see the artworks better.
 **Rationale:** In order to look more closely at the 3D scene/gallery it is important for viewers to feel like they are interacting with the artwork and viewing it in a real museum. It is my decision because without the interaction then the viewer will feel less engaged and it will not be a good scene to be the first thing the viewer sees when viewing the website.
 **Acceptance criteria:**
-- Given the viewer wants to view the 3D scene, when the viewer clicks into the 3D scene, then they will be able to scroll back and forth to view each artworks in the 3D scene.
+- Given the viewer wants to view the 3D scene, when the viewer clicks into the 3D scene, then they will be able to zoom in and out to view each artworks in the 3D scene.
 - Given it fails to zoom, when clicking into the scene, then the viewer will be notified with a pop up that the zoom function is not working at the current moment and to try again later.
 
 **Source:** My decision
@@ -266,11 +268,24 @@ could interpret a word two ways, it belongs here.
 ### FR-EXT-04 — Extract Canvas Information from Artwork .procreate file
 
 **Priority:** Must
-**Requirement:** An artist shall be able to extract canvas information from the .procreate file after uploading it in the upload tab. The canvas information has to be uploaded with an artwork file at the same time so that the system knows which artwork the canvas information belongs to. 
+**Requirement:** An artist shall be able to see the extracted canvas information from the .procreate file after uploading it in the upload tab.
 **Rationale:** In order to know more about an artwork without needing the artist to input fields themselves, having a way to upload it to extract the canvas information saves over 10 minutes. It is my decision because without needing the artists to upload the canvas information themselves then viewers will have more to look at without needing the artist to input all the fields which can get boring and repetitive.
 **Acceptance criteria:**
-- Given the artist wants canvas information to be displayed next to their artwork, when the artist/viewer views the artwork in the gallery scenes, then they will be able to read all the information being displayed next to each artwork if they had uploaded a .procreate file with their artwork upload.
-- Given it fails to display the canvas information, when clicking or viewing each artwork in the gallery scenes after uploading it in the upload tab, then the artist/viewer will see text saying that no canvas information was added after the upload, additionally the artist should be notified with a pop up for 5 seconds that it failed to extract the canvas information and will not display next the the artwork it belonged too after it had been uploaded in the upload tab and to try uploading the entire artwork and .procreate file again.
+- Given the artist wants canvas information to be displayed next to their artwork, when the artist views the artwork in the gallery scenes, then they will be able to read all the information being displayed next to each artwork if they had uploaded a .procreate file with their artwork upload.
+- Given it fails to display the canvas information, when clicking or viewing each artwork in the gallery scenes after uploading it in the upload tab, then the artist will see text saying that no canvas information was added after the upload, additionally the artist should be notified with a pop up for 5 seconds that it failed to extract the canvas information and will not display next the the artwork it belonged too after it had been uploaded in the upload tab and to try uploading the entire artwork and .procreate file again.
+
+**Source:** My decision
+
+The canvas information has to be uploaded with an artwork file at the same time so that the system knows which artwork the canvas information belongs to.
+
+### FR-EXT-05 — Pair the extracted canvas information with the uploaded artwork
+
+**Priority:** Must
+**Requirement:** The artist shall be able to upload the canvas information with its matching artwork and it should display the information with its matching artwork in the gallery.
+**Rationale:** The extracted canvas information only makes sense when it is paired with its matching artwork. It is my decision because a viewer should be able to know which canvas information goes with which artwork without having to guess.
+**Acceptance criteria:**
+- Given the artist uploads an artwork with the matching .procreate file artwork, when they are done uploading, then the artwork and matching canvas information will display with each other.
+- Given it fails to display the artwork with its matching canvas information, when the files have been uploaded in the upload tab, then the artist will be notified that it could not be uploaded with its pair and to try uploading the files again.
 
 **Source:** My decision
 
@@ -302,8 +317,8 @@ could interpret a word two ways, it belongs here.
 
 | ID | Requirement | Priority | How it is measured |
 |---|---|---|---|
-| NFR-PRIV-01 | When a artist uploads an artwork they must be able to delete the artworks and canvas information and it must not stay in the database, their must be 0 deleted artworks and canvas information left in the database, 0 rows, with only one action | Must | To measure this upload 20 artworks and canvas informations and ensure that all of them are deleted and delted from every table in the database make sure that when querying every table for the artworks and canvas information their must be 0 rows |
-| NFR-DATA-01 | When a artist uploads artworks into the gallery, the gallery must not save artwork files that are corrupt and duplicate artwork files, 0 corrupt and duplicate files should be saved in the database or on website. | Must |  To measure this upload artwork files two times and make sure that the artwork can canvas information all display correctly and that the duplicate files are not kept/ 0 corrupt or duplicate artworks are kept. |
+| NFR-PRIV-01 | When a artist uploads an artwork they must be able to delete the artworks and canvas information and it must not stay in the database, their must be 0 deleted artworks and canvas information left in the database, 0 rows, with only one action | Must | To measure this upload 20 artworks and canvas informations and ensure that all of them are deleted and delted from every table in the database, make sure that when querying every table for the artworks and canvas information their must be 0 rows |
+| NFR-DATA-01 | When a artist uploads artworks into the gallery, the gallery must not save artwork files that are corrupt and duplicate artwork files, 0 corrupt and duplicate files should be saved in the database or on the website. | Must |  To measure this upload artwork files two times and make sure that the artworks and canvas information all display correctly and that the duplicate files are not kept/ 0 corrupt files are kept. |
 | NFR-DATA-02 | If any part of the muti-step upload fails it must leave 0 artworks and files and remove any incomplete records by that upload | Must | Test a failed upload at each stage and ensure that it has 0 incomplete records in the database and in the gallery  |
 
 ### 6.5 Accessibility
@@ -351,15 +366,16 @@ with one line of reasoning. A short list here means you have not thought hard en
 |---|---|---|---|
 | 2026-09-11 | 1.0 | Initial specification | Milestone 3 |
 | 2026-09-12 | 1.0 | Edited 6 sentences that could be inferred that two different programs could satisfy it | Ambiguity pass after external read |
-17?
+| 2026-09-19 | 1.1 | Non-functional requirements, constraints, assumptions, dependencies, and obligations
+added | Milestone 4 |
 
-## 10. Constraints  <things you did NOT choose and cannot change>
+## 10. Constraints
 
 | ID | Constraint | Where it comes from | What it rules out |
 |---|---|---|---|
-| CON-01 | The amount of effort and work for this project is capped at ~240 hours across 16 weeks | course | There would be no time for two different application such as a moblie app and no extra features such as light/darkmode, and liking/commenting |
+| CON-01 | The amount of effort and work for this project is capped at ~240 hours across 16 weeks | course | There would be no time for two different applications such as a moblie app and no extra features such as light/darkmode, and liking/commenting features |
 | CON-02 | The website will only be able to handle one artist in this release | scoping decision | There will be no user account system and the website will not be able to do artwork collaborations |
-| CON-03 | The website is focused on the gallery aspect rather than an artwork print shop | scoping decision | There will be no store or abilites to checkout prints |
+| CON-03 | The project must follow the course rubric | course rubric | A project that does not follow the course criteria |
 | CON-04 | The website will be built to run on one browser, Chrome | scoping decision | There will be no second client application, no app, and will only run on Chrome not a browser such as Opera |
 
 
@@ -385,5 +401,5 @@ with one line of reasoning. A short list here means you have not thought hard en
 | Obligation | Primary source (URL) | Date checked | What it requires of me |
 |---|---|---|---|
 | Supabase scaling/storage | https://supabase.com/docs/guides/storage/production/scaling | 2026-09-17 | I should stay in the free plan limits and if I am about to exceed the amount I should upgrate to the Pro plan |
-| React Three Fiber | https://github.com/pmndrs/react-three-fiber/blob/master/LICENSE // https://github.com/pmndrs/react-three-fiber#readme | 2026-09-17 | Verify license requirements beofre distributing the application and preserve any required license and copyright notices |
-| React | https://github.com/react/react/blob/main/LICENSE | 2026-09-17 | Verify license requirements beofre distributing the application and preserve any required license and copyright notices |
+| React Three Fiber | https://github.com/pmndrs/react-three-fiber/blob/master/LICENSE // https://github.com/pmndrs/react-three-fiber#readme | 2026-09-17 | Verify license requirements before distributing the application and preserve any required license and copyright notices |
+| React | https://github.com/react/react/blob/main/LICENSE | 2026-09-17 | Verify license requirements before distributing the application and preserve any required license and copyright notices |

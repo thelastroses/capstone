@@ -167,3 +167,43 @@ Rest of rep 9 is in requirements.md
 ## Rep 10 - The enumeration pass, and the cull
 
 Rep 10 is in requirements.md and ai-usage.md
+
+## Rep 11 - Break it, then fix it
+
+ORPHAN REQUIREMENT (2)
+  - FR-005: no design element -- nothing in the system is responsible for it
+    - Demote FR-005 to Could and record the decision
+  - NFR-PRIV-02: no design element -- nothing in the system is responsible for it
+    - Add design element such as a item name and identifier remover that removes identification fields before being sent to a third party model
+
+UNTESTED REQUIREMENT (3)
+  - FR-004: no test -- you cannot show it works, so it does not count
+    - Test if the user is able to get back the right item by testing both the scanning and typing a barcode
+  - FR-005: no test -- you cannot show it works, so it does not count
+    - Test if more than one account can use the same household pantry and access its items
+  - NFR-PRIV-02: no test -- you cannot show it works, so it does not count
+    - Test sending in a item name and a user identifier to ensure that both can not be sent to a third-party model
+
+UNMEASURABLE NFR (1)
+  - NFR-PERF-02: no measurement method -- this is a wish, not a requirement
+    - Use the barcode look up 5 times and record results if it able to return or time out within 3s
+
+UNREQUESTED WORK (1)
+  - ExportToCsvButton: built or planned with no requirement behind it -- cut it, or write the requirement and get it prioritized
+    - Cut the ExportToCsvButton because there is no requirement behind it and record the decision
+
+DUPLICATE ID (1)
+  - NFR-ACC-02: appears 2 times; identifiers must be unique and stable
+    - Delete duplicate row so that identifiers remain unique and stable, if it is truly a duplicate row with the same information. If it is not a duplicate row increment the id, log as modified, and record the decision.
+
+Clean. Every requirement is designed, tested, and measurable.
+
+Requirments listed in traceability-matrix.csv
+
+Write: how many orphans you had on the first run, and whether any of them were requirements you had quietly stopped intending to build.
+  - There were 0 orphans when I did the first run on the traceability-matrix.csv. All requirements I intend to build.
+
+## Rep 12 - Write it then cut it
+
+Write: which items you cut and why. Then a harder sentence: name the one item you kept that you are least sure you will honor, and say what you will change about your workflow to make it survive Week 12.
+  - I did not cut any items the only one I edited was I got rid of, (or, for a CLI, remain readable with color disabled), because I will not be making a project that is for the terminal. The one item I kept that I am least sure that I will honor is having at least one automated test that covers the new behavior, and the whole suite passes locally because I feel like when I write the code and the feature works that testing it further, I might forget to do it or I get lazy and just want to move on. What I will change about my workflow to make it survive week 12 is that I will get ahead in days so that even if I am lazy or forget, I will have time to go back and time to motivate myself to test.
