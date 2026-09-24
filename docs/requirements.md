@@ -291,6 +291,14 @@ The canvas information has to be uploaded with an artwork file at the same time 
 
 ## 6. Non-Functional Requirements
 
+| Data element | Why you need it | Where it lives | How long you keep it | How a user gets rid of it |
+|---|---|---|---|---|
+| Canvas Information | Remember's artwork details when leaving and coming back to website | canvas_information table in Supabase | Until artwork deletion | Artwork deletion |
+| Artwork Files | Used to display artworks in gallery | artwork_files table in Supabase | Until artwork deletion | Artwork deletion |
+| Email address | Lets viewers contact someone about the artist's artwork | Not stored in gallery database or in gallery but is outside email website | Verify g-mail terms | N/A |
+
+- The row: email address, where I genuinely did not know what to answer was how long you kept and how a user gets rid of it. Since I am not saving the email address into my Supabase I wasn't sure what to put N/A or something else for the how a user gets rid of it. Then for the how long you keep it since I am not saving that data would I need to put or read g-mail's terms or do would I just put N/A again?
+
 ### 6.1 Performance
 
 | ID | Requirement (metric · threshold · condition) | Priority | How it is measured |
@@ -401,5 +409,5 @@ added | Milestone 4 |
 | Obligation | Primary source (URL) | Date checked | What it requires of me |
 |---|---|---|---|
 | Supabase scaling/storage | https://supabase.com/docs/guides/storage/production/scaling // https://github.com/supabase/supabase/blob/master/LICENSE | 2026-09-17 | I should stay in the free plan limits and if I am about to exceed the amount I should upgrate to the Pro plan and verify license requirements before distributing the application and preserve any required license and copyright notices |
-| React Three Fiber | https://github.com/pmndrs/react-three-fiber/blob/master/LICENSE // https://github.com/pmndrs/react-three-fiber#readme | 2026-09-17 | Verify license requirements before distributing the application and preserve any required license and copyright notices |
+| React Three Fiber | https://github.com/react/react/blob/main/LICENSE  // https://github.com/pmndrs/react-three-fiber#readme | 2026-09-17 | Verify license requirements before distributing the application and preserve any required license and copyright notices |
 | React | https://github.com/react/react/blob/main/LICENSE | 2026-09-17 | Verify license requirements before distributing the application and preserve any required license and copyright notices |

@@ -49,4 +49,10 @@ enforces nothing. "If needed" is where documentation goes to die.
 
 ---
 
-**Adopted:** 2026-09-19 · **Revised:** 2026-09-19, Wrote Definition of Done
+## Cut List
+
+  - I did not cut any items the only one I edited was I got rid of, (or, for a CLI, remain readable with color disabled), because I will not be making a project that is for the terminal. The one item I kept that I am least sure that I will honor is having at least one automated test that covers the new behavior, and the whole suite passes locally because I feel like when I write the code and the feature works that testing it further, I might forget to do it or I get lazy and just want to move on. What I will change about my workflow to make it survive week 12 is that I will get ahead in days so that even if I am lazy or forget, I will have time to go back and time to motivate myself to test.
+
+---
+
+**Adopted:** 2026-09-19 · **Revised:** 2026-09-20, Wrote Definition of Done

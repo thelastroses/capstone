@@ -1,0 +1,48 @@
+decision,criterion,weight,option,score,evidence
+# Long format: one row per (decision, option, criterion). Scores are 0-5.
+# Weights within a decision must sum to 1.00. Every row needs evidence.
+# Worked example: PantryPilot. Replace every row with your own project.
+data-store,fits the data model for artworks that are upload (FR-UPL-02 FR-UPL-03 FR-DATA-01 FR-DATA-02 FR-GALL-02),0.30,,,
+data-store,is able to delete and artwork and all its related canvas information at once (FR-UPL-02),0.15,,,
+data-store,does not commit secrets to repository using enviroment vairables instead (NFR-SEC-01),0.15,,,
+data-store,i have shipped with it before,0.20,,,
+data-store,hosting and cost at student scale,0.25,,,
+data-store,operational burden for a one person project,0.10,,,
+hosting,is not expensive within a students budget,0.35,,,
+hosting,i have shipped with it before,0.15,,,
+hosting,the grader is able to reach the website on Chrome (CON-04),0.35,,,
+hosting,is able to be deployed without much setup,0.15,,,
+3D-gallery,is able to render the gallery in Chrome (CON-04),0.25,,,
+3D-gallery,is able to hold up to 20 artworks (FR-DATA-02, NFR-AVA-02),0.20,,,
+3D-gallery,allows interactions such as clicking and zooming (FR-TDG-01 FR-TDG-02),0.25,,,
+3D-gallery,is able to maintain at minimum 30 FPS for 95% of a 60 second viewing session (NFR-PERF-02),0.30,,,
+
+
+
+data-store,fits the data model (FR-007 FR-011),0.30,PostgreSQL,5,"both queries are one join; planner does the work"
+data-store,fits the data model (FR-007 FR-011),0.30,SQLite,4,"same SQL; single-writer limit is the risk not the model"
+data-store,fits the data model (FR-007 FR-011),0.30,MongoDB,2,"FR-011 becomes a hand-written join in app code"
+data-store,I have shipped with it before,0.20,PostgreSQL,3,"used in DB course; never deployed one"
+data-store,I have shipped with it before,0.20,SQLite,5,"used in two prior courses including a deployed tool"
+data-store,I have shipped with it before,0.20,MongoDB,0,"never used it"
+data-store,hosting and cost at student scale,0.25,PostgreSQL,3,"managed tiers exist; terms vary - checked vendor page 2026-02-09"
+data-store,hosting and cost at student scale,0.25,SQLite,5,"a file on the same host; no separate service"
+data-store,hosting and cost at student scale,0.25,MongoDB,3,"managed tiers exist; checked vendor page 2026-02-09"
+data-store,backup and restore I can document (NFR-M-01),0.15,PostgreSQL,5,"pg_dump / pg_restore is two runbook lines"
+data-store,backup and restore I can document (NFR-M-01),0.15,SQLite,5,"copy the file"
+data-store,backup and restore I can document (NFR-M-01),0.15,MongoDB,3,"mongodump exists; I have never run a restore"
+data-store,operational burden on one person,0.10,PostgreSQL,3,"one more service to run locally and in CI"
+data-store,operational burden on one person,0.10,SQLite,5,"no service"
+data-store,operational burden on one person,0.10,MongoDB,3,"one more service plus a driver I do not know"
+hosting,cost at student scale through Week 16,0.35,managed-paas,4,"free/low tiers advertised; terms change - re-verify before Week 14"
+hosting,cost at student scale through Week 16,0.35,small-vps,3,"predictable small monthly fee; no expiry surprise"
+hosting,cost at student scale through Week 16,0.35,campus-vm,5,"free to me; requires a request form and staff approval"
+hosting,deploy from a git push,0.25,managed-paas,5,"push-to-deploy is the product"
+hosting,deploy from a git push,0.25,small-vps,3,"I would write the deploy script myself"
+hosting,deploy from a git push,0.25,campus-vm,2,"no outbound CI access without a ticket"
+hosting,persistent storage for the database,0.25,managed-paas,3,"add-on; idle-suspend policies vary - verify"
+hosting,persistent storage for the database,0.25,small-vps,5,"a disk I control"
+hosting,persistent storage for the database,0.25,campus-vm,5,"a disk the university controls"
+hosting,I have shipped with it before,0.15,managed-paas,4,"deployed a class project this way"
+hosting,I have shipped with it before,0.15,small-vps,2,"I have SSHed into one; never provisioned one"
+hosting,I have shipped with it before,0.15,campus-vm,0,"never used it"

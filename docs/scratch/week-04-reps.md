@@ -82,7 +82,7 @@ NFR-6  The app should work on mobile.
 Which of the six you found hardest to rewrite, and whether the difficulty was in the metric, the threshold, the condition, or the method?
 - Out of the six I found hardest to rewrite was NFR-PERF-01 it was because the difficulty was in the condition I did not know whether the load should be under 25 seconds for if there were 20 artworks in the gallery or if that should be for an empty gallery.
 
-Rep 4 — The data inventory
+## Rep 4 — The data inventory
 
 | Data element | Why you need it | Where it lives | How long you keep it | How a user gets rid of it |
 |---|---|---|---|---|
