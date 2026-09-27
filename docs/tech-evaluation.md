@@ -59,7 +59,7 @@ The highest-weight hosting criterion is allowing the grader to reach the website
 
 | Seam | What has to work | Crossed before? | Risk | Spike |
 |---|---|---|---|---|
-| website ↔ 3D gallery | React website must be able to render the 3D gallery in Chrome and allow interactivity | no | High | SP-01 |
+| website ↔ 3D gallery | React website must be able to render the 3D gallery in Chrome and allow interactivity | no | Closed/Low - Worked Successfully | SP-01 |
 | website ↔ database | React website must be able to read and write the data from Supabase | yes | Medium | SP-02 |
 | website ↔ deploy | The website must be able to build and run on the chosen deployment site | yes | Medium | SP-03 |
 | website ↔ artwork data | The website must be able to take in .procreate files and retrieve the artwork and canvas information | no | High | SP-04 |
@@ -72,3 +72,17 @@ React Three Fiber - innovation token requirement; spiked in SP-01; it allows for
 .procreate file Extraction
 
 2 - They interact with each other share seam SP-06
+
+## Cost sheet
+
+| Service | Total |
+|---|---|
+| Vercel | $0 Hobby Plan, $20 Pro Plan 1TB  |
+| Supabase | $0 for Free Plan, $25 Pro Plan |
+| Vite | $0 open source |
+| React | $0 open source |
+| Blender | $0 open source |
+| TailwindCSS | $0 open source |
+| .procreate file | $0 for me but for others $12.99 for Procreate drawing app on Apple App Store to then download the Procreate specific files |
+
+Monthly Total: $0
