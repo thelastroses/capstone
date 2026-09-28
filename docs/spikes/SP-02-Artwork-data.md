@@ -22,6 +22,6 @@ Failure is that it takes longer than 25 seconds to display on the website after 
 
 ## Plan B if it fails
 
-If it fails then the canvas information will need to be inputted manually and it will drop FR-EXT-04, FR-EXT-05, ASM-02 as out of scope for v1.
+If it fails then the canvas information and artwork file will need to be inputted manually and it will drop FR-EXT-04, FR-EXT-05, ASM-02 as out of scope for v1.
 
 ---
