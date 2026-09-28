@@ -6,7 +6,7 @@ any of it, say so in the Result section so the next reader knows.
 -->
 
 - **Unknown:** Will the blender scene be able to load onto a website and allow interactivity on the objects in it?
-- **Feeds:** ADR 0001 — 3D gallery scene loading with object and interactivity vs. dropping requirements as out of scope for v1
+- **Feeds:** ADR 0004 — 3D gallery scene loading with object and interactivity vs. dropping requirements as out of scope for v1
 - **Requirements at risk:** FR-UPL-03, FR-GALL-02, FR-TDG-01, FR-TDG-02, NFR-PERF-02
 - **Time box:** 90 minutes
 - **Run on:** 2026-09-24

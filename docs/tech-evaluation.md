@@ -60,11 +60,11 @@ The highest-weight hosting criterion is allowing the grader to reach the website
 | Seam | What has to work | Crossed before? | Risk | Spike |
 |---|---|---|---|---|
 | website ↔ 3D gallery | React website must be able to render the 3D gallery in Chrome and allow interactivity | no | Closed/Low - Worked Successfully | SP-01 |
-| website ↔ database | React website must be able to read and write the data from Supabase | yes | Medium | SP-02 |
-| website ↔ deploy | The website must be able to build and run on the chosen deployment site | yes | Medium | SP-03 |
-| website ↔ artwork data | The website must be able to take in .procreate files and retrieve the artwork and canvas information | no | High | SP-04 |
+| website ↔ artwork data | The website must be able to take in .procreate files and retrieve the artwork and canvas information | no | High | SP-02 |
+| website ↔ database | React website must be able to read and write the data from Supabase | yes | Medium | SP-03 |
+| website ↔ deploy | The website must be able to build and run on the chosen deployment site | yes | Medium | SP-04 |
 | database ↔ artwork data | Artwork and artwork canvas information must be able to be stored and retrieved without error | no | Medium | SP-05 |
-| 3D gallery ↔ artwork data | 3D gallery must be able to get the correct artwork data for each artwork | no | High | SP-06 |
+| 3D gallery ↔ artwork data | 3D gallery must be able to get the correct artwork data for each artwork | no | Medium | SP-06 |
 
 ##  Count your novelty load
 
@@ -86,3 +86,52 @@ React Three Fiber - innovation token requirement; spiked in SP-01; it allows for
 | .procreate file | $0 for me but for others $12.99 for Procreate drawing app on Apple App Store to then download the Procreate specific files |
 
 Monthly Total: $0
+
+## Free-tier Watch List
+
+| Free Service | What is free | Where you read it | The date you read it | The risk | What you do if it ends |
+|---|---|---|---|---|---|
+| Vercel | Edge Requests 1M / month included; Fast Data Transfer 100 GB / month included | https://vercel.com/pricing | 2026-09-27 | Going over the amount of edge requests and data transfer | Upgrading Plan to pro or switch to Netlify |
+| Supabase | Database Size 500 MB per project, Storage Size	1 GB, etc | https://supabase.com/pricing // https://supabase.com/docs/guides/platform/billing-on-supabase | 2026-09-27 | Going over database size and storage size I would ugrade to pro plan or switch to Firebase |  |
+| Vite | It is open source, commercial use, modification, distribution, and private use | https://github.com/vitejs/vite/blob/main/LICENSE | 2026-09-27 | If it is no longer open source and costs more than a reasonable amount or no longer working with other services | Keep using earlier version or switch to Nuxt |
+| React | It is open source | https://github.com/react/react/blob/main/LICENSE | 2026-09-27 | If it is no longer open source and costs more than a reasonable amount or no longer working with other services | Keep using earlier version or switch to Vue |
+| React Three Fiber | It is open source | https://github.com/pmndrs/react-three-fiber/blob/master/LICENSE | 2026-09-27 | If it is no longer open source and costs more than a reasonable amount or no longer working with other services | Keep using earlier version or switch to A-Frame |
+| Blender | It is open source, "you are free to use Blender, for any purpose" | https://www.blender.org/about/license/ | 2026-09-27 | It says it is free and open source forever but if not then I would not be able to make a scene in blender | I would make the scene fully in React Three Fiber |
+| TailwindCSS | It is open source, commercial use, modification, distribution, and private use | https://github.com/tailwindlabs/tailwindcss/blob/main/LICENSE | 2026-09-27 | If it is no longer open source and costs more than a reasonable amount or no longer working with other services | I don't use tailwindcss and switch to normal css |
+
+- The single line most likely to surprise you. When I read that blender said that it would be free and open source forever.
+
+- If this service ended in Week 12, how many hours would it cost me to move? If the answer is more than eight, that dependency needs a Plan B written now, not discovered then.
+
+| Service | Hours would it cost me to move if service ended in Week 12 | Plan B |
+|---|---|---|
+| Vercel | 2 hours | Switch to Netlify |
+| Supabase | 6 hours | Switch to Firebase |
+| Vite | 6 hours | Switch to Nuxt |
+| React | 8 hours | Switch to Vue |
+| React Three Fiber | 8 hours | Switch to A-Frame |
+| Blender | 8 hours | Make the scene fully in React Three Fiber |
+| TailwindCSS | 4 hours | Switch to normal css |
+
+## License Inventory
+
+| Dependency | SPDX id | Type | Obligation on me | Ship? |
+|---|---|---|---|
+| Vercel | None | Vercel Hosting Service | Follow Vercel terms | Yes |
+| Supabase | MIT | Permissive | Keep copyright and license notices | Yes |
+| Vite | MIT | Permissive | Keep copyright and license notices | Yes |
+| React | MIT | Permissive | Keep copyright and license notices | Yes |
+| React Three Fiber | MIT | Permissive | Keep copyright and license notices | Yes |
+| Blender | GPL-3.0-or-later | Copyleft | Follow GPL; Will not be modify blender for this project | Yes |
+| TailwindCSS | MIT | Permissive | Keep copyright and license notices | Yes |
+| Bootstrap Icons | MIT | Permissive | Keep copyright and license notices | Yes |
+
+The one dependency in your list whose license you were wrong about, or would have been wrong about. If every single one matched your assumption, say so — and note that you checked, because next semester one of them will not match.
+I was wrong about Supabase I thought it was Apache 2.0 but it was actually MIT for my project specifically.
+
+## Verify five claims, and record your hit rate
+
+| Claim as stated | Verdict | Source (vendor URL) | Checked |
+|---|---|---|---|
+| Note reminding Dr. Litman - I chose not to use AI this week, this table does not need to be filled out |
+

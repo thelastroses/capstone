@@ -6,7 +6,7 @@ React | A | VERIFIED | Installed | correctly displayed page - usable | yes | n/a
 
 Blender | A | VERIFIED | Downloaded |  ~348MB usable | yes | n/a | 2026-09-05
 
-React Three Fiber | A | VERIFIED | Installed | tested that cube obejct displayed properly | yes | n/a | 2026-09-05
+React Three Fiber | A | VERIFIED | Installed | tested that cube object displayed properly | yes | n/a | 2026-09-05
 
 TailwindCSS | A | VERIFIED | Installed | correctly displayed styling changes - usable | no | n/a | 2026-09-05
 

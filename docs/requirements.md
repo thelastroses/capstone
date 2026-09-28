@@ -304,7 +304,7 @@ The canvas information has to be uploaded with an artwork file at the same time 
 | ID | Requirement (metric · threshold · condition) | Priority | How it is measured |
 |---|---|---|---|
 | NFR-PERF-01 | An artist when running the application shall load the website in a p95 under 25 seconds when there are 20 artworks in the galleries with throttled 3G internet in Chrome. | Should | Measured with 20 artworks in the gallery loaded and record p95 in `docs/measurements.md`. |
-| NFR-PERF-02 | The 3D scene must maintain at minimum 30 FPS for 95% of a 60 second viewing session with 20 artwokrs in Chrome | Must | Measure the fps when loading, zooming, and clicking onto artworks. |
+| NFR-PERF-02 | The 3D scene must maintain at minimum 30 FPS for 95% of a 60 second viewing session with 20 artworks in Chrome | Must | Measure the fps when loading, zooming, and clicking onto artworks. |
 
 ### 6.2 Reliability & Availability
 
@@ -408,6 +408,6 @@ added | Milestone 4 |
 
 | Obligation | Primary source (URL) | Date checked | What it requires of me |
 |---|---|---|---|
-| Supabase scaling/storage | https://supabase.com/docs/guides/storage/production/scaling // https://github.com/supabase/supabase/blob/master/LICENSE | 2026-09-17 | I should stay in the free plan limits and if I am about to exceed the amount I should upgrate to the Pro plan and verify license requirements before distributing the application and preserve any required license and copyright notices |
+| Supabase scaling/storage | https://supabase.com/docs/guides/storage/production/scaling // https://github.com/supabase/supabase-js/blob/master/LICENSE | 2026-09-17 | I should stay in the free plan limits and if I am about to exceed the amount I should upgrate to the Pro plan and verify license requirements before distributing the application and preserve any required license and copyright notices |
 | React Three Fiber | https://github.com/react/react/blob/main/LICENSE  // https://github.com/pmndrs/react-three-fiber#readme | 2026-09-17 | Verify license requirements before distributing the application and preserve any required license and copyright notices |
 | React | https://github.com/react/react/blob/main/LICENSE | 2026-09-17 | Verify license requirements before distributing the application and preserve any required license and copyright notices |
