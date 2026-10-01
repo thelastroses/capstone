@@ -58,4 +58,6 @@ Every piece of state has exactly one owner: yes
 
 Which test failed first? Almost everyone fails the single-owner test on their first draft. What state did you find with two owners, and what would that have cost you in Week 12?
 
-None of my tests failed. 
+None of my tests failed and I did not find 2 owners in any of the rows. 
+
+
