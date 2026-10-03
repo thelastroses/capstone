@@ -1,5 +1,228 @@
 # architecture
 
+# Technical Specification — Artwork Gallery
+
+Version: v0.1   Date: 2026-10-01   Author: Jennifer Spencer   Status: Draft
+Requirements baseline this design satisfies: docs/requirements.md v0.1
+
+## 1. Purpose and Scope
+One paragraph: what this system is for. Then two lists.
+This system is for artists, recruiters for the artist, friends and family to view and interactive with the artworks to create a memorable experience. Artist are able to upload their artworks to a 3D and a 2D artwork overview so that are artworks never get lost in their photo app again. The website offers more information by taking the extracted canvas information from the artwork and displays it next to each artwork. The artist does not need to write it themself.
+
+In scope: FR-UPL-01, FR-UPL-02, FR-UPL-03, FR-DATA-01, FR-DATA-02, FR-GALL-02, FR-TDG-02, FR-EXT-04, FR-EXT-05
+Out of scope: A user/artist account system is too much extra work that adds over 10 hours of time since I have not made one before. An artstore would be fun to look and browser through as a viewer, however I want to focus more of the showing off the artworks and it would also take a significant amount of time to complete. Rearranging artworks in the 3D scene, light and dark mode, and a place to take pictures built directly into the website are all out of bounds for this version.
+
+## 2. System Context (Level 1)
+Diagram: docs/diagrams/Level1-Context.png
+| External actor / system | What it does with us | Protocol | If it is unavailable |
+|---|---|---|---|
+| Artist | Uploads and deletes artworks, views gallery, zooms and clicks on artworks | HTTPS | Gallery tells artist that there is an error and to come back later |
+| Viewer | Views gallery, zooms and clicks on artworks | HTTPS | Gallery tells viewer that there is an error and to come back later |
+| Website | Runs the entire React/Vite site, rendering the 3D and 2D gallery |  HTTPS | Website can not be accessed |
+| Supabase | Stores and allows retrieval of artworka and canvas information | HTTPS | Gallery is currently unavailable and to come back later |
+| Gmail | Allows viewer to contact the artist |  mailto: | That there is a problem with the email and to come back later |
+| Vercel | Hosts the deployed website | HTTPS | Website can not be accessed |
+
+
+## 3. Containers (Level 2)
+Diagram: docs/diagrams/Level2-Containers.png
+| Container | Responsibility (one sentence) | Technology | Runs where | Holds secrets? |
+|---|---|---|---|---|
+| Website | Takes in artist's artworks and displays them in 2 scenes a 3D and a 2D scene, the scenes pull the the artwork and canvas information data to remember for later. | React + Vite | Browser | No |
+| Relational Database | Stores artwork and canvas information so that when a user goes out of the website it is remember for later. | Supabase | Supabase cloud | Yes |
+| Deployment | Deploys the website so that people outside of the artist can visit the site. | Vercel | Vercel cloud | No |
+
+Trust boundary: The website runs on the browser while the relational database runs in the Supabase cloud and the deployment runs in the Vercel cloud but Supabase is the only one that hold secrets for this project.
+
+## 4. Components (Level 3 — for the container with the hard part only)
+| Component | Responsibility (verb first) | Owns (state) | Depends on | Serves (req IDs) |
+|---|---|---|---|---|
+| `gallery` | Displays the 3D gallery that allows interactions for each artwork | `selectedArtworks` | `db` | FR-TDG-01, FR-TDG-02 |
+| `overview` | Displays 2D artworks and its canvas information | `allArtworks` | `db` | FR-GALL-02, FR-GALL-04 |
+| `upload` | uploads artworks and stores artwork and canvas information for later in database | `files` | `db` | FR-UPL-01, FR-UPL-02, FR-UPL-03 |
+| `contact` | Opens email to message artist so that viewers can get in contact | `none` | `mail` | FR-GALL-03 || 3D Gallery Module | Displays artworks in an interactive 3D gallery | 3D gallery state | artwork data | FR-TDG-01, FR-TDG-02 |
+
+Dependency graph is acyclic: Yes
+Every piece of state has exactly one owner: Yes
+
+## 5. Interface Contracts
+
+### uploadArtwork(pngFile, procreateFile, galleryType)                                    (serves FR-UPL-01, FR-UPL-03, FR-DATA-01, FR-DATA-02)
+Purpose      Uploads the artwork to the 3D gallery, 2D gallery or both
+Auth         Uses Supabase key in .env to connect to Supabase project. The .env file is in the .gitignore so that it is not committed to the repository.
+Request  { 
+           "pngFile": file           required, .png
+           "procreateFile": file     optional, .procreate
+           "galleryType": string     required, "2D", "3D", or "both"
+         }
+Success  201 Created — { "artwork_id": 2, "fileName": "eye.png", "width": 4320,
+         "height": 5400, "dpi": 300 }
+Errors   400 invalid_png_file 400 invalid_procreate_file 400 invalid_gallery_type
+         409 duplicate_artwork 500 database_error
+         body: {"error":{"code":"...","field":"...","message":"..."}}
+Idempotency  If the artist tries to upload the same artwork mutliple times then it will alert them that it is a duplicate and ask them if they are sure they want to replace the current artwork or to try uploading a different file
+Side effects  Stores the artwork and canvas information that was extracted from the .procreate file upload into Supabase
+Limits       maximum of 20 artworks with only .png and .procreate files that are accepted
+
+
+### deleteArtwork(artwork_id)                                       (serves FR-UPL-02, FR-DATA-02)
+Purpose      Deletes the artwork with it's matching procreate file from the specific gallery
+Auth         Uses Supabase key in .env to connect to Supabase project. The .env file is in the .gitignore so that it is not committed to the repository.
+Request  { 
+           "artwork_id": uuid        required
+         }
+Success  204 - Artwork and related files deleted successfully
+Errors   400 invalid_artwork_id 404 the artwork does not exist
+         500 database_error
+         body: {"error":{"code":"...","field":"...","message":"..."}}
+Idempotency  If the artist tries to deletean artwork that has already been delted then the system will return the 404 error and does not delete anything further
+Side effects  Deletes the artworks and it's canvas information and the .procreate file from Supabase.
+Limits       Only one artwork can be deleted at a time
+
+Error envelope used system-wide: { "error": { "code": ..., "field": ..., "message": ... } }
+Status-code policy - Codes I will use and what each means in MY system:
+  400 invalid or missing information such as invaild .png, .procreate file, gallery type, artwork id   401 not used, there are no user accounts
+  403 not used, there are no user accounts   404 Artwork does not exist
+  409 request conflicts with current state such as duplicate artworks or there are already 20 artworks uploaded   429 not used does not set rate limit
+  500 code broke - database error   (CLI: n/a is a website des not have a command line interface)
+What a user is shown for each, and what gets logged: The user will be shown a short error message that does not expose every database error detail. The system logs the error code and what interaction caused the error to happen.
+
+| Error Number | What a user is shown for each | What gets logged | 
+|---|---|---|
+| 400 | The user is shown that there is an invalid or missing information based on what happened if there was an invaild .png, .procreate file, gallery type, or artwork id | The message gets logged for what was invalid or missing with code |
+| 401 | n/a | n/a |
+| 403 | n/a | n/a |
+| 404 | The current selected artwork does not exist please try reloading or select a different artwork | The messages gets logged for what did not exist with the code |
+| 409 | The action can not be done, for example, the artist tries uploading the same artwork again creating a duplicate or there are more than 20 artworks already | The message gets logged for what could not be done with code |
+| 429 | n/a | n/a |
+| 500 | Something went wrong. Please try again later | The message gets logged for the database error with code |
+
+Where were you about to use two different error shapes in the same system, and why did that feel reasonable at the time?
+  - I was not about to use two different error shapes in the same system it seemed like it would make things more complicated
+
+## 6. Data Model
+
+### Entity: artwork                                 (serves FR-UPL-01, FR-UPL-02, FR-UPL-03)
+Purpose        One artwork that has been uploaded to the gallery
+  id  uuid  NOT NULL  PK
+  png_name  text  NOT NULL  Name of the PNG file
+  gallery_type  text  NOT NULL  Has to be either 2D, 3D, or both - enum: '2D' | '3D' | 'Both' |
+  png_path  text  NOT NULL  PNG file path, where it is located in the storage
+
+Invariants     I1 Every artwork must get a unique id
+               I2 Every artwork uploaded must have a PNG file 
+               I3 Every artwork must have a gallery type of 2D, 3D, or both 
+               I4 The gallery must not hold more than 20 artworks
+               I5 There must only be one png file for a artwork
+               I6 The gallery_type can only be typed as 2D, 3D, or both 
+
+Relationships  artwork 1 ──── 0..1 procreate_data
+Volume         There is a maximum of 20 artworks so at most 20 rows or under (under around there)
+Lifecycle      Created when the artists uploads an artwork file successfully. Hard deleted when the artist deletes the artwork and the related procreate_data is deleted with it's artwork.
+
+### Entity: procreate_data                                     (serves FR-UPL-01)
+Purpose: One .procreate file that has been uploaded to the gallery that had its canvas information extracted from it
+  id            uuid        PK
+  artwork_id  uuid        NOT NULL  FK -> artwork(id) ON DELETE CASCADE
+  width          integer        NULL  (null = width is not available from that .procreate file)
+  height      integer     NULL  (null = width is not available from that .procreate file)
+  dpi      integer     NULL  (null = dpi is not available from that .procreate file)
+  procreate_path    text        NOT NULL      .procreate file path, where it is located in the storage
+ 
+Invariants
+  I1  artwork_id must reference an artwork that actually exists
+  I2 There must only be one .procreate file for a artwork or none
+  I3 width, height, dpi can not be negative values
+Relationships  procreate_data 0..1 ──── 1 artwork
+Volume         There is a maximum of 20 artworks so at most 20 rows or under (under around there) if each artwork has a .procreate file
+Lifecycle      Created when the artists uploads an .procreate file successfully and its canvas information is extracted. Hard deleted when the artist deletes the artwork because the related is the procreate_data so it is deleted with it's artwork.
+
+
+Which column did you almost make free text that should be constrained? Which nullable column’s meaning did you struggle to state in words? That struggle means two concepts are sharing one column — say what they are.
+  - The column that I almost made free text is the gallery type but I limited it to 2D, 3D, or both as the only choices. I did not struggle to state the nullable column's meaning in words.
+
+### Migrations
+Mechanism      numbered SQL applied in order + schema_migrations
+Direction      Forward-only
+Path + runner  migrations/0001-....sql, applied by <script>
+Conventions    Enums constrained - gallery_type
+
+What is your plan for the first schema change after you have data you care about? Write the two sentences now, while it is hypothetical and therefore easy to be honest about.
+  - 
+
+## 7. Sequence Flows
+### Flow 1 — Upload Artwork Flow                      (serves FR-UPL-01, FR-UPL-03, FR-DATA-01, FR-GALL-02)
+| Step | What can go wrong | System behavior | User sees |
+|---|---|---|---|
+| 1 - The artist selects an .png artwork they want to upload with its canvas information .procreate file. Then the artist choses the gallery type, where they want it to be displayed | A field is missing input | Does not allow the upload to go through | Artist sees a message saying what was missing |
+| 2 - The upload process checks if the .png and .procreate file are all valid file types | The file types being invalid | Returns the 400 error | Artist sees the message explaining what the invalid file type was |
+| 3 - The upload starts its process to upload the files and information to Supabase | The upload ends up failing | The upload gets terminated | Artist sees the message asking them to try uploading again |
+| 4 - The upload stores the canvas information and artwork files into Supabase | The database gets an error | Returns the 500 error | Artist sees a message asking them to try uploading again |
+| 5 - The artist sees the artwork in the correct gallery type with its canvas information | n/a |  Shows a successful upload pop up | Artist sees a pop up saying that their upload was successfully uploaded|
+
+### Flow 2 — Extraction of the .procreate file                      (serves FR-UPL-01, FR-EXT-04, FR-EXT-05)
+| Step | What can go wrong | System behavior | User sees |
+|---|---|---|---|
+|1 - The artist selects an .png artwork they want to upload with its canvas information .procreate file. Then the artist choses the gallery type, where they want it to be displayed | A field is missing input | Does not allow the upload to go through | Artist sees a message saying what was missing |
+|2 - The upload process check if .procreate file is valid and it goes to the extraction process | The .procreate file is invalid | Returns the 400 error | Artist sees the message explaining what the .procreate file was an invalid file type |
+|3 - The .procreate file gets read and extracts the width, height, and dpi | The canvas information could not be extracted | The entire extraction gets terminated | Artist sees a message asking them to try uploading again |
+|4 - The extracted information gets uploaded into Supabase | The extract information failed to upload into Supabase | Returns the 500 error | Artist sees a message asking them to try uploading again |
+|5 - The artist see the canvas information next the the artwork it is related to | n/a | Shows the successfully extracted canvas information | Artist sees a pop up saying that their canvas information was successfuly extracted and uploaded |
+
+### Flow 3 — Failed extraction of the .procreate file                      (serves FR-UPL-01, FR-EXT-04)
+| Step | What can go wrong | System behavior | User sees |
+|1 - The artist selects an .png artwork they want to upload with its canvas information .procreate file. Then the artist choses the gallery type, where they want it to be displayed | A field is missing input | Does not allow the upload to go through | Artist sees a message saying what was missing |
+|2 - The upload process check if .procreate file is valid and it goes to the extraction process | The .procreate file is invalid | Returns the 400 error | Artist sees the message explaining what the .procreate file was an invalid file type |
+|3 - The .procreate file fails to get read and fails the extraction of the width, height, and dpi | The canvas information could not be extracted | The entire extraction gets terminated | Artist sees a message asking them to try uploading again |
+|4 - The extracted information does not get uploaded into Supabase | The extract information failed to upload into Supabase | Returns the 500 error | Artist sees a message asking them to try uploading again |
+|5 - The artist see an error saying that the canvas information could not be read | The extraction did not output any canvas information | No canvas information is uploaded and saved to the website | Canvas information is not there, that it is unavailable and to try uploading again |
+
+- What did the failure branch change about your interface contract from Rep 5 or your data model from Rep 7?
+The failure branch did change my interface by ensuring when a .procreate file extractiuon fails that it does not save the bad canvas information into Supabase and returns a error message to the artist.
+
+## 8. Error Handling and Edge Cases
+| Category | Policy |
+|---|---|
+| Invalid input / Not authorized / Not found / Conflict / Dependency failure / Exhaustion | |
+
+For every call that leaves this process:
+| Call | Timeout (s) | Retries + backoff | Fallback | User is told? |
+|---|---|---|---|---|
+|---|---|---|---|---|
+
+Edge-case register (12+ entries; these become tests in Week 11):
+| # | Edge case | Expected behavior |
+|---|---|---|
+|---|---|---|
+
+## 9. External and Nondeterministic Dependencies
+For an AI component, the prompt contract: purpose, inputs, privacy rule, prompt
+template path in this repo, model identifier + date verified, parameters, output
+schema + validator, behavior on invalid output, token/latency/cost budget with a
+hard cap, the non-AI fallback, and the logging + retention rule.
+For any other third party: what you call, cost, limits, behavior when it is down.
+| Fact | Value | Source URL | Date checked |
+|---|---|---|---|
+
+## 10. Traceability
+| Requirement | Priority | Component(s) | Interface(s) | Flow |
+|---|---|---|---|---|
+|---|---|---|---|---|
+
+Every Must requirement appears here. Every component appears at least once.
+
+## 11. Open Questions and Design Risks
+| # | Open question | What it blocks | Owner | Decide by |
+|---|---|---|---|---|
+|---|---|---|---|---|
+An open question with a blocker, an owner, and a date is professional.
+An unmarked hole is a landmine.
+
+## 12. Change Log for This Document
+| Version | Date | Change | Why |
+|---|---|---|---|
+|---|---|---|---|
+
 ## Rep 1 - The decision inventory
 
 | # | Requirement | Decision that must be made first        | Section it belongs in |
@@ -32,7 +255,6 @@
 Which requirement generated the most decisions? That requirement is where your design risk lives, and it is almost certainly the one you should build first in Week 9.
 -  The requirement that generated the most decisions is NFR-DATA-02.
 
-
 ## Rep 2 - Context, then containers
 
 How many containers did you draw, and how many of them did the requirements demand versus how many you added because they felt professional? Delete the ones that fail that test and say what you deleted.
@@ -60,4 +282,140 @@ Which test failed first? Almost everyone fails the single-owner test on their fi
 
 None of my tests failed and I did not find 2 owners in any of the rows. 
 
+## Rep 5 - One complete interface contract, for the one you understand least
 
+GOOD: uploadArtwork(pngFile, procreateFile, galleryType)                                        (serves FR-UPL-01, FR-UPL-02, FR-UPL-03)
+Auth     Uses Supabase key in .env to connect to Supabase project. The .env file is in the .gitignore so that it is not committed to the repository.
+Request  { "pngFile": file           required, .png
+           "procreateFile": file     optional, .procreate
+           "galleryType": string     required, "2D", "3D", or "both"
+         }
+Success  201 Created — { "id": 2, "fileName": "eye.png", "width": 4320,
+         "height": 5400, "dpi": 300 }
+Errors   400 invalid_png_file 400 invalid_procreate_file 400 invalid_gallery_type
+         409 duplicate_artwork 500 database_error
+         body: {"error":{"code":"...","field":"...","message":"..."}}
+Idempotency  If the artist tries to upload the same artwork mutliple times then it will alert them that it is a duplicate and ask them if they are sure they want to replace the current artwork or to try uploading a different file
+Side effects   Stores the artwork and canvas information that was extracted from the .procreate file upload into Supabase
+Limits   maximum of 20 artworks with only .png and .procreate files that are accepted
+
+GOOD: deleteArtwork(artwork_id)                                       (serves FR-UPL-02)
+Auth         Uses Supabase key in .env to connect to Supabase project. The .env file is in the .gitignore so that it is not committed to the repository.
+Request  { 
+           "artwork_id": uuid        required
+         }
+Success  204 - Artwork and related files deleted successfully
+Errors   400 invalid_artwork_id 404 the artwork does not exist
+         500 database_error
+         body: {"error":{"code":"...","field":"...","message":"..."}}
+Idempotency  If the artist tries to deletean artwork that has already been deleted then the system will return the 404 error and does not delete anything further
+Side effects  Deletes the artworks and it's canvas information and the .procreate file from Supabase.
+Limits       Only one artwork can be deleted at a time
+
+What did you have to decide while writing this that you had been quietly leaving open? Name it. That decision is the value of the rep.
+-  I defined exactly what happens when there is a duplicate artwork that it asks them if they are sure they want to replace the current artwork or to try uploading a different file.
+
+## Rep 6 - One error envelope, one status-code policy
+
+Error envelope used system-wide: { "error": { "code": ..., "field": ..., "message": ... } }
+Status-code policy - Codes I will use and what each means in MY system:
+  400 invalid or missing information such as invaild .png, .procreate file, gallery type, artwork id   401 not used, there are no user accounts
+  403 not used, there are no user accounts   404 Artwork does not exist
+  409 request conflicts with current state such as duplicate artworks or there are already 20 artworks uploaded   429 not used does not set rate limit
+  500 code broke - database error   (CLI: n/a is a website des not have a command line interface)
+What a user is shown for each, and what gets logged: The user will be shown a short error message that does not expose every database error detail. The system logs the error code and what interaction caused the error to happen.
+
+| Error Number | What a user is shown for each | What gets logged | 
+|---|---|---|
+| 400 | The user is shown that there is an invalid or missing information based on what happened if there was an invaild .png, .procreate file, gallery type, or artwork id | The message gets logged for what was invalid or missing with code |
+| 401 | n/a | n/a |
+| 403 | n/a | n/a |
+| 404 | The current selected artwork does not exist please try reloading or select a different artwork | The messages gets logged for what did not exist with the code |
+| 409 | The action can not be done, for example, the artist tries uploading the same artwork again creating a duplicate or there are more than 20 artworks already | The message gets logged for what could not be done with code |
+| 429 | n/a | n/a |
+| 500 | Something went wrong. Please try again later | The message gets logged for the database error with code |
+
+Where were you about to use two different error shapes in the same system, and why did that feel reasonable at the time?
+  - I was not about to use two different error shapes in the same system it seemed like it would make things more complicated
+
+## Rep 7 - The data model, with invariants
+
+### Entity: artwork                                 (serves FR-UPL-01, FR-UPL-02, FR-UPL-03)
+Purpose        One artwork that has been uploaded to the gallery
+  id  uuid  NOT NULL  PK
+  png_name  text  NOT NULL  Name of the PNG file
+  gallery_type  text  NOT NULL  Has to be either 2D, 3D, or both
+  png_path  text  NOT NULL  PNG file path, where it is located in the storage
+
+Invariants     I1 Every artwork must get a unique id
+               I2 Every artwork uploaded must have a PNG file 
+               I3 Every artwork must have a gallery type of 2D, 3D, or both 
+               I4 The gallery must not hold more than 20 artworks
+               I5 There must only be one png file for a artwork
+Relationships  artwork 1 ──── 0..1 procreate_data
+Volume         There is a maximum of 20 artworks so at most 20 rows or under (under around there)
+Lifecycle      Created when the artists uploads an artwork file successfully. Hard deleted when the artist deletes the artwork and the related procreate_data is deleted with it's artwork.
+
+### Entity: procreate_data                                     (serves FR-UPL-01)
+Purpose: One .procreate file that has been uploaded to the gallery that had its canvas information extracted from it
+  id            uuid        PK
+  artwork_id  uuid        NOT NULL  FK -> artwork(id) ON DELETE CASCADE
+  product_id    uuid        NULL      FK -> product(id)   (null = manual entry)
+  width          integer        NULL  (null = width is not available from that .procreate file)
+  height      integer     NULL  (null = width is not available from that .procreate file)
+  dpi      integer     NULL  (null = dpi is not available from that .procreate file)
+  procreate_path    text        NOT NULL      .procreate file path, where it is located in the storage
+ 
+Invariants
+  I1  artwork_id must reference an artwork that actually exists
+  I2 There must only be one .procreate file for a artwork or none
+  I3 width, height, dpi can not be negative values
+Relationships  procreate_data 0..1 ──── 1 artwork
+Volume         There is a maximum of 20 artworks so at most 20 rows or under (under around there) if each artwork has a .procreate file
+Lifecycle      Created when the artists uploads an .procreate file successfully and its canvas information is extracted. Hard deleted when the artist deletes the artwork because the related is the procreate_data so it is deleted with it's artwork.
+
+Which column did you almost make free text that should be constrained? Which nullable column’s meaning did you struggle to state in words? That struggle means two concepts are sharing one column — say what they are.
+  - The column that I almost made free text is the gallery type but I limited it to 2D, 3D, or both as the only choices. I did not struggle to state the nullable column's meaning in words. 
+
+### Rep 8 - Three sequence flows, and the branch that matters
+
+### Flow 1 — Upload Artwork Flow                      (serves FR-UPL-01, FR-UPL-03, FR-DATA-01, FR-GALL-02)
+| Step | What can go wrong | System behavior | User sees |
+|---|---|---|---|
+| 1 - The artist selects an .png artwork they want to upload with its canvas information .procreate file. Then the artist choses the gallery type, where they want it to be displayed | A field is missing input | Does not allow the upload to go through | Artist sees a message saying what was missing |
+| 2 - The upload process checks if the .png and .procreate file are all valid file types | The file types being invalid | Returns the 400 error | Artist sees the message explaining what the invalid file type was |
+| 3 - The upload starts its process to upload the files and information to Supabase | The upload ends up failing | The upload gets terminated | Artist sees the message asking them to try uploading again |
+| 4 - The upload stores the canvas information and artwork files into Supabase | The database gets an error | Returns the 500 error | Artist sees a message asking them to try uploading again |
+| 5 - The artist sees the artwork in the correct gallery type with its canvas information | n/a |  Shows a successful upload pop up | Artist sees a pop up saying that their upload was successfully uploaded|
+
+### Flow 2 — Extraction of the .procreate file                      (serves FR-UPL-01, FR-EXT-04, FR-EXT-05)
+| Step | What can go wrong | System behavior | User sees |
+|---|---|---|---|
+|1 - The artist selects an .png artwork they want to upload with its canvas information .procreate file. Then the artist choses the gallery type, where they want it to be displayed | A field is missing input | Does not allow the upload to go through | Artist sees a message saying what was missing |
+|2 - The upload process check if .procreate file is valid and it goes to the extraction process | The .procreate file is invalid | Returns the 400 error | Artist sees the message explaining what the .procreate file was an invalid file type |
+|3 - The .procreate file gets read and extracts the width, height, and dpi | The canvas information could not be extracted | The entire extraction gets terminated | Artist sees a message asking them to try uploading again |
+|4 - The extracted information gets uploaded into Supabase | The extract information failed to upload into Supabase | Returns the 500 error | Artist sees a message asking them to try uploading again |
+|5 - The artist see the canvas information next the the artwork it is related to | n/a | Shows the successfully extracted canvas information | Artist sees a pop up saying that their canvas information was successfuly extracted and uploaded |
+
+### Flow 3 — Failed extraction of the .procreate file                      (serves FR-UPL-01, FR-EXT-04)
+| Step | What can go wrong | System behavior | User sees |
+|1 - The artist selects an .png artwork they want to upload with its canvas information .procreate file. Then the artist choses the gallery type, where they want it to be displayed | A field is missing input | Does not allow the upload to go through | Artist sees a message saying what was missing |
+|2 - The upload process check if .procreate file is valid and it goes to the extraction process | The .procreate file is invalid | Returns the 400 error | Artist sees the message explaining what the .procreate file was an invalid file type |
+|3 - The .procreate file fails to get read and fails the extraction of the width, height, and dpi | The canvas information could not be extracted | The entire extraction gets terminated | Artist sees a message asking them to try uploading again |
+|4 - The extracted information does not get uploaded into Supabase | The extract information failed to upload into Supabase | Returns the 500 error | Artist sees a message asking them to try uploading again |
+|5 - The artist see an error saying that the canvas information could not be read | The extraction did not output any canvas information | No canvas information is uploaded and saved to the website | Canvas information is not there, that it is unavailable and to try uploading again |
+
+- What did the failure branch change about your interface contract from Rep 5 or your data model from Rep 7?
+The failure branch did change my interface by ensuring when a .procreate file extractiuon fails that it does not save the bad canvas information into Supabase and returns a error message to the artist.
+
+## Rep 9 - The migration decision
+
+1. Migration mechanism: Numbered SQL files applied in order and tracked in a schema_migrations table
+2. Forward-only or reversible: Forward-only
+3. Path and runner: migrations/____________ , applied by ______________
+   (the same script the Week 14 clean-machine test will run)
+
+Then write migration 0001 for the schema from Rep 7 and commit it.
+
+What is your plan for the first schema change after you have data you care about? Write the two sentences now, while it is hypothetical and therefore easy to be honest about.
+  - 
