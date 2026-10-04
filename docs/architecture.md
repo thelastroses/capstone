@@ -75,14 +75,14 @@ Success  204 - Artwork and related files deleted successfully
 Errors   400 invalid_artwork_id 404 the artwork does not exist
          500 database_error
          body: {"error":{"code":"...","field":"...","message":"..."}}
-Idempotency  If the artist tries to deletean artwork that has already been delted then the system will return the 404 error and does not delete anything further
+Idempotency  If the artist tries to deletean artwork that has already been deleted then the system will return the 404 error and does not delete anything further
 Side effects  Deletes the artworks and it's canvas information and the .procreate file from Supabase.
 Limits       Only one artwork can be deleted at a time
 
 Error envelope used system-wide: { "error": { "code": ..., "field": ..., "message": ... } }
 Status-code policy - Codes I will use and what each means in MY system:
   400 invalid or missing information such as invaild .png, .procreate file, gallery type, artwork id   401 not used, there are no user accounts
-  403 not used, there are no user accounts   404 Artwork does not exist
+  403 not used, there are no user accounts   404 Artwork could not be found 
   409 request conflicts with current state such as duplicate artworks or there are already 20 artworks uploaded   429 not used does not set rate limit
   500 code broke - database error   (CLI: n/a is a website des not have a command line interface)
 What a user is shown for each, and what gets logged: The user will be shown a short error message that does not expose every database error detail. The system logs the error code and what interaction caused the error to happen.
@@ -92,7 +92,7 @@ What a user is shown for each, and what gets logged: The user will be shown a sh
 | 400 | The user is shown that there is an invalid or missing information based on what happened if there was an invaild .png, .procreate file, gallery type, or artwork id | The message gets logged for what was invalid or missing with code |
 | 401 | n/a | n/a |
 | 403 | n/a | n/a |
-| 404 | The current selected artwork does not exist please try reloading or select a different artwork | The messages gets logged for what did not exist with the code |
+| 404 | The current selected artwork could not be found please try reloading or select a different artwork | The messages gets logged for what could not be found with the code |
 | 409 | The action can not be done, for example, the artist tries uploading the same artwork again creating a duplicate or there are more than 20 artworks already | The message gets logged for what could not be done with code |
 | 429 | n/a | n/a |
 | 500 | Something went wrong. Please try again later | The message gets logged for the database error with code |
@@ -142,15 +142,16 @@ Which column did you almost make free text that should be constrained? Which nul
   - The column that I almost made free text is the gallery type but I limited it to 2D, 3D, or both as the only choices. I did not struggle to state the nullable column's meaning in words.
 
 ### Migrations
-Mechanism      numbered SQL applied in order + schema_migrations
+Mechanism      Supabase tool
 Direction      Forward-only
-Path + runner  migrations/0001-....sql, applied by <script>
+Path + runner  migrations/0001-initial.sql, applied by Supabase CLI
 Conventions    Enums constrained - gallery_type
 
 What is your plan for the first schema change after you have data you care about? Write the two sentences now, while it is hypothetical and therefore easy to be honest about.
-  - 
+  - I will make another migration rather than changing the old migration. I will ensure that it does not delete anything that it should not or change any important data.
 
 ## 7. Sequence Flows
+
 ### Flow 1 — Upload Artwork Flow                      (serves FR-UPL-01, FR-UPL-03, FR-DATA-01, FR-GALL-02)
 | Step | What can go wrong | System behavior | User sees |
 |---|---|---|---|
@@ -181,19 +182,41 @@ What is your plan for the first schema change after you have data you care about
 The failure branch did change my interface by ensuring when a .procreate file extractiuon fails that it does not save the bad canvas information into Supabase and returns a error message to the artist.
 
 ## 8. Error Handling and Edge Cases
-| Category | Policy |
-|---|---|
-| Invalid input / Not authorized / Not found / Conflict / Dependency failure / Exhaustion | |
+
+| Category | Example | Policy |
+|---|---|---|
+| Invalid input | A missing .png file, .procreate file, gallery type | |
+| Not authorized | n/a because I will not have a user accounts system in the first version | n/a because I will not have a user accounts system in the first version |
+| Not found | The artwork_id does not exist | Returns the 404 error of the artwork could not be found |
+| Conflict | There is a duplicate artwork or there are already 20 artworks uploaded | Returns the 409 error and tells the artist what the conflict was |
+| Dependency failure | Supabase times out | The artist can try uploading 3 times and if it still fails it tells the artist to come back later |
+| Exhaustion | The art gallery has 20 artworks in it and there is no storage left in the database | The new upload is not uploaded and tells the artist that they have reached the artwork limit |
 
 For every call that leaves this process:
 | Call | Timeout (s) | Retries + backoff | Fallback | User is told? |
 |---|---|---|---|---|
-|---|---|---|---|---|
+| delete artwork | 15 | 0 retries | The artwork is kept and a pop up notifying the artist that is failed to delete appears | Yes |
+| upload artwork | 60 | 0 retries | A message pop up appears telling the artist that their upload failed | Yes |
+| get artwork | 15 | 0 retries | A message pop up appears telling the artist that it failed to load the artwork | Yes |
 
 Edge-case register (12+ entries; these become tests in Week 11):
-| # | Edge case | Expected behavior |
-|---|---|---|
-|---|---|---|
+| # | Edge case | Expected behavior | Becomes test |
+|---|---|---|---|
+| 1 | Empty state: zero artworks, first run | Shows an empty gallery and tells the artist to upload to see artworks displayed here | Week 11 |
+| 2 | Exactly one artwork | Displays the one artwork in the 3D and 2D overview. | Week 11 |
+| 3 | Exactly 20 artworks | Displays all 20 artworks in the 3D and 2D overview. | Week 11 |
+| 4 | Uploading the 21 artworks | The upload is denied and the artist gets notified with a pop up that they can not exceed the 20 artwork limit, nothing happens to the gallery | Week 11 |
+| 5 | Uploading a duplicate artwork | The upload warns the artist that they are trying to upload a duplicate artwork and are they sure they want to replace the current piece | Week 11 |
+| 6 | User zooms to a certain distance in the 3D gallery | The viewer is preventing from zooming in to a particular range that is too close so that they do not get lost and forget where they are | Week 11 |
+| 7 | Artist deletes every artwork that had been uploaded so there are none left | The gallery becomes empty telling the artist to upload to see artworks displayed here | Week 11 |
+| 8 | Artwork file name has something such as an emoji in it | The artwork file is allowed and uploads without problem | Week 11 |
+| 9 | Artist clicks out of image in 3D gallery | The image is closed and the artist can go back to exploring the other artworks | Week 11 |
+| 10 | Artist cancels the artwork deletion | The artwork is not deleted and the artwork remains the same | Week 11 |
+| 11 | Artist uploads a file that is 250 characters long | The artwork is displayed without a problem in the scenes | Week 11 |
+| 12 | A .png file is uploaded without its .procreate file | The upload is allowed and the canvas information is left blank saying that the artist did not upload any canvas information for this piece | Week 11 |
+
+Which external call did you discover had no timeout at all in your plan? Look up what your client library’s default actually is and write the number down — some defaults are “forever.”
+  - I did not find any external call that had no timeout and can run forever. The supabase default timeout for the anon role is 3s though.
 
 ## 9. External and Nondeterministic Dependencies
 For an AI component, the prompt contract: purpose, inputs, privacy rule, prompt
@@ -305,7 +328,7 @@ Request  {
            "artwork_id": uuid        required
          }
 Success  204 - Artwork and related files deleted successfully
-Errors   400 invalid_artwork_id 404 the artwork does not exist
+Errors   400 invalid_artwork_id 404 the artwork could not be found 
          500 database_error
          body: {"error":{"code":"...","field":"...","message":"..."}}
 Idempotency  If the artist tries to deletean artwork that has already been deleted then the system will return the 404 error and does not delete anything further
@@ -320,7 +343,7 @@ What did you have to decide while writing this that you had been quietly leaving
 Error envelope used system-wide: { "error": { "code": ..., "field": ..., "message": ... } }
 Status-code policy - Codes I will use and what each means in MY system:
   400 invalid or missing information such as invaild .png, .procreate file, gallery type, artwork id   401 not used, there are no user accounts
-  403 not used, there are no user accounts   404 Artwork does not exist
+  403 not used, there are no user accounts   404 Artwork could not be found 
   409 request conflicts with current state such as duplicate artworks or there are already 20 artworks uploaded   429 not used does not set rate limit
   500 code broke - database error   (CLI: n/a is a website des not have a command line interface)
 What a user is shown for each, and what gets logged: The user will be shown a short error message that does not expose every database error detail. The system logs the error code and what interaction caused the error to happen.
@@ -330,7 +353,7 @@ What a user is shown for each, and what gets logged: The user will be shown a sh
 | 400 | The user is shown that there is an invalid or missing information based on what happened if there was an invaild .png, .procreate file, gallery type, or artwork id | The message gets logged for what was invalid or missing with code |
 | 401 | n/a | n/a |
 | 403 | n/a | n/a |
-| 404 | The current selected artwork does not exist please try reloading or select a different artwork | The messages gets logged for what did not exist with the code |
+| 404 | The current selected artwork could not be found please try reloading or select a different artwork | The messages gets logged for what did not exist with the code |
 | 409 | The action can not be done, for example, the artist tries uploading the same artwork again creating a duplicate or there are more than 20 artworks already | The message gets logged for what could not be done with code |
 | 429 | n/a | n/a |
 | 500 | Something went wrong. Please try again later | The message gets logged for the database error with code |
@@ -360,7 +383,6 @@ Lifecycle      Created when the artists uploads an artwork file successfully. Ha
 Purpose: One .procreate file that has been uploaded to the gallery that had its canvas information extracted from it
   id            uuid        PK
   artwork_id  uuid        NOT NULL  FK -> artwork(id) ON DELETE CASCADE
-  product_id    uuid        NULL      FK -> product(id)   (null = manual entry)
   width          integer        NULL  (null = width is not available from that .procreate file)
   height      integer     NULL  (null = width is not available from that .procreate file)
   dpi      integer     NULL  (null = dpi is not available from that .procreate file)
@@ -410,12 +432,90 @@ The failure branch did change my interface by ensuring when a .procreate file ex
 
 ## Rep 9 - The migration decision
 
-1. Migration mechanism: Numbered SQL files applied in order and tracked in a schema_migrations table
+1. Migration mechanism: Supabase tool
 2. Forward-only or reversible: Forward-only
-3. Path and runner: migrations/____________ , applied by ______________
+3. Path and runner: migrations/0001-initial.sql , applied by Supabase CLI
    (the same script the Week 14 clean-machine test will run)
 
-Then write migration 0001 for the schema from Rep 7 and commit it.
-
 What is your plan for the first schema change after you have data you care about? Write the two sentences now, while it is hypothetical and therefore easy to be honest about.
-  - 
+  - I will make another migration rather than changing the old migration. I will ensure that it does not delete anything that it should not or change any important data.
+
+## Rep 10 - Error policy and the edge-case register
+
+| Category | Example | Policy |
+|---|---|---|
+| Invalid input | A missing .png file, .procreate file, gallery type | |
+| Not authorized | n/a because I will not have a user accounts system in the first version | n/a because I will not have a user accounts system in the first version |
+| Not found | The artwork_id does not exist | Returns the 404 error of the artwork could not be found |
+| Conflict | There is a duplicate artwork or there are already 20 artworks uploaded | Returns the 409 error and tells the artist what the conflict was |
+| Dependency failure | Supabase times out | The artist can try uploading 3 times and if it still fails it tells the artist to come back later |
+| Exhaustion | The art gallery has 20 artworks in it and there is no storage left in the database | The new upload is not uploaded and tells the artist that they have reached the artwork limit |
+
+For every call that leaves this process:
+| Call | Timeout (s) | Retries + backoff | Fallback | User is told? |
+|---|---|---|---|---|
+| delete artwork | 15 | 0 retries | The artwork is kept and a pop up notifying the artist that is failed to delete appears | Yes |
+| upload artwork | 60 | 0 retries | A message pop up appears telling the artist that their upload failed | Yes |
+| get artwork | 15 | 0 retries | A message pop up appears telling the artist that it failed to load the artwork | Yes |
+
+Edge-case register (12+ entries; these become tests in Week 11):
+| # | Edge case | Expected behavior | Becomes test |
+|---|---|---|---|
+| 1 | Empty state: zero artworks, first run | Shows an empty gallery and tells the artist to upload to see artworks displayed here | Week 11 |
+| 2 | Exactly one artwork | Displays the one artwork in the 3D and 2D overview. | Week 11 |
+| 3 | Exactly 20 artworks | Displays all 20 artworks in the 3D and 2D overview. | Week 11 |
+| 4 | Uploading the 21 artworks | The upload is denied and the artist gets notified with a pop up that they can not exceed the 20 artwork limit, nothing happens to the gallery | Week 11 |
+| 5 | Uploading a duplicate artwork | The upload warns the artist that they are trying to upload a duplicate artwork and are they sure they want to replace the current piece | Week 11 |
+| 6 | User zooms to a certain distance in the 3D gallery | The viewer is preventing from zooming in to a particular range that is too close so that they do not get lost and forget where they are | Week 11 |
+| 7 | Artist deletes every artwork that had been uploaded so there are none left | The gallery becomes empty telling the artist to upload to see artworks displayed here | Week 11 |
+| 8 | Artwork file name has an emoji in it | The artwork file is allowed and uploads without problem | Week 11 |
+| 9 | Artist clicks out of image in 3D gallery | The image is closed and the artist can go back to exploring the other artworks | Week 11 |
+| 10 | Artist cancels the artwork deletion | The artwork is not deleted and the artwork remains the same | Week 11 |
+| 11 | Artist uploads a file that is 250 characters long | The artwork is displayed without a problem in the scenes | Week 11 |
+| 12 | A .png file is uploaded without its .procreate file | The upload is allowed and the canvas information is left blank saying that the artist did not upload any canvas information for this piece | Week 11 |
+
+Which external call did you discover had no timeout at all in your plan? Look up what your client library’s default actually is and write the number down — some defaults are “forever.”
+  - I did not find any external call that had no timeout and can run forever. The supabase default timeout for the anon role is 3s though. I chose a 15/60 second timeout for my calls so that they have enough time to finish.
+
+## Rep 11 - Rewrite the vague specification
+
+FR-07 — Expiry notifications                            Priority: Must
+Owner: search   ·   Depends on: database
+
+Definition  
+A search is found when the search is in the database or when key words bring up a related find, it is not case sensitive. If there are no results then a user gets the message that there are no search results for that search. If a search is found it displays results and if it is more than 10 results it gets paginated.
+
+Trigger  
+The search runs when the users enters a search and hits the search button to begin the search query.
+
+Behavior
+  1. The user types in what they want to search and the search searches for what they wrote based off the keywords they used
+  2. The query returns the result from the closest match to the farthest match
+  3. It return 10 results per page, more than 10 gets paginated
+  4. If the result is that there are no matching it shows no results and a message that there is no matching search results for that search.
+  5. If there are over 100 results then it narrows the search down to the closet matches to only have 100 maximum.
+
+Data  
+reads search, writes nothing. No public endpoint; the search results are returned on the search page
+
+Errors  
+Search fails -> The Search failed please try again and log ERROR. 
+Search is invalid -> The Search failed please try again and log ERROR, the search is not run.
+Edge  
+Extra spaces are added after search -> extra spaces are removed
+UI  Shows the search results on the search page. If there are no search results then it says There are no search results found
+
+Acceptance (Week 11 turns these into tests, verbatim)
+  AC-12.1 search results match one item -> exactly one results appears
+  AC-12.2 search results match 0 items -> 0 results appear and no search results found message appears
+  AC-12.3 search results matches 100 results -> 100 results appear but with 10 per page
+  AC-12.4 search results matches over 100 results -> results are narrowed down to the closest matches 100 maximum
+
+OPEN QUESTION 
+  What makes a word in the search a keyword?
+  Blocked on what decides a word as a keyword in a search
+
+  Owner: Jennifer Spencer  Decide by: end of Week 7.
+
+Count the decisions you added.
+  - I added around 7 more decisions.
