@@ -16,22 +16,22 @@
 
 ## 2. Capacity — Weeks 8–16
 
-| Week | Chapter, quiz, reps, milestone write-up | Available for this plan |
+| Week | Chapter, quiz, reps, milestone write-up | Available for this plan | 
 |---|---:|---:|
-| 8 | <11> | 0 |
-| 9 | <11> | <4> |
-| 10 | <11> | <4> |
-| 11 | <11> | <4> |
-| 12 | <11> | <4> |
-| 13 | <11> | <4> |
-| 14 | <11> | <4> |
-| 15 | <11> | <4> |
-| 16 | <11> | <4> |
+| 8 | 12 | 8 |
+| 9 | 7 | 13 |
+| 10 | 5 | 15 |
+| 11 | 7 | 13 |
+| 12 | 7 | 13 |
+| 13 | 7 | 13 |
+| 14 | 7 | 13 |
+| 15 | 7 | 13 |
+| 16 | 7 | 13 |
 | … | … | … |
-| **Total** | **<48>** | **<87>** |
+| **Total** | **66** | **114** |
 
-Declared project buffer: **25%** of available hours = **15 h**
-Plannable effort (available − buffer) = **<65.2> h**
+Declared project buffer: **25%** of available hours = **28.5 h**
+Plannable effort (available − buffer) = **85.5 h**
 
 ## 3. Work breakdown
 
@@ -105,11 +105,17 @@ Repeat one block per work package. Then total every package into the roll-up bel
 
 | Work package | Tasks | Raw E (h) | Calibrated (h) |
 |---|---:|---:|---:|
-| WP-0 <enabling> | <2> | <5.3> | <6.1> |
+| WP-1 Upload artworks | 5 | 12.0 | 13.2 |
+| WP-2 Extract .procreate data | 4 | 14.0 | 15.4 |
+| WP-3 Save artwork files into Database | 4 | 11.0 | 12.1 |
+| WP-4 Make 3D gallery | 4 | 9.0 | 9.9 |
+| WP-5 Make 2D overview with contact section | 4 | 9.0 | 9.9 |
+| WP-6 Delete Artworks | 4 | 10.0 | 11.0 |
+| WP-7 Maintainability and Deployment | 2 | 5.0 | 5.5 |
 | … | | | |
-| **Total** | | **<86.2>** | **<97.9>** |
+| **Total** | | **70.0** | **77.0** |
 
-Calibration factor from `docs/hours-log.csv`: **<1.14>×**
+Calibration factor from `docs/hours-log.csv`: **1.10×**
 (actual hours ÷ expected hours over the tasks you have already finished)
 
 ## 5. Schedule
@@ -134,5 +140,8 @@ Hours over plannable: **<32.7>**
 | Cut / deferred / re-estimated | Item | Reqs | Hours recovered | MoSCoW before → after | Why |
 |---|---|---|---:|---|---|
 | cut | <WP-5 recipe suggestion> | <FR-031, FR-032> | <12.9> | Could → Won't | <one honest sentence> |
+
+
+VERDICT: fits, with 15.5 h to spare
 
 Signed: <your name>, <date>. Re-baselined after any change of more than <5> hours.
