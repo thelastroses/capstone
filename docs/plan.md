@@ -16,22 +16,22 @@
 
 ## 2. Capacity — Weeks 8–16
 
-| Week | Chapter, quiz, reps, milestone write-up | Available for this plan | 
+| Week | What it is | Course overhead: Chapter, quiz, reps, milestone write-up | Available for this plan | Known losses |
 |---|---:|---:|
-| 8 | 12 | 8 |
-| 9 | 7 | 13 |
-| 10 | 5 | 15 |
-| 11 | 7 | 13 |
-| 12 | 7 | 13 |
-| 13 | 7 | 13 |
-| 14 | 7 | 13 |
-| 15 | 7 | 13 |
-| 16 | 7 | 13 |
-| … | … | … |
+| 8 | Design review + midterm checkpoint | 12 | 8 | broken week |
+| 9 | Walking skeleton + CI | 7 | 13 | none |
+| 10 | Iteration one: the core | 5 | 15 | none |
+| 11 | Testing, quality, defect log | 7 | 13 | none |
+| 12 | Iteration two: integration | 7 | 13 | none |
+| 13 | Documentation | 7 | 13 | none |
+| 14 | Deployment and handoff | 7 | 13 | broken week |
+| 15 | Presentation preparation | 7 | 13 | none |
+| 16 | Delivery day | 7 | 13 | none |
 | **Total** | **66** | **114** |
 
 Declared project buffer: **25%** of available hours = **28.5 h**
 Plannable effort (available − buffer) = **85.5 h**
+- The default buffer seems like a reasonable choice for my project and my speed
 
 ## 3. Work breakdown
 
@@ -39,11 +39,11 @@ Plannable effort (available − buffer) = **85.5 h**
 
 | Task | Name | Reqs | O | M | P | E | Done when | Depends on |
 |---|---|---|---:|---:|---:|---:|---|---|
-| T-1.1 | Accepts .png and .procreate files into upload | FR-UPL-01 | 1 | 2 | 3 | 2.0 | A .png and .procreate file can both be accepted and the .procreate file must be optionally added | — |
+| T-1.1 | Set up a upload tab that accepts .png and optionally .procreate files into upload | FR-UPL-01 | 1 | 2 | 3 | 2.0 | A .png and .procreate file can both be accepted and the .procreate file must be optionally added in the upload tab | — |
 | T-1.2 | Make sure that any other file is not accepted | FR-UPL-01 | 2 | 3 | 4 | 3.0 | No other files besides the .png and .procreate file can be accepted, all other are rejected with error message appearing | T-1.1 |
 | T-1.3 | 2D, 3D, and both radio buttons for choosing gallery location | FR-UPL-03 | 1 | 2 | 3 | 2.0 | One of the 2D, 3D, or both must be chosen and it sorts it into the correct gallery based on the chosen location | T-1.2 |
 | T-1.4 | Gives warning if it is duplicate file and asks them if they are sure they want to replace | NFR-DATA-01 | 1 | 2 | 3 | 2.0 | If a artist uploads a dupliate artwork it shows a warning message asking them if they are sure if they want to replace the files | T-1.3 |
-| T-1.5 | If upload fails give them a failed upload message | NFR-DATA-02, NFR-REL-01 | 2 | 3 | 4 | 3.0 | After a failure an error message is shown to the artist describing something short on why it failed and what to do next | T-1.4 |
+| T-1.5 | If upload succeeds/fails give them a succeeds/failed upload message | NFR-DATA-02, NFR-REL-01 | 2 | 3 | 4 | 3.0 | After a successfull upload or a failed upload a successfull/failure message is shown to the artist describing something short on why it succeeded/failed and what to do next | T-1.4 |
 
 ### WP-2 — Extract .procreate data  ·  requirements FR-EXT-04, FR-EXT-05, FR-GALL-02  ·  owner: Jennifer Spencer
 
@@ -68,7 +68,7 @@ Plannable effort (available − buffer) = **85.5 h**
 | Task | Name | Reqs | O | M | P | E | Done when | Depends on |
 |---|---|---|---:|---:|---:|---:|---|---|
 | T-4.1 | Display the artworks that were chosen to be in the 3D gallery | FR-UPL-03, NFR-SEC-02 | 2 | 3 | 4 | 3.0 | Any artwork that was selected to be in the 3D gallery in the upload process is placed in the 3D gallery | — |
-| T-4.2 | Make sure that everything renders correctly by measuring performance and availability | NFR-PERF-01, NFR-PERF-02, NFR-AVA-02 | 1 | 2 | 3 | 2.0 | The website is able to load the website in a p95 under 25 seconds when there are 20 artworks in the galleries with throttled 3G internet in Chrome and maintain 30 FPS for 95% of a 60 second viewing session | T-4.1 |
+| T-4.2 | Make sure that everything renders correctly by measuring performance and availability | NFR-PERF-01, NFR-PERF-02, NFR-AVA-02 | 1 | 2 | 3 | 2.0 | The website is able to load the website in a p95 under 25 seconds when there are 20 artworks in the galleries with throttled 3G internet in Chrome and maintain 30 FPS for 95% of a 60 second viewing session, if no gallery appears the artist is shown a message saying that something went wrong with the 3D gallery and to come back later to view it. | T-4.1 |
 | T-4.3 | Clicking on artwork shows canvas information with artwork overlay and clicking out closes it all | FR-TDG-01 | 1 | 2 | 3 | 2.0 | When a artist clicks on an artwork appears next to the canvas informatin and then clicking outside of it closes it | T-4.2 |
 | T-4.4 | Zoom in and out in 3D gallery | FR-TDG-02 | 1 | 2 | 3 | 2.0 | The artist is able to zoom in and out of the 3D gallery | T-4.3 |
 
@@ -78,7 +78,7 @@ Plannable effort (available − buffer) = **85.5 h**
 |---|---|---|---:|---:|---:|---:|---|---|
 | T-5.1 | Display the artworks that were chosen to be in the 2D gallery | FR-UPL-03, NFR-SEC-02, FR-GALL-02, NFR-AVA-02 | 2 | 3 | 4 | 3.0 | Any artwork that was selected to be in the 2D gallery in the upload process is placed in the 2D gallery | — |
 | T-5.2 | Ensure that there is no overlapping text and images | NFR-USE-02 | 1 | 2 | 3 | 2.0 | In the 2D overview the canvas information and artwork do not overlap each other in a standard Chrome screen size | T-5.1 |
-| T-5.3 | Add contact component | FR-GALL-03 | 1 | 2 | 3 | 2.0 | The contact component is able to redirect the viewer to the artists email and send an email directly to them | T-5.2 |
+| T-5.3 | Add contact component | FR-GALL-03 | 1 | 2 | 3 | 2.0 | The contact component is able to redirect the viewer to the artists email and send an email directly to them, if it fails to redirect a clear message is given saying that it failed to redirect and to try again later | T-5.2 |
 | T-5.4 | Ensure that the overview is accessible | NFR-ACC-01, NFR-ACC-02, NFR-ACC-03 | 1 | 2 | 3 | 2.0 | The art gallery is able to be navigated with tabs and shift tab in a logical order | T-5.3 |
 
 ### WP-6 — Delete Artworks  ·  requirements NFR-PRIV-01, FR-UPL-02, NFR-REL-01, FR-DATA-02   ·  owner: Jennifer Spencer
@@ -112,17 +112,34 @@ Repeat one block per work package. Then total every package into the roll-up bel
 | WP-5 Make 2D overview with contact section | 4 | 9.0 | 9.9 |
 | WP-6 Delete Artworks | 4 | 10.0 | 11.0 |
 | WP-7 Maintainability and Deployment | 2 | 5.0 | 5.5 |
-| … | | | |
 | **Total** | | **70.0** | **77.0** |
 
 Calibration factor from `docs/hours-log.csv`: **1.10×**
-(actual hours ÷ expected hours over the tasks you have already finished)
 
 ## 5. Schedule
 
 | Week | Work packages in flight | Planned hours | Gate / dependency |
 |---|---|---:|---|
-| <9> | <WP-0, WP-2> | <12> | <CI green before any feature merges> |
+| 9 | WP-2 — Extract .procreate data | 13 | Canvas information is extracted from the .procreate file and is paired with the .png file |
+| 10 | finish up the pairing WP-2 — Extract .procreate data, WP 3- Save artwork files into Database | 15 | The .procreate extraction succeeds and that canvas information and artwork is save properly in the database |
+| 11 | WP-1 — Upload artworks, first slice of WP-4 — Make 3D gallery | 13 | The entire upload process succeeds accepting only .png and .procreate and placing them in their appropriate gallery and the 3D gallery renders fully successfully |
+| 12 | WP-4 — Make 3D gallery, first two slices of WP-5 — Make 2D overview with contact section | 13 | Interactivity is completed allowing navigation and the 2D display the artworks  |
+| 13 | last slices of WP-5 — Make 2D overview with contact section, WP-6 — Delete Artworks | 13 | The 2D gallery is complete and the delete artworks function succeeds with errors handled |
+| 14 | WP-7 — Maintainability and Deployment | 13 | All tests succeed, the art gallery loads and is accessible for viewers |
+| 15 | Final checks, deployment and clean clean machine test | 13 | Clean clone check should be succesful only using the README and art gallery is deployed and good to go, with no errors present |
+| 16 | Delivery | 13 | Tagged release; submitted |
+
+| Week | Work packages in flight | Planned hours | Gate / dependency |
+|---|---|---:|---|
+| 9 | WP-6 enabling, WP-1 + WP-3 first slice, WP-5 fallback slice | 13 | Expo/React Native and SQLite are able to take in check ins and journal entries, and the analysis fallback can provide a response |
+| 10 | WP-5 analysis | 15 | The result from the Gemini AI API based on the selected check ins and journal entries present on screen an analysis response and errors are handled |
+| 11 | WP-2 overview,  WP-4 first slice | 13 | The overview page has weekly + monthly graphs that show either the results of check ins, or the empty or loading views, and the sections for the activites are created and the breathing activities are started  |
+| 12 | WP-1 check-in tests, WP-3 journal tests, WP-4 activites | 13 | The missing/blank response and saving tests succeed, editing a journal entry works, and the rest of the activites are created and tests succeed |
+| 13 | WP-7 first slice, WP-8 documentation slice | 13 | One pass through test must pass, and an individual can clone and run the app from the README alone |
+| 14 | WP-7 pass through, WP-8 deployment and release | 13 | All the pass through test succeed and the app is reliable and accessible, and is deployed and reproducible from a clean machine |
+| 15 | Final fixes from development and the clean-machine test | 13 | No high severity bugs or errors present |
+| 16 | Delivery | 13 | Tagged release; submitted |
+
 
 Rules: risky work first, integration before Week 12, nothing new starts after Week 14.
 
@@ -130,18 +147,26 @@ Rules: risky work first, integration before Week 12, nothing new starts after We
 
 | Week | Capacity | Ideal remaining | Projected remaining |
 |---|---:|---:|---:|
-| <8> | <4.0> | <65.2> | <97.9> |
+| 8 | 8.0 | 85.5 | 70.0 |
+| 9 | 13.0 | 79.5 | 62.0 |
+| 10 | 13.0 | 69.8 | 49.0 |
+| 11 | 13.0 | 58.5 | 34.0 |
+| 12 | 13.0 | 48.8 | 21.0 |
+| 13 | 13.0 | 39.0 | 8.0 |
+| 14 | 13.0 | 29.2 | -5.0 |
+| 15 | 13.0 | 19.5 | -18.0 |
+| 16 | 13.0 | 9.8 | -31.0 |
+| end | - | 0.0 | -44.0 |
 
-First week the plan exceeds remaining capacity: **<week 8>**
-Hours over plannable: **<32.7>**
+First week the plan exceeds remaining capacity: **never**
+Hours over plannable: **-15.5**
+-   VERDICT: fits, with 15.5 h to spare
 
 ## 7. The scope decision
 
 | Cut / deferred / re-estimated | Item | Reqs | Hours recovered | MoSCoW before → after | Why |
 |---|---|---|---:|---|---|
-| cut | <WP-5 recipe suggestion> | <FR-031, FR-032> | <12.9> | Could → Won't | <one honest sentence> |
+| deferred to next version | n/a Search Artworks | FR-GALL-04 | n/a | Could | I do not think the feature is all that necessary for this version and it could add a lot of problems that I have not seen before equaling more hours |
 
 
-VERDICT: fits, with 15.5 h to spare
-
-Signed: <your name>, <date>. Re-baselined after any change of more than <5> hours.
+Signed: Jennifer Spencer, 2026-10-10. Re-baselined after any change of more than 5 hours.

@@ -6,9 +6,9 @@ calibrates it against tasks you have already finished, lays the total against
 your remaining weekly capacity, and reports the first week the plan goes over.
 
 Usage:
-  python tools/plan-check.py docs/wbs.csv
-  python tools/plan-check.py docs/wbs.csv --buffer 0.25 --exclude WP-5,WP-3
-  python tools/plan-check.py docs/wbs.csv --capacity 8,13,15,13,13,13,13,13,13 --buffer 0.25 --start-week 8
+  python tools/plan-check.py docs/my-wbs.csv
+  python tools/plan-check.py docs/my-wbs.csv --buffer 0.25
+  python tools/plan-check.py docs/my-wbs.csv --capacity 8,13,15,13,13,13,13,13,13 --buffer 0.25 --start-week 8
 
 Nothing here is magic. Read it, change the numbers, argue with the verdict.
 """

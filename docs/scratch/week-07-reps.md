@@ -122,14 +122,14 @@ T-7.2 E = 2.0 x 1.10 = 2.2
 Reflect: What is your factor, and how many tasks is it built on? Then answer the uncomfortable question: are you slower than you thought, or were your done-whens too vague to fail?
 -   The calibration factor is 1.10, it was built on 42 tasks. I was a bit slower than I thought since my estimate is 7 hours less than the actual 77 hours.
 
-## Rep 7
+## Rep 7 - Run the checker
 
 Reflect: What is your verdict line, verbatim? If you are over budget, by how many hours — and which week does the script say the plan first exceeds remaining capacity?
 -   VERDICT: fits, with 15.5 h to spare
 python tools/plan-check.py docs/wbs.csv --capacity 8,13,15,13,13,13,13,13,13 --buffer 0.25
 - The tasks that have SPIKE in front could not be marked as done with 1.0 and 0.5 actual hours because it skewed the Calibration to much
 
-## Rep 8
+## Rep 8 - Build the capacity table you will actually live in
 
 | Week | Course overhead | Known losses | Available for this plan | 
 |---|---:|---:|
@@ -148,10 +148,34 @@ python tools/plan-check.py docs/wbs.csv --capacity 8,13,15,13,13,13,13,13,13 --b
 Reflect: What is your real total, and how far is it from 87? If your number is higher than 87, name the specific thing that makes you faster than the model. “I’ll just work more” is not a thing.
 - It is 27 more because on average and based on the hour-log.csv I send 20 hours a week, I just spend more on each task to do the same amount of work. It not that I am faster it is just I have more time and I am slower at working.
 
-## Rep 9 
+## Rep 9 - Declare the buffer and find the gap
 
 Available 114 h   ·   Buffer 28.5 h   ·   Plannable 85.5 h
 Calibrated WBS total 77 h   ·   Gap 8.5 h
 
 Reflect: Was your first instinct to lower the buffer or to cut scope? Both close the gap on paper. Only one of them still closes it in Week 13.
--   My first instict was to cut scope because 
+-   My first instict was to cut scope because it is important for the buffer to be there so that if something small goes wrong it still would not affect the place as much and it would be easier to mitigate.
+
+My first instinct was to cut the scope to close the gap because I already knew that I would likely need to cut some of the shoulds or coulds and this proves it to me that this is necessary so it lowers the work load time without removing the buffer because it is important to have the buffer in place just in case something goes wrong or if I am even slower than I predicted.
+
+## Rep 10 - Twelve risks, culled to eight, with triggers that can fire
+
+Reflect: Which of your responses is not yet a task in your WBS with hours attached? Add it now and note what it did to your total — a response with no hours is a hope. And which risk could not be given an observable trigger? That is either a badly written risk or a genuinely unobservable one; say which, and either rewrite it until it can be seen or accept it and write the contingency.
+-   The risks R-05 and R-06 did not have part of it as a task in the WBS so the WBS: WP-4 and R-06 WP-5 where updated. None of them needed a change in hours since it still seemed apprioartae for the task. The R-01 was written badly and was updated so that it can be observable.
+
+## Rep 11 - The breadth pass and its price
+
+Tasks proposed: 29   kept: 2   genuinely new to me: 2
+Risks proposed: 15   kept: 1  genuinely new to me: 1
+Of the durations it produced: how many were identical? 3 spread given? 2.2
+
+Reflect: Where was it worth the fifteen minutes, and where was it confidently wrong? Name one task it proposed that you would not have thought of, and one duration that would have hurt you if you had believed it.
+-   The ai basically just broke down my task into the same sections I had already written. It did not give much new information and I found it rather unhelpful, which was frustrating. Though I would not have thought to add the set up of the upload tab it completly crossed my mind and did not seem like it would take much time just something that had to be done. The duration that would have hurt if I believed it is when it said that T-1.1 would take only 2.0 while I estimated 3.0 if I listened it would have taken away time that I needed to ensure the upload works with the files I need it to.
+
+## Rep 12 - Budget what AI costs you
+
+T-4.4  by hand:   O 1  M 2  P 3   ->  E 2.0
+T-4.4  generated: generation 0.25 + review 0.5 + debugging 0.5  =  1.25
+
+Reflect: Which is smaller, and by how much? Say plainly how confident you are in the second number, and what evidence would change your mind. In Week 11 you will have real data on this; today you have a hypothesis, and it should be labeled as one.
+-   The T-4.4 generated is smaller which makes sense and I am pretty confident in the second number because in general generating tasks often take less time and it knows things without needing to spend much time on the research part. The evidence that would change my mind is if it produced many errors that ended up taking more time than the generated.

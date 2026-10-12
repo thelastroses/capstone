@@ -1,5 +1,5 @@
 wp_id,wp_name,task_id,task_name,requirements,optimistic,likely,pessimistic,status,actual_hours
-WP-1,Upload artworks,T-1.1,Accepts .png and .procreate files into upload,FR-UPL-01,1,2,3,todo,
+WP-1,Upload artworks,T-1.1,Set up a upload tab that accepts .png and optionally .procreate files into upload,FR-UPL-01,1,2,3,todo,
 WP-1,Upload artworks,T-1.2,Make sure that any other file is not accepted,FR-UPL-01,2,3,4,todo,
 WP-1,Upload artworks,T-1.3,2D 3D and both radio buttons for choosing gallery location,FR-UPL-03,1,2,3,todo,
 WP-1,Upload artworks,T-1.4,Gives warning if it is duplicate file and asks them if they are sure they want to replace,NFR-DATA-01,1,2,3,todo,
