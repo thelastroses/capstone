@@ -115,6 +115,8 @@ Repeat one block per work package. Then total every package into the roll-up bel
 | **Total** | | **70.0** | **77.0** |
 
 Calibration factor from `docs/hours-log.csv`: **1.10×**
+-  completed tasks: 0
+-   factor: 1.00x
 
 ## 5. Schedule
 
