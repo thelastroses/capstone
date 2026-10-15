@@ -37,9 +37,9 @@ Trust boundary: The website runs on the browser while the relational database ru
 ## 4. Components (Level 3 — for the container with the hard part only)
 | Component | Responsibility (verb first) | Owns (state) | Depends on | Serves (req IDs) |
 |---|---|---|---|---|
-| `gallery` | Displays the 3D gallery that allows interactions for each artwork | `selectedArtwork` | `db` | FR-TDG-01, FR-TDG-02 |
-| `overview` | Displays 2D artworks and its canvas information | `allArtworks` | `db` | FR-GALL-02, FR-GALL-04 |
-| `upload` | uploads artworks and stores artwork and canvas information for later in database | `files` | `db` | FR-UPL-01, FR-UPL-02, FR-UPL-03, FR-EXT-04, FR-EXT-05, FR-DATA-01, FR-DATA-02 |
+| `gallery` | Displays the 3D gallery that allows interactions for each artwork | `selectedArtwork` | `db` | FR-TDG-01, FR-TDG-02, NFR-PERF-01, NFR-PERF-02, NFR-MNT-01, NFR-USE-01, NFR-REL-01, NFR-AVA-02 |
+| `overview` | Displays 2D artworks and its canvas information | `allArtworks` | `db` | FR-GALL-02, NFR-USE-02, NFR-USE-01, NFR-ACC-01, NFR-ACC-02, NFR-ACC-03, NFR-REL-01, NFR-AVA-02 |
+| `upload` | uploads artworks and stores artwork and canvas information for later in database | `files` | `db` | FR-UPL-01, FR-UPL-02, FR-UPL-03, FR-EXT-04, FR-EXT-05, FR-DATA-01, FR-DATA-02, NFR-DATA-01, NFR-DATA-02, NFR-PRIV-01, NFR-SEC-01, NFR-SEC-02 |
 | `contact` | Opens email to message artist so that viewers can get in contact | `none` | `mail` | FR-GALL-03 |
 
 Dependency graph is acyclic: Yes
@@ -78,6 +78,21 @@ Errors   400 invalid_artwork_id 404 the artwork does not exist
 Idempotency  If the artist tries to delete an artwork that has already been deleted then the system will return the 404 error and does not delete anything further
 Side effects  Deletes the artworks and it's canvas information and the .procreate file from Supabase.
 Limits       Only one artwork can be deleted at a time
+
+### getArtwork(artwork_id)                                    (serves FR-GALL-02, FR-TDG-02)
+Purpose      Gets the artwork for the 3D gallery, 2D gallery or both
+Auth         Uses Supabase key in .env to connect to Supabase project. The .env file is in the .gitignore so that it is not committed to the repository.
+Request  { 
+           "artwork_id": uuid        required
+         }
+Success  200 OK — { "artwork_id": 123e4567-e89b-12d3-a456-789123456789, "fileName": "eye.png", "galleryType": "both", "width": 4320,
+         "height": 5400, "dpi": 300 }
+Errors   400 invalid_png_file 400 invalid_procreate_file 400 invalid_gallery_type
+         409 duplicate_artwork 500 database_error
+         body: {"error":{"code":"...","field":"...","message":"..."}}
+Idempotency  If the artist tries to get the same artwork again, the system will not change how the data is saved
+Side effects  Gets the artwork and canvas information that was extracted from the .procreate file upload into Supabase
+Limits       maximum of 20 artworks with only .png and .procreate files that are accepted during the upload
 
 Error envelope used system-wide: { "error": { "code": ..., "field": ..., "message": ... } }
 Status-code policy - Codes I will use and what each means in MY system:
@@ -240,19 +255,37 @@ Describe your fallback in one sentence, then answer honestly: could you demo you
 |---|---|---|---|---|
 | FR-UPL-01 | Must | upload | uploadArtwork(pngFile, procreateFile, galleryType) - Uploads to Supabase | An artwork file is uploaded it is saved and extracted if .procreate then displayed |
 | FR-UPL-03 | Must | upload | uploadArtwork(pngFile, procreateFile, galleryType) - Uploads to Gallery and Overview | An artwork file is uploaded and artist chooses where to display it in 3D, 2D, or both |
-| FR-GALL-02 | Must | overview | Gallery gets artworks after Uploaded | After artwork is uploaded and it is chosen in 2D scene it is displayed |
-| FR-TDG-02 | Must | gallery | Gallery gets artworks after Uploaded | After artwork is uploaded and it is chosen in 3D scene it is displayed so that artist can zoom in and out  |
-| FR-EXT-04 | Must | upload | Uploaded gets extracted | An .procreate file is uploaded and extracts the canvas information and displays it where chosen |
-| FR-EXT-05 | Must | upload | Extracted gets paired in Gallery and Overview | An .procreate file is uploaded and extracts the canvas information, gets paired with artwork file and displays both together for where it is chosen |
+| FR-GALL-02 | Must | overview | getArtwork(artwork_id) - Gallery gets artworks after Uploaded | After artwork is uploaded and it is chosen in 2D scene it is displayed |
+| FR-TDG-02 | Must | gallery | getArtwork(artwork_id) - Gallery gets artworks after Uploaded | After artwork is uploaded and it is chosen in 3D scene it is displayed so that artist can zoom in and out  |
+| FR-EXT-04 | Must | upload | uploadArtwork(pngFile, procreateFile, galleryType) - Uploaded gets extracted | An .procreate file is uploaded and extracts the canvas information and displays it where chosen |
+| FR-EXT-05 | Must | upload | uploadArtwork(pngFile, procreateFile, galleryType) - Extracted gets paired in Gallery and Overview | An .procreate file is uploaded and extracts the canvas information, gets paired with artwork file and displays both together for where it is chosen |
 | FR-DATA-01 | Must | upload | uploadArtwork(pngFile, procreateFile, galleryType) - Uploaded to Supabase | An artwork file is uploaded it is saved into database so that artist can return and it be there without reuploading |
-| FR-DATA-02 | Must | upload | Uploaded to Supabase |  An artwork file is about to be uploaded and checked if it is allowed that there are less than 20 uploaded artworks, rejected if 20, accepted if less |
+| FR-DATA-02 | Must | upload | uploadArtwork(pngFile, procreateFile, galleryType) - Uploaded to Supabase | An artwork file is about to be uploaded and checked if it is allowed that there are less than 20 uploaded artworks, rejected if 20, accepted if less |
+| NFR-PERF-01 | Should | gallery | getArtwork(artwork_id) - Gallery gets artworks after Uploaded | After artwork is uploaded and it is chosen in any of the scenes it is displayed |
+| NFR-PERF-02 | Must | gallery | getArtwork(artwork_id) - Gallery gets artworks after Uploaded | After artwork is uploaded and it is chosen in the 3D scenes it is displayed |
+| NFR-REL-01 | Must | gallery, overview | getArtwork(artwork_id) - Gallery gets artworks after Uploaded | When an artwork is displaying in any of the scenes the viewer will not see any unhandled exceptions |
+| NFR-AVA-02 | Must | gallery, overview | getArtwork(artwork_id) - Gallery gets artworks after Uploaded | After artwork is uploaded and it is chosen in any of the scenes it is displayed |
+| NFR-SEC-01 | Must | upload | getArtwork(artwork_id) - Gallery gets artworks after Uploaded | When an artwork is uploaded 0 secrets are exposed to the viewer |
+| NFR-SEC-02 | Must | upload | getArtwork(artwork_id) - Gallery gets artworks after Uploaded | When an artwork is uploaded and extracts the canvas information 0 are able to execute HTML or scripts when displayed |
+| NFR-PRIV-01 | Must | upload | deleteArtwork(artwork_id) - Artworks get deleted after confirming delete | When a artist uploads an artwork they must be able to delete the artworks and canvas information, 0 deleted artworks and canvas information left in the database, 0 rows |
+| NFR-DATA-01 | Must | upload | uploadArtwork(pngFile, procreateFile, galleryType) - Uploaded to Supabase | When an artwork is uploaded 0 corrupt or duplicate files are saved |
+| NFR-DATA-02 | Must | upload | uploadArtwork(pngFile, procreateFile, galleryType) - Uploaded to Supabase | When an artwork is uploaded and fails 0 artworks and files are saved and any incomplete records are removed |
+| NFR-ACC-01 | Must | overview | getArtwork(artwork_id) - Gallery gets artworks after Uploaded | After artwork is uploaded and it is chosen in the 2D scene it is displayed, it is able to be navigated without error |
+| NFR-ACC-02 | Must | overview | getArtwork(artwork_id) - Gallery gets artworks after Uploaded | After artwork is uploaded and it is chosen in the 2D scene it is displayed, it is able to be navigated without error |
+| NFR-ACC-03 | Must | overview | getArtwork(artwork_id) - Gallery gets artworks after Uploaded | After artwork is uploaded and it is chosen in the 2D scene it is displayed, it is able to be navigated without error |
+| NFR-USE-01 | Must | overview, gallery | getArtwork(artwork_id) - Gallery gets artworks after Uploaded | After artwork is uploaded and it is chosen in any of the scenes it is displayed, it is able to be navigated without error |
+| NFR-USE-02 | Must | overview | getArtwork(artwork_id) - Gallery gets artworks after Uploaded | After artwork is uploaded and it is chosen in the 2D scene it is displayed, it is able to be navigated without error |
+| NFR-MNT-01 | Must | gallery | getArtwork(artwork_id) - Gallery gets artworks after Uploaded | After artwork is uploaded and it is chosen in any of the scenes it is displayed successfully in under 10 minutes |
+
+Deferred: FR-GALL-01, FR-GALL-04, FR-TDG-03, FR-EXT-01, FR-EXT-02, FR-EXT-03, NFR-PORT-01, FR-UPL-04, FR-UPL-05, FR-UPL-06, FR-UPL-07
 
 ## 11. Open Questions and Design Risks
 | # | Open question | What it blocks | Owner | Decide by |
 |---|---|---|---|---|
-| 1 | No questions left open at the moment | n/a | Jennifer Spencer | 2026-10-04 |
+| 1 | Does the website take in a .procreate file and extract the artwork and canvas information from it in Chrome in under 25 seconds after uploading it in the upload tab? | FR-EXT-04; FR-EXT-05 | Jennifer Spencer | 2026-10-23 |
 
 ## 12. Change Log for This Document
 | Version | Date | Change | Why |
 |---|---|---|---|
 | v0.1 | 2026-10-04 | technical specification | initial architecture doc creation |
+| v0.2 | 2026-10-13 | comment edits | updated with missing edits and findings needed to be deferred or added to this document |

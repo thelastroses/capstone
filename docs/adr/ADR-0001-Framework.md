@@ -14,7 +14,11 @@ I have worked with both React and Vite for previous projects. This makes things 
 
 ## Options considered
 
-Did not weight other options because it will work best for my project. I am the most comfortable with these technologies and it keeps the novelty load to a 0. A fallback though would be Nuxt and Vue but that would increase hours to at least 14. Though then React Three Fiber would also need to be changed too which adds even more time. React Three Fiber and React where designed to work together.
+| Option | Weighted score | The detail that decided it |
+|---|---:|---|
+| React/Vite | 5.00 | React Three Fiber and React where designed to work together. |
+| Vue/Vite | 3.65 | React Three Fiber and Nuxt/Vue where not specifically designed to work together. |
+| Nuxt/Vue | 3.20 | React Three Fiber and Nuxt/Vue where not specifically designed to work together. |
 
 ## Decision
 

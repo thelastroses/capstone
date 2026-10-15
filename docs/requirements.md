@@ -198,7 +198,7 @@ could interpret a word two ways, it belongs here.
 
 ### FR-GALL-04 — Search Artworks
 
-**Priority:** Could
+**Priority:** Won't
 **Requirement:** The artist and viewers shall be able to search their artworks in the 2D overview in a search box based on whatever title or by specific categories they choose. 
 **Rationale:** It is important for a viewer and an artist to look up artworks if they like one in particular and want to specifically show someone else that artwork. It is my decision because it helps an artist to also understand what they have already uploaded if they do not want to test it for duplicates when uploading it a second time or look for it through the 2D overview.
 **Acceptance criteria:**

@@ -11,36 +11,48 @@ data-store,is able to delete and artwork and all its related canvas information 
 data-store,does not commit secrets to repository using enviroment variables instead (NFR-SEC-01),0.15,Supabase,5,key is given through environment variables
 data-store,does not commit secrets to repository using enviroment variables instead (NFR-SEC-01),0.15,Firebase,5,key is given through environment variables
 data-store,does not commit secrets to repository using enviroment variables instead (NFR-SEC-01),0.15,PostgreSQL,5,connection is given through environment variables
-data-store,i have shipped with it before,0.10,Supabase,4,I have shipped a project with it before
-data-store,i have shipped with it before,0.10,Firebase,0,I have not shipped with it before
-data-store,i have shipped with it before,0.10,PostgreSQL,0,I have not shipped with it before
-data-store,hosting and cost at student scale,0.20,Supabase,4,Has a free plan for small projects but with a usage limit
-data-store,hosting and cost at student scale,0.20,Firebase,4,Has a spark plan for project having no cost to a certain usage limit
-data-store,hosting and cost at student scale,0.20,PostgreSQL,4,Is free and open source but hosting database can cost money
-data-store,operational burden for a one person project,0.10,Supabase,5,Hosts the database service with Supabase Cloud and manages it for you
-data-store,operational burden for a one person project,0.10,Firebase,5,Hosts the database service and manages it for you
-data-store,operational burden for a one person project,0.10,PostgreSQL,4,Does not host the database for you requires a database host
-hosting,is not expensive within a students budget,0.35,Vercel,4,Has a free plan for project but with a usage limit
-hosting,is not expensive within a students budget,0.35,Netlify,4,Has a free plan for project but with a usage limit
-hosting,is not expensive within a students budget,0.35,GitHub Pages,4,GitHub Pages is free to use but with a usage limit
-hosting,i have shipped with it before,0.15,Vercel,5,I have deployed a website with Vercel before
-hosting,i have shipped with it before,0.15,Netlify,0,I have not deployed to Netlify before
-hosting,i have shipped with it before,0.15,GitHub Pages,0,I have not deployed to Netlify before
+data-store,i have shipped with it before (CON-01),0.10,Supabase,4,I have shipped a project with it before
+data-store,i have shipped with it before (CON-01),0.10,Firebase,0,I have not shipped with it before
+data-store,i have shipped with it before (CON-01),0.10,PostgreSQL,0,I have not shipped with it before
+data-store,hosting and cost at student scale (DEP-01),0.20,Supabase,4,Has a free plan for small projects but with a usage limit
+data-store,hosting and cost at student scale (DEP-01),0.20,Firebase,4,Has a spark plan for project having no cost to a certain usage limit
+data-store,hosting and cost at student scale (DEP-01),0.20,PostgreSQL,4,Is free and open source but hosting database can cost money
+data-store,operational burden for a one person project (CON-01),0.10,Supabase,5,Hosts the database service with Supabase Cloud and manages it for you
+data-store,operational burden for a one person project (CON-01),0.10,Firebase,5,Hosts the database service and manages it for you
+data-store,operational burden for a one person project (CON-01),0.10,PostgreSQL,4,Does not host the database for you requires a database host
+hosting,is not expensive within a students budget (ASM-01),0.35,Vercel,4,Has a free plan for project but with a usage limit
+hosting,is not expensive within a students budget (ASM-01),0.35,Netlify,4,Has a free plan for project but with a usage limit
+hosting,is not expensive within a students budget (ASM-01),0.35,GitHub Pages,4,GitHub Pages is free to use but with a usage limit
+hosting,i have shipped with it before (CON-01),0.15,Vercel,5,I have deployed a website with Vercel before
+hosting,i have shipped with it before (CON-01),0.15,Netlify,0,I have not deployed to Netlify before
+hosting,i have shipped with it before (CON-01),0.15,GitHub Pages,0,I have not deployed to Netlify before
 hosting,the grader is able to reach the website on Chrome (CON-04),0.35,Vercel,5,Vercel gives a URL that can be opened by anyone in Chrome
 hosting,the grader is able to reach the website on Chrome (CON-04),0.35,Netlify,5,Netlify gives a URL that can be opened by anyone in Chrome
 hosting,the grader is able to reach the website on Chrome (CON-04),0.35,GitHub Pages,5,GitHub Pages gives a URL that can be opened by anyone in Chrome
-hosting,is able to be deployed without much setup,0.15,Vercel,5,Vercel can connect to Git repository automatically building and deloying the Vite project
-hosting,is able to be deployed without much setup,0.15,Netlify,5,Netfiy can connect to Git repository automatically building and deloying a project
-hosting,is able to be deployed without much setup,0.15,GitHub Pages,3,GitHub Pages can deploy a static website from a GitHub repository
+hosting,is able to be deployed without much setup (NFR-MNT-01),0.15,Vercel,5,Vercel can connect to Git repository automatically building and deloying the Vite project
+hosting,is able to be deployed without much setup (NFR-MNT-01),0.15,Netlify,5,Netfiy can connect to Git repository automatically building and deloying a project
+hosting,is able to be deployed without much setup (NFR-MNT-01),0.15,GitHub Pages,3,GitHub Pages can deploy a static website from a GitHub repository
 3D-gallery,is able to render the gallery in Chrome (CON-04),0.25,React Three Fiber,5,Works with a React website and on Chrome to display a 3D scene
 3D-gallery,is able to render the gallery in Chrome (CON-04),0.25,Three.js,4,Can work on React website on chrome displaying 3D scene but needs extra work on integrating React with it
 3D-gallery,is able to render the gallery in Chrome (CON-04),0.25,A-Frame,4,Made for 3D enviroments on browsers and works with VR and websites that are in Chrome
-3D-gallery,is able to hold up to 20 artworks (FR-DATA-02 NFR-AVA-02),0.20,React Three Fiber,5,Can manage/handle the maximum amount of artworks (20) needed for the proejct 
-3D-gallery,is able to hold up to 20 artworks (FR-DATA-02 NFR-AVA-02),0.20,Three.js,5,Can manage/handle the maximum amount of artworks (20) needed for the proejct 
-3D-gallery,is able to hold up to 20 artworks (FR-DATA-02 NFR-AVA-02),0.20,A-Frame,5,Can manage/handle the maximum amount of artworks (20) needed for the proejct 
+3D-gallery,is able to hold up to 20 artworks (FR-DATA-02 NFR-AVA-02),0.20,React Three Fiber,5,Can manage/handle the maximum amount of artworks (20) needed for the project 
+3D-gallery,is able to hold up to 20 artworks (FR-DATA-02 NFR-AVA-02),0.20,Three.js,5,Can manage/handle the maximum amount of artworks (20) needed for the project 
+3D-gallery,is able to hold up to 20 artworks (FR-DATA-02 NFR-AVA-02),0.20,A-Frame,5,Can manage/handle the maximum amount of artworks (20) needed for the project 
 3D-gallery,allows interactions such as clicking and zooming (FR-TDG-01 FR-TDG-02),0.25,React Three Fiber,5,Camera controls can be used to add in zooming and clicking interactions
 3D-gallery,allows interactions such as clicking and zooming (FR-TDG-01 FR-TDG-02),0.25,Three.js,5,Camera controls can be used to add in zooming and clicking interactions
 3D-gallery,allows interactions such as clicking and zooming (FR-TDG-01 FR-TDG-02),0.25,A-Frame,5,Camera controls can be used to add in zooming and clicking interactions
 3D-gallery,is able to maintain at minimum 30 FPS for 95% of a 60 second viewing session (NFR-PERF-02),0.30,React Three Fiber,5,Performance can remain stable with a small gallery scene that has a limit of 20 artworks
 3D-gallery,is able to maintain at minimum 30 FPS for 95% of a 60 second viewing session (NFR-PERF-02),0.30,Three.js,5,Performance can remain stable with a small gallery scene that has a limit of 20 artworks
 3D-gallery,is able to maintain at minimum 30 FPS for 95% of a 60 second viewing session (NFR-PERF-02),0.30,A-Frame,5,Performance can remain stable with a small gallery scene that has a limit of 20 artworks
+framework,is able to work with React Three Fiber (DEP-03),0.35,React/Vite,5, React Three Fiber and React where designed to work together. 
+framework,is able to work with React Three Fiber (DEP-03),0.35,Nuxt/Vue,2, React Three Fiber and Nuxt/Vue where not specifically designed to work together. 
+framework,is able to work with React Three Fiber (DEP-03),0.35,Vue/Vite,2, React Three Fiber and Vue/Vite where not specifically designed to work together. 
+framework,keeps the novelty load to a 0 (CON-01 CON-03),0.15,React/Vite,5, I have used React/Vite before
+framework,keeps the novelty load to a 0 (CON-01 CON-03),0.15,Nuxt/Vue,0, I have not used Nuxt/Vue before which would add to the novelty load
+framework,keeps the novelty load to a 0 (CON-01 CON-03),0.15,Vue/Vite,3, I have not used Vue before which would add to the novelty load
+framework,its is lightweight (CON-01),0.20,React/Vite,5, Is lightweight does not have as much bloat
+framework,its is lightweight (CON-01),0.20,Nuxt/Vue,5, Nuxt is heavier and has additional features that can add difficulty
+framework,its is lightweight (CON-01),0.20,Vue/Vite,5, Is lightweight does not have as much bloat
+framework,runs on the browser (CON-04),0.30,React/Vite,5, Can run on the browser
+framework,runs on the browser (CON-04),0.30,Nuxt/Vue,5, Can run on the browser
+framework,runs on the browser (CON-04),0.30,Vue/Vite,5, Can run on the browser

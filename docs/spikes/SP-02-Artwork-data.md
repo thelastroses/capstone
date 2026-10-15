@@ -6,7 +6,7 @@
 
 ## The question
 
-Does the website take in a .procreate file and extract the artwork and canvas information from it in Chrome in under 25 seconds after uploading it in the upload tab??
+Does the website take in a .procreate file and extract the artwork and canvas information from it in Chrome in under 25 seconds after uploading it in the upload tab?
 
 ## The smallest thing that answers it
 

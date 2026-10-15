@@ -83,7 +83,7 @@ React Three Fiber - innovation token requirement; spiked in SP-01; it allows for
 | React | $0 open source |
 | Blender | $0 open source |
 | TailwindCSS | $0 open source |
-| .procreate file | $0 for me but for others $12.99 for Procreate drawing app on Apple App Store to then download the Procreate specific files |
+| .procreate file | $0 for me but for others $12.99 for Procreate drawing app on Apple App Store to then download the Procreate specific files; Source: https://procreate.com/ ; Date: 2026-10-14 ; I already have it downloaded - fallback: if someone can not download app either provide the .procreate files for them or canvas information is not available with each artwork |
 
 Monthly Total: $0
 
@@ -133,5 +133,8 @@ I was wrong about Supabase I thought it was Apache 2.0 but it was actually MIT f
 
 | Claim as stated | Verdict | Source (vendor URL) | Checked |
 |---|---|---|---|
-| Note reminding Dr. Litman - I chose not to use AI this week, this table does not need to be filled out |
-
+| "MongoDB Atlas with object storage - its flexible schema can allow inconsistent or missing fields unless validation is carefully implemented." | Correct | https://www.mongodb.com/docs/manual/core/schema-validation/ | 2026-10-14 |
+| "Firebase provides a managed database, file storage, authentication, and scalable APIs with little server administration." | Correct | https://firebase.google.com/ | 2026-10-14 |
+| "Appwrite - hosting and maintaining the Appwrite server adds operational work" | Correct | https://appwrite.io/docs/advanced/self-hosting | 2026-10-14 |
+| "Cloudinary with metadata stored in JSON - it is not a complete relational database, so deleting artwork and all related canvas information requires extra coordination." | Correct | https://cloudinary.com/documentation/delete_assets | 2026-10-14 |
+| "Supabase - Good for a smaller web project, common failure - free plan limit" | Correct | https://www.activepieces.com/blog/supabase-pricing-free-tier-limits-pro-costs-egress | 2026-10-14 |
