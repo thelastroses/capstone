@@ -52,7 +52,7 @@ could interpret a word two ways, it belongs here.
 | Overlay | An overlay is when an artwork with its canvas information covers a viewer's screen and in order to get out of the overlay they have to click out of it |
 | Pop up | A pop up can be something as big as an overlay or as small as a text box component that appears at the top of a viewers or artist screen to let them know of any urgent information or limitations they have met |
 | Fields | A field is each text category that displays with the artwork from when the canvas information has been extracted |
-| Procreate | Procreate is a digital drawing app that allows artists to draw for free and download the .procreate file for its data |
+| Procreate | Procreate is a digital drawing app that allows artists to draw for $12.99 (one time purchase) and download the .procreate file for its data |
 
 ## 4. Assumptions and Dependencies
 

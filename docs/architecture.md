@@ -69,7 +69,7 @@ Limits       maximum of 20 artworks with only .png and .procreate files that are
 Purpose      Deletes the artwork with it's matching procreate file from the specific gallery
 Auth         Uses Supabase url from the Vite environment variables to connect to Supabase project. The .env file is in the .gitignore so that it is not committed to the repository.
 Request  { 
-           "artwork_id": uuid        required
+           "artwork_id": integer        required
          }
 Success  204 - Artwork and related files deleted successfully
 Errors   400 invalid_artwork_id 404 the artwork does not exist
@@ -83,19 +83,22 @@ Limits       Only one artwork can be deleted at a time
 Purpose      Gets the artwork for the 3D gallery, 2D gallery or both
 Auth         Uses Supabase key in .env to connect to Supabase project. The .env file is in the .gitignore so that it is not committed to the repository.
 Request  { 
-           "artwork_id": uuid        required
+           "artwork_id": integer        required
          }
 Success  200 OK — { "artwork_id": 123e4567-e89b-12d3-a456-789123456789, "fileName": "eye.png", "galleryType": "both", "width": 4320,
          "height": 5400, "dpi": 300 }
-Errors   400 invalid_png_file 400 invalid_procreate_file 400 invalid_gallery_type
+Errors   400 invalid_png_file 400 invalid_procreate_file 400 invalid_gallery_type 404 the artwork does not exist
          409 duplicate_artwork 500 database_error
          body: {"error":{"code":"...","field":"...","message":"..."}}
-Idempotency  If the artist tries to get the same artwork again, the system will not change how the data is saved
+Idempotency  If the artist tries to get the same artwork again, the system will not change how the data is saved and return the 409 error
 Side effects  Gets the artwork and canvas information that was extracted from the .procreate file upload into Supabase
 Limits       maximum of 20 artworks with only .png and .procreate files that are accepted during the upload
 
 Error envelope used system-wide: { "error": { "code": ..., "field": ..., "message": ... } }
 Status-code policy - Codes I will use and what each means in MY system:
+  200 successfully got artwork and canvas information
+  201 created artwork and canvas information data
+  204 artwork and related files deleted successfully
   400 invalid or missing information such as invaild .png, .procreate file, gallery type, artwork id   401 not used, there are no user accounts
   403 not used, there are no user accounts   404 Artwork could not be found 
   409 request conflicts with current state such as duplicate artworks or there are already a maximum of 20 artworks uploaded   429 not used does not set rate limit
@@ -119,7 +122,7 @@ Where were you about to use two different error shapes in the same system, and w
 
 ### Entity: artwork                                 (serves FR-UPL-01, FR-UPL-02, FR-UPL-03)
 Purpose        One artwork that has been uploaded to the gallery
-  id  uuid  NOT NULL  PK
+  id  integer  NOT NULL  PK
   png_name  text  NOT NULL  Name of the PNG file
   gallery_type  text  NOT NULL  Has to be either 2D, 3D, or both - enum: '2D' | '3D' | 'Both' |
   png_path  text  NOT NULL  PNG file path, where it is located in the storage
@@ -133,14 +136,15 @@ Invariants     I1 Every artwork must get a unique id
 
 Relationships  artwork 1 ──── 0..1 procreate_data
 Volume         There is a maximum of 20 artworks so at most 20 rows or under (under around there)
-Lifecycle      Created when the artists uploads an artwork file successfully. Hard deleted when the artist deletes the artwork and the related procreate_data is deleted with it's artwork.
+Lifecycle      Created when the artists uploads an artwork file successfully. Hard deleted with cascade when the artist deletes the artwork and the related procreate_data is deleted with it's artwork. 
 
 ### Entity: procreate_data                                     (serves FR-UPL-01)
 Purpose: One .procreate file that has been uploaded to the gallery that had its canvas information extracted from it
-  id            uuid        PK
-  artwork_id  uuid        NOT NULL  FK -> artwork(id) ON DELETE CASCADE
-  width          integer        NULL  (null = width is not available from that .procreate file)
-  height      integer     NULL  (null = width is not available from that .procreate file)
+  id            integer     NOT NULL   PK
+  artwork_id  integer        NOT NULL  FK -> artwork(id) ON DELETE CASCADE
+  width          integer        NULL  (null = width is not available from that .procreate file) ex. 4320
+         
+  height      integer     NULL  (null = height is not available from that .procreate file) ex. 5400
   dpi      integer     NULL  (null = dpi is not available from that .procreate file)
   procreate_path    text        NOT NULL      .procreate file path, where it is located in the storage
  
@@ -150,7 +154,7 @@ Invariants
   I3 width, height, dpi can not be negative values
 Relationships  procreate_data 0..1 ──── 1 artwork
 Volume         There is a maximum of 20 artworks so at most 20 rows or under (under around there) if each artwork has a .procreate file
-Lifecycle      Created when the artists uploads an .procreate file successfully and its canvas information is extracted. Hard deleted when the artist deletes the artwork because the related is the procreate_data so it is deleted with it's artwork.
+Lifecycle      Created when the artists uploads an .procreate file successfully and its canvas information is extracted. Hard deleted with cascade when the artist deletes the artwork because the related is the procreate_data so it is deleted with it's artwork.
 
 
 Which column did you almost make free text that should be constrained? Which nullable column’s meaning did you struggle to state in words? That struggle means two concepts are sharing one column — say what they are.
@@ -164,6 +168,9 @@ Conventions    Enums constrained - gallery_type
 
 What is your plan for the first schema change after you have data you care about? Write the two sentences now, while it is hypothetical and therefore easy to be honest about.
   - I will make another migration rather than changing the old migration. I will ensure that it does not delete anything that it should not or change any important data.
+
+  - png_name, png_path, width, height, dpi, procreate_path
+  - Retained until the next version of the system comes out for when the user accounts system is added in, linking it to an actual person which is then it would implement the deletion
 
 ## 7. Sequence Flows
 
@@ -247,8 +254,12 @@ For any other third party: what you call, cost, limits, behavior when it is down
 | Fact | Value | Source URL | Date checked |
 | Supabase pricing | Free Plan | https://supabase.com/pricing | 2026-10-04 |
 
+| .procreate file | $0 for me but for others $12.99 for Procreate drawing app on Apple App Store to then download the Procreate specific files  https://procreate.com/ | 2026-10-14 |
+
+
 Describe your fallback in one sentence, then answer honestly: could you demo your project in Week 16 with that dependency switched off entirely? If not, the fallback is not real yet.
   - The failback is if Supabase is not available if there are artwork that had already been uploaded and got or a sample of artworks and canvas information then they will show correctly but anything new will not until the database is available to start uploads again. I could demo my project in Week 16 with Supabase switched off entirely because my project could use a sample set of artworks and canvas information just the uploading of new artworks and canvas information would not be available at that time.
+- I already have it downloaded - fallback: if someone can not download the app I will either provide the .procreate files for them or the canvas information will just not available with each artwork for them. I could demo my project with this switched off because an artwork does not need canvas information the extraction and canvas information displaying will just not be avialbale.
 
 ## 10. Traceability
 | Requirement | Priority | Component(s) | Interface(s) | Flow |

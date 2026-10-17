@@ -92,37 +92,51 @@ impact) · **transfer** (make it somebody else's problem — a managed service, 
 · **Contingency:**  Update and fix the upload process so it only saves when both are saved properly into the database. Re test to ensure it works properly. An error message is given stating if the database could not save it.
 · **Status:** open. Reviewed weekly.
 
+**R-09** —  Because Supabase has a free plan that could change or I could exceed the limits, if it starts to cost money, then I need to pay for the paid version as long as it is under $50 a month (or the Pro Plan at them moment is $25) so that my database still runs properly, not giving errors.
+· data/legal · L 3 · I 4 · **E 12**
+· **Trigger:** When Supabase free plan is no longer free or I exceed the storage/usage limits
+· **Owner:** Jennifer Spencer · **Response:** Mitigate by Week 8 - ensure that the free plan has not changed and that I have not gone over the limits or are not close to the limits either, if over or close upgrade to the Pro Plan - 2026-10-16 Supabase Free Plan is still free
+· **Contingency:**  Upgrade to the Pro Plan
+· **Status:** open. Reviewed weekly.
+
+**R-10** —  Because Vercel has a free plan that could change or I could exceed the limits, if it starts to cost money, then I need to pay for the paid version as long as it is under $50 a month (or the Hobby Plan at them moment is $20) so that my database still runs properly, not giving errors.
+· data/legal · L 3 · I 4 · **E 12**
+· **Trigger:** When Vercel free plan is no longer free or I exceed the storage/usage limits
+· **Owner:** Jennifer Spencer · **Response:** Mitigate by Week 10 - ensure that the free plan has not changed and that I have not gone over the limits or are not close to the limits either, if over or close upgrade to the Hobby Plan
+· **Contingency:**  Upgrade to the Hobby Plan
+· **Status:** open. Reviewed weekly.
+
 ## Risks that did not survive
 
-**R-09** —  Because the project needs to be deployed with Vercel for the final project demo, significant changes with the project timeline may delay deployment, preventing the lastest art gallery from being shown
+**R-11** —  Because the project needs to be deployed with Vercel for the final project demo, significant changes with the project timeline may delay deployment, preventing the lastest art gallery from being shown
 · schedule/personal · L 2 · I 4 · **E 8**
 · **Trigger:** The task list for that week is not fully completed
 · **Owner:** Jennifer Spencer · **Response:** Ensure that time for deployment is never cut out and ensure that the must features are always worked on before shoulds and coulds
 · **Contingency:**  Readjust the schedule while focusing on must features so that there is a working project by the end of the weeks
 · **Status:** open. Reviewed weekly.
 
-**R-10** —  Because the Supabase has a storage limit and cost, it may consume more storage than the plan allows, leading to money consumed and uploads could fail
+**R-12** —  Because the Supabase has a storage limit and cost, it may consume more storage than the plan allows, leading to money consumed and uploads could fail
 · technical · L 2 · I 4 · **E 8**
 · **Trigger:** The upload fails because the database ran out of storage/ storage is almost full
 · **Owner:** Jennifer Spencer · **Response:** Ensure that there is nothing interfering with the upload process and nothing is being uploaded twice
 · **Contingency:**  Upgrade the database storage plan to the Pro plan
 · **Status:** open. Reviewed weekly.
 
-**R-11** — Because the uploaded artworks depends on the Supabase connection, any connection failure could stop artworks from being uploaded or retrieved preventing the art galleries from displaying the artworks
+**R-13** — Because the uploaded artworks depends on the Supabase connection, any connection failure could stop artworks from being uploaded or retrieved preventing the art galleries from displaying the artworks
 · dependency · L 2 · I 3 · **E 6**
 · **Trigger:** Anytime an upload happens if it returns a database connection error
 · **Owner:** Jennifer Spencer · **Response:** Mitigate by Week 10 - test that if a upload does fail that an appropriate error appears
 · **Contingency:** I notify the artist with a pop up leting the artist know that their artwork failed to upload becaause the connection with the database is not currently up and to try again later. The error will be documented. If zero artworks are able to be retrieved then example artworks fill the galleries.
 · **Status:** open. Reviewed weekly.
 
-**R-12** — Because the contact component needs to redirect the viewer to the artist's email, if the component does not redirect the viewer, the viewer will not be able to contact the artist
+**R-14** — Because the contact component needs to redirect the viewer to the artist's email, if the component does not redirect the viewer, the viewer will not be able to contact the artist
 · technical · L 2 · I 1 · **E 2**
 · **Trigger:** If the contact component does not redirect the viewer
 · **Owner:** Jennifer Spencer · **Response:** Mitigate by Week 10 - test what happens if the viewer does not get redirected and ensure that their is a clear message given
 · **Contingency:**  Give an error message pop up with a clear message saying that the redirect failed and to try again later
 · **Status:** open. Reviewed weekly.
 
-**R-13** — Because I have other courses with projects, my available hours for that week may drop from 20 to 10, pushing work past their designated weeks.
+**R-15** — Because I have other courses with projects, my available hours for that week may drop from 20 to 10, pushing work past their designated weeks.
 · schedule/personal · L 1 · I 2 · **E 2**
 · **Trigger:** the Week-11 hours log shows fewer than 15 hours logged.
 · **Owner:** Jennifer Spencer · **Response:** avoid - it will not happen I will not allow it to I always never not prioritized enough time to get a project done, I typically always have a little time left over in a week 

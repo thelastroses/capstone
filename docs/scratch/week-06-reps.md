@@ -78,7 +78,7 @@ Limits   maximum of 20 artworks with only .png and .procreate files that are acc
 GOOD: deleteArtwork(artwork_id)                                       (serves FR-UPL-02)
 Auth         Uses Supabase url from the Vite environment variables to connect to Supabase project. The .env file is in the .gitignore so that it is not committed to the repository.
 Request  { 
-           "artwork_id": uuid        required
+           "artwork_id": integer        required
          }
 Success  204 - Artwork and related files deleted successfully
 Errors   400 invalid_artwork_id 404 the artwork could not be found 
@@ -118,7 +118,7 @@ Where were you about to use two different error shapes in the same system, and w
 
 ### Entity: artwork                                 (serves FR-UPL-01, FR-UPL-02, FR-UPL-03)
 Purpose        One artwork that has been uploaded to the gallery
-  id  uuid  NOT NULL  PK
+  id  integer  NOT NULL  PK
   png_name  text  NOT NULL  Name of the PNG file
   gallery_type  text  NOT NULL  Has to be either 2D, 3D, or both
   png_path  text  NOT NULL  PNG file path, where it is located in the storage
@@ -134,8 +134,8 @@ Lifecycle      Created when the artists uploads an artwork file successfully. Ha
 
 ### Entity: procreate_data                                     (serves FR-UPL-01)
 Purpose: One .procreate file that has been uploaded to the gallery that had its canvas information extracted from it
-  id            uuid        PK
-  artwork_id  uuid        NOT NULL  FK -> artwork(id) ON DELETE CASCADE
+  id            integer        PK
+  artwork_id  integer        NOT NULL  FK -> artwork(id) ON DELETE CASCADE
   width          integer        NULL  (null = width is not available from that .procreate file)
   height      integer     NULL  (null = width is not available from that .procreate file)
   dpi      integer     NULL  (null = dpi is not available from that .procreate file)
@@ -151,6 +151,10 @@ Lifecycle      Created when the artists uploads an .procreate file successfully 
 
 Which column did you almost make free text that should be constrained? Which nullable column’s meaning did you struggle to state in words? That struggle means two concepts are sharing one column — say what they are.
   - The column that I almost made free text is the gallery type but I limited it to 2D, 3D, or both as the only choices. I did not struggle to state the nullable column's meaning in words. 
+
+
+  - png_name, png_path, width, height, dpi, procreate_path
+  - Retained until the next version of the system comes out for when the user accounts system is added in, linking it to an actual person which is then it would implement the deletion
 
 ### Rep 8 - Three sequence flows, and the branch that matters
 
