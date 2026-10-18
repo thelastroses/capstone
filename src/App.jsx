@@ -1,4 +1,5 @@
 import Gallery from "./Gallery"
+import eyeImage from "./eye.jpg";
 import { Suspense, useState } from 'react';
 import { Canvas } from '@react-three/fiber';
 
@@ -33,7 +34,7 @@ function App() {
       
     {view && (
             <div className="absolute inset-0 flex items-center justify-center" style={{position: 'center'}}  onClick={() => {setSelected(false), setControlsEnabled(true), setView(false)}}>
-              <img className="w-50 h-80" src="src/eye.jpg"/>
+              <img className="w-50 h-80" src={eyeImage}/>
               
               <h2 color="black">Canvas Information</h2>
                 <button className="absolute top-170 ">  x </button>
