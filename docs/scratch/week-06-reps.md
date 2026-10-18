@@ -78,7 +78,7 @@ Limits   maximum of 20 artworks with only .png and .procreate files that are acc
 GOOD: deleteArtwork(artwork_id)                                       (serves FR-UPL-02)
 Auth         Uses Supabase url from the Vite environment variables to connect to Supabase project. The .env file is in the .gitignore so that it is not committed to the repository.
 Request  { 
-           "artwork_id": integer        required
+           "artwork_id": uuid        required
          }
 Success  204 - Artwork and related files deleted successfully
 Errors   400 invalid_artwork_id 404 the artwork could not be found 
@@ -118,7 +118,7 @@ Where were you about to use two different error shapes in the same system, and w
 
 ### Entity: artwork                                 (serves FR-UPL-01, FR-UPL-02, FR-UPL-03)
 Purpose        One artwork that has been uploaded to the gallery
-  id  integer  NOT NULL  PK
+  id  uuid  NOT NULL  PK
   png_name  text  NOT NULL  Name of the PNG file
   gallery_type  text  NOT NULL  Has to be either 2D, 3D, or both
   png_path  text  NOT NULL  PNG file path, where it is located in the storage
@@ -134,8 +134,8 @@ Lifecycle      Created when the artists uploads an artwork file successfully. Ha
 
 ### Entity: procreate_data                                     (serves FR-UPL-01)
 Purpose: One .procreate file that has been uploaded to the gallery that had its canvas information extracted from it
-  id            integer        PK
-  artwork_id  integer        NOT NULL  FK -> artwork(id) ON DELETE CASCADE
+  id            uuid        PK
+  artwork_id      uuid    NOT NULL  FK -> artwork(id) ON DELETE CASCADE
   width          integer        NULL  (null = width is not available from that .procreate file)
   height      integer     NULL  (null = width is not available from that .procreate file)
   dpi      integer     NULL  (null = dpi is not available from that .procreate file)
@@ -282,9 +282,15 @@ Count the decisions you added.
 | What you call | Cost | What its limits are | Behavior when it is down | What system degrade to |
 |---|---|---|---|---|
 | Supabase - for the database that stores the artworks and canvas information | $0 - Free Plan | It has storage limits - Database Size 500 MB per project, Storage Size	1 GB | Uploading artworks and canvas information to the database fails, it shows the artist a message that it failed to upload the artwork and canvas information | Artworks that had already been got from the database will show or it would show a sample of artworks and canvas information but anything new will not until the database is available to start uploads again |
+| Vercel - for the website to be hosted on and connected | $0 - Free Plan | Edge Requests 1M / month included; Fast Data Transfer 100 GB / month included | Upgrade it to the Hobby Plan if it is down because it hit the usage limits or switch it to use Netlify | Degrades to temporarily unavailable until Vercel is upgraded |
+| Procreate - download the .procreate files | $12.99 | Depends on the amount of storage the artist's iPad holds and requires iPad | Use already downloaded files or have fact canvas information display for demonstration purposes | The upload feature if no .procreate files are available would not be able to show off that feature only the fake canvas information displaying next to it |
 
 | Fact | Value | Source URL | Date checked |
 | Supabase pricing | Free Plan | https://supabase.com/pricing | 2026-10-04 |
+| .procreate file | $0 for me but for others $12.99 for Procreate drawing app on Apple App Store to then download the Procreate specific files | https://procreate.com/ | 2026-10-14 |
+| Vercel pricing | Free Plan | https://vercel.com/pricing | 2026-10-16 |
 
 Describe your fallback in one sentence, then answer honestly: could you demo your project in Week 16 with that dependency switched off entirely? If not, the fallback is not real yet.
-  - The failback is if Supabase is not available if there are artwork that had already been uploaded and got or a sample of artworks and canvas information then they will show correctly but anything new will not until the database is available to start uploads again. I could demo my project in Week 16 with Supabase switched off entirely because my project could use a sample set of artworks and canvas information just the uploading of new artworks and canvas information would not be available at that time.
+  - The fallback is if Supabase is not available if there is artwork that had already been uploaded and got or a sample of artworks and canvas information then they will show correctly but anything new will not until the database is available to start uploading again. I could demo my project in Week 16 with Supabase switched off entirely because my project could use a sample set of artworks and canvas information just the uploading of new artworks and canvas information would not be available at that time.
+  - I already have it downloaded - fallback: if someone can not download the app I will either provide the .procreate files for them or the canvas information will just not be available with each artwork for them. I could demo my project with this switched off because an artwork does not need canvas information extracted and canvas information extraction will not be available or it will display sample set of canvas information.
+  - The failback if Vercel is not available is if the dependency switched off because it hit the usage limits, I would just upgrade to the pro plan or switch it to Netlify. For this reason I would be able to demo my project in Week 16 if I needed to upgrade it to the pro plan because that is a quick fix.

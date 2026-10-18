@@ -51,7 +51,7 @@ Plannable effort (available − buffer) = **85.5 h**
 |---|---|---|---:|---:|---:|---:|---|---|
 | T-2.1 | Understand how the .procreate file is structured | FR-EXT-04 | 2 | 3 | 4 | 3.0 | Understand how and where the canvas informatin is and how to retrieve it | — |
 | T-2.2 | Extract the canvas information | FR-EXT-04 | 3 | 4 | 5 | 4.0 | Canvas information such as the height, width, and dpi can be retrieved successfully, returning the wanted fields, that are the same as the artwork canvas information in the Procreate settings | T-2.1 |
-| T-2.3 | Mark the non found fields as n/a | FR-GALL-02 | 2 | 3 | 4 | 3.0 | If there is no canvas information for a specific field then it appears as n/a on the canvas information displayed side panel | T-2.2 |
+| T-2.3 | Mark the non found fields as n/a | FR-GALL-02 | 2 | 3 | 4 | 3.0 | If there is no canvas information for a specific field then it appears as n/a on the canvas information displayed side panel but if fields are suppose to be found and Supabase is not connecting use the sample set | T-2.2 |
 | T-2.4 | Pair the canvas information .procreate file with the artwork | FR-EXT-05 | 3 | 4 | 5 | 4.0 | The .png and .procreate file that are uploaded together, there data is paired together so they are next to each other in the galleries and no canvas information is stranded | T-2.3 |
 
 ### WP-3 — Save artwork files into Database  ·  requirements FR-DATA-01, FR-DATA-02, NFR-DATA-01, NFR-SEC-01  ·  owner: Jennifer Spencer
@@ -68,7 +68,7 @@ Plannable effort (available − buffer) = **85.5 h**
 | Task | Name | Reqs | O | M | P | E | Done when | Depends on |
 |---|---|---|---:|---:|---:|---:|---|---|
 | T-4.1 | Artworks size adjusts automatically after each upload | NFR-USE-02 | 2 | 3 | 4 | 3.0 | A small set of artworks displays properly and sizing automatically is adjusted after each artwork uploaded if needed before testing 20 artworks | — |
-| T-4.2 | Display the artworks that were chosen to be in the 3D gallery | FR-UPL-03, NFR-SEC-02 | 2 | 3 | 4 | 3.0 | Any artwork that was selected to be in the 3D gallery in the upload process is placed in the 3D gallery, the artworks are successfully retrieved from the database | T-4.1 |
+| T-4.2 | Display the artworks that were chosen to be in the 3D gallery | FR-UPL-03, NFR-SEC-02 | 2 | 3 | 4 | 3.0 | Any artwork that was selected to be in the 3D gallery in the upload process is placed in the 3D gallery, the artworks are successfully retrieved from the database, 0 of these that are able to execute HTML or scripts when displayed  | T-4.1 |
 | T-4.3 | Make sure that everything renders correctly by measuring performance and availability | NFR-PERF-01, NFR-PERF-02, NFR-AVA-02 | 1 | 2 | 3 | 2.0 | The website is able to load the website in a p95 under 25 seconds when there are 20 artworks in the galleries with throttled 3G internet in Chrome and maintain 30 FPS for 95% of a 60 second viewing session, if no gallery appears the artist is shown a message saying that something went wrong with the 3D gallery and to come back later to view it. | T-4.2 |
 | T-4.4 | Clicking on artwork shows canvas information with artwork overlay and clicking out closes it all | FR-TDG-01 | 1 | 2 | 3 | 2.0 | When a artist clicks on an artwork appears next to the canvas informatin and then clicking outside of it closes it | T-4.3 |
 | T-4.5 | Zoom in and out in 3D gallery | FR-TDG-02 | 1 | 2 | 3 | 2.0 | The artist is able to zoom in and out of the 3D gallery | T-4.4 |
@@ -77,7 +77,7 @@ Plannable effort (available − buffer) = **85.5 h**
 
 | Task | Name | Reqs | O | M | P | E | Done when | Depends on |
 |---|---|---|---:|---:|---:|---:|---|---|
-| T-5.1 | Display the artworks that were chosen to be in the 2D gallery | FR-UPL-03, NFR-SEC-02, FR-GALL-02, NFR-AVA-02 | 2 | 3 | 4 | 3.0 | Any artwork that was selected to be in the 2D gallery in the upload process is placed in the 2D gallery | — |
+| T-5.1 | Display the artworks that were chosen to be in the 2D gallery | FR-UPL-03, NFR-SEC-02, FR-GALL-02, NFR-AVA-02 | 2 | 3 | 4 | 3.0 | Any artwork that was selected to be in the 2D gallery in the upload process is placed in the 2D gallery, 0 of these that are able to execute HTML or scripts when displayed | — |
 | T-5.2 | Ensure that there is no overlapping text and images | NFR-USE-02 | 1 | 2 | 3 | 2.0 | In the 2D overview the canvas information and artwork do not overlap each other in a standard Chrome screen size | T-5.1 |
 | T-5.3 | Add contact component | FR-GALL-03 | 1 | 2 | 3 | 2.0 | The contact component is able to redirect the viewer to the artists email and send an email directly to them, if it fails to redirect a clear message is given saying that it failed to redirect and to try again later | T-5.2 |
 | T-5.4 | Ensure that the overview is accessible | NFR-ACC-01, NFR-ACC-02, NFR-ACC-03 | 1 | 2 | 3 | 2.0 | The art gallery is able to be navigated with tabs and shift tab in a logical order | T-5.3 |
@@ -87,7 +87,7 @@ Plannable effort (available − buffer) = **85.5 h**
 | Task | Name | Reqs | O | M | P | E | Done when | Depends on |
 |---|---|---|---:|---:|---:|---:|---|---|
 | T-6.1 | Delete artwork and canvas information all at once | FR-UPL-02 | 3 | 4 | 5 | 4.0 | An artwork and its canvas information are able to be deleted all at once after confirming the deletion, no canvas information is left alone and is fully deleted | — |
-| T-6.2 | If delete fails/they cancel the delete make sure that there is a message and nothing is deleted | FR-UPL-02, NFR-REL-01 | 1 | 2 | 3 | 2.0 | If the delete fails or is canceled the database remains the same as it was before and nothing is deelted, an error message displays letting the artist know what happened | T-6.1 |
+| T-6.2 | If delete fails/they cancel the delete make sure that there is a message and nothing is deleted | FR-UPL-02, NFR-REL-01 | 1 | 2 | 3 | 2.0 | If the delete fails or is canceled the database remains the same as it was before and nothing is deleted, an error message displays letting the artist know what happened | T-6.1 |
 | T-6.3 | Make sure that it is still deleted even after reloading | NFR-PRIV-01 | 1 | 2 | 3 | 2.0 | An artworks and its canvas information are deleted they will not appear after reloading | T-6.2 |
 | T-6.4 | Ensure that the artist can still upload another artwork and canvas information after deleting if they were at their maximum artworks | FR-DATA-02 | 1 | 2 | 3 | 2.0 | When the art gallery had a total of 20 artworks after deleting one of those it allows the artist to upload again to hit maximum 20 artwork limit | T-6.3 |
 

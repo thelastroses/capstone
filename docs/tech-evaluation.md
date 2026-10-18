@@ -83,7 +83,7 @@ React Three Fiber - innovation token requirement; spiked in SP-01; it allows for
 | React | $0 open source |
 | Blender | $0 open source |
 | TailwindCSS | $0 open source |
-| .procreate file | $0 for me but for others $12.99 for Procreate drawing app on Apple App Store to then download the Procreate specific files; Source: https://procreate.com/ ; Date: 2026-10-14 ; I already have it downloaded - fallback: if someone can not download the app I will either provide the .procreate files for them or the canvas information will just not available with each artwork for them |
+| .procreate file | $0 for me but for others $12.99 for Procreate drawing app on Apple App Store |
 
 Monthly Total: $0
 
