@@ -3,7 +3,7 @@
 **Declared:** 2026-10-18
 **Declared by:** Jennifer Spencer, author and moderator of record
 **Git tag:** spec-baseline-v1.0
-**Commit:** 
+**Commit:** 66101d4
 **Review report:** docs/review/2026-10-18-design-review-report.md
 
 ## Artifacts frozen at this baseline

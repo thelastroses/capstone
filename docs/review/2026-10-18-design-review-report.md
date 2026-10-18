@@ -3,7 +3,7 @@
 Date: 2026-10-18 
 Material Reviewed: Project charter, Requirements specification, Non-functional requirements, Technical specification, Architecture decision records, Work breakdown and schedule, Risk register, Definition of done
 - Tag: spec-baseline-v1.0
-- Commit: 
+- Commit: 66101d4
 Participant: Jennifer Spencer
 - Roles: Author and moderator 
 - Time Spent: 18 hours
@@ -51,7 +51,7 @@ I have no items carried pasted the baseline because nothing was deferred or cut 
 
 ## The pace correction from Rep 12, in one sentence.
 
-I am on pace so my pace does not need to be corrected because I am on time with everything. The hours logged through from Week 1 to Week 8 is 151.50 hours and the budgeted is 120.0 hours. This shows that I spend more time than the originally planned but I am still on time. My calibrated hours is **84.7** which fits in my plannable effort hours of **85.5 h** and my Must set alone also fits as it must roughly fit in around 60 hours and my Must total is about **57 h**.
+I am on pace so my pace does not need to be corrected because I am on time with everything, the hours logged through from Week 1 to Week 8 is 151.50 hours and the budgeted is 120.0 hours, this shows that I spend more time than the originally planned but I am still on time, my calibrated hours is **84.7** which fits in my plannable effort hours of **85.5 h** and my Must set alone also fits as it must roughly fit in around 60 hours and my Must total is about **57 h**.
 
 ---
 
