@@ -2,8 +2,8 @@
 
 # Technical Specification — Artwork Gallery
 
-Version: v0.1   Date: 2026-10-01   Author: Jennifer Spencer   Status: Draft
-Requirements baseline this design satisfies: docs/requirements.md v0.1
+Version: v0.3   Date: 2026-10-16   Author: Jennifer Spencer   Status: Baselined
+Requirements baseline this design satisfies: docs/requirements.md v1.3
 
 ## 1. Purpose and Scope
 One paragraph: what this system is for. Then two lists.
@@ -318,3 +318,4 @@ Deferred: FR-GALL-01, FR-GALL-04, FR-TDG-03, FR-EXT-01, FR-EXT-02, FR-EXT-03, NF
 |---|---|---|---|
 | v0.1 | 2026-10-04 | technical specification | initial architecture doc creation |
 | v0.2 | 2026-10-13 | comment edits | updated with missing edits and findings needed to be deferred or added to this document |
+| v0.3 | 2026-10-16 | Refining edits | After doing the walkthrough, checklist, and assistant go through, minor defects needed to be updated |

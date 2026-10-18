@@ -74,6 +74,23 @@ Write: the finding that stung, and the honest reason it stung.
 
 ## Rep 7 - The adversarial AI pass, then the verification
 
+1. Rejected
+2. Comfirmed
+3. Comfirmed
+4. Comfirmed
+5. Rejected
+6. Rejected
+7. Comfirmed
+8. Rejected
+9. Rejected
+10. Rejected
+11. Comfirmed
+12. Comfirmed
+13. Rejected
+14. Rejected
+15. Comfirmed
+16. Comfirmed
+
 Write: your fabrication rate — fabricated findings over total findings — and one sentence on what that number means for how you use this tool in Week 12. Then answer the question that matters most: name one defect your human reviewer found that the assistant did not, and say why the assistant could not have found it.
 -   0/16 even though it did not fabricate anything in this output does not mean it won't. I will have to continue to be careful that everything outputted is a real and verifiable result. A defect that my human reviewer found that the assistant did not is what happpens when Supabase goes down the ai did not know that I wanted it to show a sample set of canvas information.
 
@@ -88,7 +105,69 @@ Majors: 2
 Minors: 25
 Trivial: 2
 
-# Rep 9 - Rework the Majors, then verify them separately
+## Rep 9 - Rework the Majors, then verify them separately
 
 Write: one finding whose fix created a second finding. There is usually one, and catching it is the whole point of verifying separately.
 -   The one finding whose fix created a second finding is DR-012 because it made me update my WP-2 after finding a add-on to my FR-GALL-02 requirement in requirement.md.
+
+## Rep 10 - Declare the baseline
+
+Write: three sentences on what is now frozen and what is deliberately not, addressed to the engineer who will read this in Week 16
+
+The project charter, requirements specification, non-functional requirements, technical specification, architecture decision records, work breakdown and schedule, risk registerm, and definition of done are all frozen now. It is frozen because those files are the main decisions for the project before development begins. They will need a change request to show that a change happened in the plan. What is deliberately not in the frozen files are the files that do not have big influence to the project decisions, that can change over time as it grows without having negative impact on the plan.
+
+
+## Rep 11 - Stand up change control and work one real request
+
+No Change Logs at the moment because nothing was deffered in rep 8 or in general, no scope cuts need to be made from rep 12 or in general, and after searching again for others could not find anything so there are no changes for a change log that need to be made yet that I know is already coming. Dr. Litman said I could skip this.
+
+Write: the five kinds of change that will require a CR for the rest of this course, and one kind that deliberately will not.
+-  Changes in a requirement, changes with or adding a risk, changes with a techonology, changes in what considers a task done, changes with the plan schedule, will all require a CR. What will not require a CR is a change in the code when developing
+
+## Rep 12 - The halfway audit and the honest paragraph
+
+# The halfway audit and the honest paragraph
+
+## Hours — logged versus budgeted, and the trend across the eight weeks.
+
+The amount logged through week 8 is 151.5 hours while the budgeted is 120.0 hours according to the pace audit tool. The trend across the eight weeks means that I consistently spend more time than originally planned.
+
+VERDICT:
+    logged through week 8 : 151.5 h
+    budgeted              : 120.0 h  (variance +31.5 h)
+
+| week | variance |
+|------|----------|
+|   1  |   +7.2   |
+|   2  |   +16.5  |
+|   3  |   +17.0  |
+|   4  |   +21.5  |
+|   5  |   +23.2  |
+|   6  |   +26.8  |
+|   7  |   +28.5  |
+|   8  |   +31.5  | 
+
+## Scope versus budget — what does your Week-7 plan estimate for the Must set? Measure it against the right number, not the ninety in the course budget table: of the 135 hours left after Week 7, 48 go to chapters, quizzes, reps, and the presentation, leaving 87 for the project, and after the declared 25% buffer about 65 plannable hours — of which testing, documentation, and deployment claim roughly 25. Above 65 hours for the whole plan, or roughly 40 for the Must set alone, you cut this week.
+
+My plannable effort is bigger than 65 after the declared 25% buffer because I have more hours available each week meaning my plannable effort is **85.5 h** so I have 20.5 hours more available then what is said above. This would mean that my calibrated hours of **84.7** does fit in this for the whole plan. Then the Must set alone must roughly fit in around 60 hours and my Must total is roughly 58 hours which is 58 hours that is necessary for my website to work so it does fit in the rough Must hours.
+
+## Risk — has any trigger already fired? Check each one; do not recall it.
+
+No triggers have already been fired I have check each one.
+
+## Environment — push a trivial commit and confirm the whole loop still runs. When does your free tier end?
+
+After pushing a trivial commit I can confirm that the whole loop runs. There is no deadline for when my free tier to Supabase ends, of 2026-10-18 it is still free and the usage limits have remained the same.
+
+## Novelty load — how many planned tasks are things you have never done?
+
+The amount of planned tasks are things that I have never done before is 5 tasks which is 12 hours worth.
+
+## The user — is your stakeholder still available and still interested?
+
+Yes, the stakeholder was talked to on 2026-10-18 and is still available and is still interested in the product, the Art Gallery.
+
+## Write: the paragraph.
+
+I am not behind in hours and my Must set estimates 58 against 60 hours which is within the hours remaining. There were no change requests that had to be made because nothing was deferred and I am not behind.
+

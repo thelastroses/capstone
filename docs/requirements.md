@@ -2,7 +2,7 @@
 
 # Software Requirements Specification — Art Gallery
 
-**Author:** Jennifer Spencer  **Version:** 1.1  **Date:** 2026-09-19
+**Author:** Jennifer Spencer  **Version:** 1.3  **Date:** 2026-10-14
 **Status:** Baselined
 
 ---
@@ -373,9 +373,10 @@ with one line of reasoning. A short list here means you have not thought hard en
 | Date | Version | Change | Reason |
 |---|---|---|---|
 | 2026-09-11 | 1.0 | Initial specification | Milestone 3 |
-| 2026-09-12 | 1.0 | Edited 6 sentences that could be inferred that two different programs could satisfy it | Ambiguity pass after external read |
-| 2026-09-19 | 1.1 | Non-functional requirements, constraints, assumptions, dependencies, and obligations
+| 2026-09-12 | 1.1 | Edited 6 sentences that could be inferred that two different programs could satisfy it | Ambiguity pass after external read |
+| 2026-09-19 | 1.2 | Non-functional requirements, constraints, assumptions, dependencies, and obligations
 added | Milestone 4 |
+| 2026-10-14 | 1.3 | Deffering/Priority changes to won't | Did not fit with project version |
 
 ## 10. Constraints
 
