@@ -22,7 +22,7 @@ test('local Supabase contains the seeded artwork', async () => {
   assert.deepEqual(await response.json(), [{
     id: '00000000-0000-4000-8000-000000000001',
     png_name: 'eye.jpg',
-    gallery_type: '2D',
+    gallery_type: '3D',
     png_path: 'src/eye.jpg',
   }]);
 });
