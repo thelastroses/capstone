@@ -85,13 +85,21 @@ I only had to restart once.
 Reflect: if a dependency of yours published a breaking release tonight, would your build still pass tomorrow? Answer with evidence, not optimism.
 -   If a dependency of mine published a breaking release tonight, my build would still pass tomorrow. This is because my package-lock.json does not change the version to the new released ones it keeps the versions the same as what it is in that file. Moreover, the .nvmrc states which Node version (22.12.0) to use so if there is a new release it does not get the latest breaking change. The npm ci is what installs the versions I have set specifically.
 
-
 ## Rep 7 - Ship the pipeline
 
-Push it on a branch. Open a pull request. Watch it run.
-
-Expect it to fail two or three times. That is the rep — each failure is a thing your laptop was hiding from you.
-
-Produce: a green CI run on a pull request, and the URL of that run in docs/skeleton-trace.md. 
-
 Reflect: list every failure it took to get green. For each one, say whether it was a real portability problem or a workflow-syntax problem. The first kind is the valuable one — name what your laptop had that a clean machine does not.
+- It failed because the build, lint, setup, start, and test where not executable - all that was done was made it executable; fixing it for a clean machine test
+    - Portability problem because the scrips were not able to run because they were not marked as executable.
+- Failed because it had the smoke test - commented it because the smoke file had not been made yet, that it for rep 9
+    - Workflow-syntax problem the ci tried running the script/smoke even though it did not exist yet
+
+## Rep 8 - Break it on purpose, twice
+
+Push a deliberately failing assertion. Confirm the build goes red, open the log, and find the exact line that reports the failure.
+Revert it. Now push a deliberate lint error — an unused import, a bad format. Confirm red again.
+Fix both and get back to green.
+If either push stayed green, your pipeline is decorative. Find out why before you go further; the usual culprits are || true, a suite collecting zero tests, or a lint config with everything disabled.
+
+Produce: two red run URLs, the green run that followed, and the fix commits. 
+
+Reflect: how many scrolls did it take to find the real error in the CI log? If it was more than a few, what would you change about your test output so that future-you finds it faster at midnight in Week 12?
