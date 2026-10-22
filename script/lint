@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+cd "$(dirname "$0")/.."
+
+if grep -RInE --include='*.js' --include='*.jsx' --include='*.mjs' --include='*.css' --include='*.sh' '[^[:blank:]][[:blank:]]+$' src script; then
+  printf '%s\n' "Lint failed: remove trailing spaces from the lines above." >&2
+  exit 1
+fi
+
+printf '%s\n' "Lint passed: no trailing spaces in source files."

@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+cd "$(dirname "$0")/.."
+
+if [[ ! -f .env.local ]]; then
+  printf '%s\n' "Local settings are missing. Run ./script/setup first." >&2
+  exit 1
+fi
+
+set -a
+source .env.local
+set +a
+
+node --test

@@ -66,6 +66,9 @@ Reflect: read your last ten subject lines as a list. Do they read like the chang
 
 ## Rep 4 - Build the script contract
 
+Reflect: which script was hardest to write, and what does that tell you about which part of your setup is not actually reproducible yet?
+
+The setup script was the hardest to write because it has to install packages, start the database, apply migrations, and add sample data. That shows the database setup is the part that is hardest to reproduce on a new machine.
 
 ## Rep 5 - The stranger's machine
 

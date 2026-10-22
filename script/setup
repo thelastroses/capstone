@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+cd "$(dirname "$0")/.."
+
+npm ci
+npm exec -- supabase start
+npm exec -- supabase db reset
+
+supabase_env="$(npm exec -- supabase status -o env)"
+api_url="$(printf '%s\n' "$supabase_env" | sed -n 's/^API_URL="\([^"]*\)"$/\1/p')"
+anon_key="$(printf '%s\n' "$supabase_env" | sed -n 's/^ANON_KEY="\([^"]*\)"$/\1/p')"
+
+if [[ -z "$api_url" || -z "$anon_key" ]]; then
+  printf '%s\n' "Could not get the local Supabase URL and anon key." >&2
+  exit 1
+fi
+
+printf 'VITE_SUPABASE_URL=%s\nVITE_SUPABASE_ANON_KEY=%s\n' \
+  "$api_url" "$anon_key" > .env.local
+
+printf '%s\n' "Setup complete. Start the app with ./script/start"

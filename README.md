@@ -1,6 +1,6 @@
 # Capstone — Capstone Project
 
-Senior capstone by Jennifer Spencer, Fall 2026. **Status: Week 4 — Non-Functional Requirements, Constraints & Definition of Done**
+Senior capstone by Jennifer Spencer, Fall 2026. **Status: Week 9 — Walking Skeleton & Continuous Integration**
 
 ## Project idea
 The project is an art gallery that is able to take artists artwork and upload it into a 3D and 2D gallery. The galllery allows interactivity and extra information from an uploaded .procreate file when the artwork is uploaded to the website.
@@ -15,4 +15,19 @@ The project is an art gallery that is able to take artists artwork and upload it
 - `docs/definition-of-done.md` — a list of items that must be completed to be have a item considered as done
 
 ## How to run it
-Nothing to run yet. From Week 9 this section is the clean-machine setup path.
+
+You need Node.js 22 or newer and Docker Desktop running. From the project folder,
+run these commands in Git Bash (or WSL):
+
+```bash
+bash script/setup
+bash script/lint
+bash script/test
+bash script/build
+bash script/start
+```
+
+`setup` installs the locked dependencies, starts the local Supabase database,
+applies migrations, seeds one artwork, and writes the local app settings to
+`.env.local`. `start` runs the app; open the local address printed in the
+terminal. The database test checks that the sample artwork is available.

@@ -14,12 +14,12 @@ const App = () => {
           <Route path="/" element={<Home />}/>
         </Routes>
       </BrowserRouter>
-  ); 
+  );
 }
 
 const Home = () => {
   
-  const [selected, setSelected] = useState(false); 
+  const [selected, setSelected] = useState(false);
   const [controlsEnabled, setControlsEnabled] =  useState(true);
   const [view, setView] = useState(false);
 

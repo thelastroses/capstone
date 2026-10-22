@@ -8,7 +8,7 @@ const Upload = () =>
         <div className="upload background text" style={{  }}>
                 <Link className="navigation-button" to="/">
                     Home
-                </Link>        
+                </Link>
             <Dropzone/>
 
             <div className='flex items-center justify-center '>
