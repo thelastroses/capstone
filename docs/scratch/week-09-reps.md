@@ -102,4 +102,10 @@ If either push stayed green, your pipeline is decorative. Find out why before yo
 
 Produce: two red run URLs, the green run that followed, and the fix commits. 
 
+Assert Fail URL (red): https://github.com/thelastroses/capstone/commit/ebad102d0250d9293e3a6da3c905a62e516e3694
+Assert Revert URL (green): https://github.com/thelastroses/capstone/commit/58d50250236a37f4c0acdd738ee03776104d2dde
+
+Lint Fail URL (red): 
+Lint Revert URL (green): 
+
 Reflect: how many scrolls did it take to find the real error in the CI log? If it was more than a few, what would you change about your test output so that future-you finds it faster at midnight in Week 12?
