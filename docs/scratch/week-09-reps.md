@@ -67,10 +67,17 @@ Reflect: read your last ten subject lines as a list. Do they read like the chang
 ## Rep 4 - Build the script contract
 
 Reflect: which script was hardest to write, and what does that tell you about which part of your setup is not actually reproducible yet?
-
-The setup script was the hardest to write because it has to install packages, start the database, apply migrations, and add sample data. That shows the database setup is the part that is hardest to reproduce on a new machine.
+-   The setup script was the hardest to write because it has to install packages, start the database, apply migrations, and add sample data. That shows the database setup is the part that is hardest to reproduce on a new machine.
 
 ## Rep 5 - The stranger's machine
 
+Time took: 6 minutes after adding the fixes below
+
+Fixes made:
+-   Changed 2D to 3D in supabase.test.mjs to match what is in the seed.sql
+-   Added in a explanation into the README.md to give more details on how to run it in Chrome
+
+Reflect: how many times did you restart? Every restart is a defect a grader would have hit in Week 16 — and you just found it for free.
+I only had to restart once.
 
 ## Rep 6 - Pin everything
