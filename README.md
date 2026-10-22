@@ -27,6 +27,8 @@ bash script/build
 bash script/start
 ```
 
+Open the local address that it gives, in the terminal into a Chrome tab. The website is designed to be used in Chrome.
+
 `setup` installs the locked dependencies, starts the local Supabase database,
 applies migrations, seeds one artwork, and writes the local app settings to
 `.env.local`. `start` runs the app; open the local address printed in the
