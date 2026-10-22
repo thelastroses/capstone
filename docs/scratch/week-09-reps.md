@@ -81,3 +81,17 @@ Reflect: how many times did you restart? Every restart is a defect a grader woul
 I only had to restart once.
 
 ## Rep 6 - Pin everything
+
+Reflect: if a dependency of yours published a breaking release tonight, would your build still pass tomorrow? Answer with evidence, not optimism.
+-   If a dependency of mine published a breaking release tonight, my build would still pass tomorrow. This is because my package-lock.json does not change the version to the new released ones it keeps the versions the same as what it is in that file. Moreover, the .nvmrc states which Node version (22.12.0) to use so if there is a new release it does not get the latest breaking change. The npm ci is what installs the versions I have set specifically.
+
+
+## Rep 7 - Ship the pipeline
+
+Push it on a branch. Open a pull request. Watch it run.
+
+Expect it to fail two or three times. That is the rep — each failure is a thing your laptop was hiding from you.
+
+Produce: a green CI run on a pull request, and the URL of that run in docs/skeleton-trace.md. 
+
+Reflect: list every failure it took to get green. For each one, say whether it was a real portability problem or a workflow-syntax problem. The first kind is the valuable one — name what your laptop had that a clean machine does not.

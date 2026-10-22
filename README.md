@@ -16,7 +16,7 @@ The project is an art gallery that is able to take artists artwork and upload it
 
 ## How to run it
 
-You need Node.js 22 or newer and Docker Desktop running. From the project folder,
+You need Node.js 22.12.0 or newer and Docker Desktop running. From the project folder,
 run these commands in Git Bash (or WSL):
 
 ```bash
