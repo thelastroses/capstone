@@ -2,53 +2,68 @@ import Gallery from "./Gallery"
 import eyeImage from "./eye.jpg";
 import { Suspense, useState } from 'react';
 import { Canvas } from '@react-three/fiber';
-
 import { OrbitControls, Stage, Text} from '@react-three/drei';
+import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
+import Upload from "./Upload.jsx";
 
+const App = () => {
+  return (
+      <BrowserRouter>
+        <Routes>
+          <Route path="/upload" element={<Upload />}/>
+          <Route path="/" element={<Home />}/>
+        </Routes>
+      </BrowserRouter>
+  ); 
+}
 
-function App() {
+const Home = () => {
+  
   const [selected, setSelected] = useState(false); 
   const [controlsEnabled, setControlsEnabled] =  useState(true);
   const [view, setView] = useState(false);
 
   return (
-    <div style={{ width: '100vw', height: '90vh' }}>
-      <Canvas camera={{ position: [5, 0, 5], fov: 30, zoom: .6}}>
+      <div style={{ width: '100%', height: '90vh' }}>
+          <Link className="navigation-button" to="upload" style={{marginRight: '24px'}}>
+              Upload
+          </Link>
+
+        <Canvas camera={{ position: [5, 0, 5], fov: 30, zoom: .6}}>
+          
+          <OrbitControls enabled={controlsEnabled} target = {[0,0,0]} />
+
+          <ambientLight intensity={0.5} />
+          <directionalLight position={[10, 10, 5]} intensity={1} />
+          
+          <Suspense fallback={null}>
+            <Stage environment="city" intensity={0.6}>
+              <Gallery />
+              <mesh position = {[2, 2, -3.35]} scale = {selected ? 2 : 1} onClick ={() => {setSelected(true), setControlsEnabled(false), setView(true)}} onPointerMissed={() => { setSelected(false), setControlsEnabled(true), setView(false)}}>
+                  <boxGeometry attach="geometry" args={[.5, .75, .1]} />
+                    <meshStandardMaterial attach="material" color={"#85948a"} />
+              </mesh>
+            </Stage>
+          </Suspense>
+          <Text position={[5, 0, 5]} rotation={[0,.75,0]}>Gallery</Text>
+        </Canvas>
         
-        <OrbitControls enabled={controlsEnabled} target = {[0,0,0]} />
-
-        <ambientLight intensity={0.5} />
-        <directionalLight position={[10, 10, 5]} intensity={1} />
-        
-        <Suspense fallback={null}>
-          <Stage environment="city" intensity={0.6}>
-            <Gallery />
-            <mesh position = {[2, 2, -3.35]} scale = {selected ? 2 : 1} onClick ={() => {setSelected(true), setControlsEnabled(false), setView(true)}} onPointerMissed={() => { setSelected(false), setControlsEnabled(true), setView(false)}}>
-                 <boxGeometry attach="geometry" args={[.5, .75, .1]} />
-                  <meshStandardMaterial attach="material" color={"#85948a"} />
-            </mesh>
-          </Stage>
-        </Suspense>
-        <Text position={[5, 0, 5]} rotation={[0,.75,0]}>Gallery</Text>
-      </Canvas>
-      
-    {view && (
-            <div className="absolute inset-0 flex items-center justify-center" style={{position: 'center'}}  onClick={() => {setSelected(false), setControlsEnabled(true), setView(false)}}>
-              <img className="w-50 h-80" src={eyeImage}/>
-              
-              <h2 color="black">Canvas Information</h2>
-                <button className="absolute top-170 ">  x </button>
-            </div>)}
+      {view && (
+              <div className="absolute inset-0 flex items-center justify-center" style={{position: 'center'}}  onClick={() => {setSelected(false), setControlsEnabled(true), setView(false)}}>
+                <img className="w-50 h-80" src={eyeImage}/>
+                
+                <h2 color="black">Canvas Information</h2>
+                  <button className="absolute top-170 ">  x </button>
+              </div>)}
 
 
-      <div className="min-h-screen bg-gray-900 text-white flex items-center justify-center">
-        <h1 className="text-4xl font-extrabold">
-          2D Scene
-        </h1>
-        <Gallery /> 
+        <div className="min-h-screen text-white flex items-center justify-center background" style={{overflowX: 'hidden'}}>
+          <h1 className="text text-4xl font-extrabold">
+            2D Scene
+          </h1>
+        </div>
       </div>
-    </div>
-  ); 
+  );
 }
 
 export default App

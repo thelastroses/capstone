@@ -1,1 +1,32 @@
 @import "tailwindcss";
+
+.navigation-button {
+    display: flex;
+    justify-content: flex-end; 
+    margin-right: 40px;
+    margin-top: 30px;
+}
+
+.navigation-button:hover {
+    cursor: pointer;
+}
+
+.background {
+    background-color: #111314;
+    min-width: 100vh;
+    min-height: 100vh;
+    overflow: hidden;
+}
+
+.text {
+    color: #b6bfc1;
+}
+
+/* .text:hover{
+    color: #f5eddd;
+} */
+
+.warning {
+    color: #f15a30;
+    /* #00b49b */
+}

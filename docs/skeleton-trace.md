@@ -7,13 +7,13 @@ hard-coded fixture, or a `TODO`. A hop that is not real is a bone that is missin
 
 | # | Hop | Component in my system | Real? | Evidence |
 |---|---|---|---|---|
-| 1 | Client / entry point | The artists selects the artwork file with its matching .procreate file and where it should be placed | no | The upload accepts both files and where it should be placed |
+| 1 | Client / entry point | A place shows an area where uploads can happen and a place to choose a scene where the artwork will display | yes | Displays the upload process area with the gallery location radio buttons |
 | 2 | Route / dispatch | The upload process receives the selected selections | no | The upload process actually receives the selected selections 200 |
 | 3 | Service / domain logic | Checks that it is under 20 artworks and if it is, extracts canvas information and pairs it with artwork | no | After uploading it displays correctly and at the 21srt save it does not allow and does message |
 | 4 | Data store | Saves the artwork and canvas information into Supabase | no | A row appears in Supabase and its canvas information are paired together with the same artwork_id |
 | 5 | Response | Receives the uploaded artwork and canvas information successfully or returns error | no | Returns the artwork and canvas information fields such as width, height, and dpi |
 | 6 | Rendered result | Shows an upload success message and displays artwork and canvas information or failure message if extraction fails or does not display | no | In the UI it shows a success message and failure message; a screenshot showing it rendered |
-| 7 | External integration | Supabase gets uploaded artwork and canvas information | stub / real | Files are in the correct locations in the Supabase database tables |
+| 7 | External integration | Supabase gets uploaded artwork and canvas information | no | Files are in the correct locations in the Supabase database tables |
 
 **Missing bone (the next task):** Issue #1: Upload, extraction, and saving
 
