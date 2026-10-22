@@ -1,24 +1,63 @@
-name: CI
+# Walking-skeleton CI — a stack-agnostic starter workflow.
+
+name: ci
 
 on:
   push:
+    branches: ["**"]
   pull_request:
+    branches: [main]
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
 
 jobs:
   build:
-    runs-on: ubuntu-24.04
+    name: build-and-verify
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
     steps:
-      - name: Check out repository
+      - name: Checkout
         uses: actions/checkout@v5
+
 
       - name: Set up Node.js
         uses: actions/setup-node@v6
         with:
-          node-version: 22
+          node-version-file: .nvmrc
           cache: npm
 
-      - name: Install dependencies
-        run: npm ci
+
+      - name: Install from the lock file
+        run: ./script/setup
+
+      - name: Lint
+        run: ./script/lint
+
+      - name: Test
+        run: ./script/test
 
       - name: Build
-        run: npm run build
+        run: ./script/build
+
+      # - name: Start the app in the background
+      #   run: |
+      #     nohup ./script/start > /tmp/app.log 2>&1 &
+      #     echo "started pid $!"
+      #   env:
+      #     PORT: "8080"
+
+      # - name: Smoke test — prove the skeleton walks here too
+      #   run: ./script/smoke
+      #   env:
+      #     APP_BASE_URL: http://127.0.0.1:8080
+      #     SMOKE_EXPECT: "Art Gallery"
+
+      # - name: Show the app log when a stage fails
+      #   if: failure()
+      #   run: tail -n 50 /tmp/app.log
