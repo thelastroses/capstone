@@ -95,16 +95,42 @@ Reflect: list every failure it took to get green. For each one, say whether it w
 
 ## Rep 8 - Break it on purpose, twice
 
-Push a deliberately failing assertion. Confirm the build goes red, open the log, and find the exact line that reports the failure.
-Revert it. Now push a deliberate lint error — an unused import, a bad format. Confirm red again.
-Fix both and get back to green.
-If either push stayed green, your pipeline is decorative. Find out why before you go further; the usual culprits are || true, a suite collecting zero tests, or a lint config with everything disabled.
-
 Produce: two red run URLs, the green run that followed, and the fix commits. 
 
 Assert Fail URL (red): https://github.com/thelastroses/capstone/actions/runs/39861649300/job/120113576267
+- error: 'Expected "actual" to be strictly unequal to: 9' (line 11) Error: Process completed with exit code 1. (line 33 - Test Tab)
+Assert Revert URL (green): https://github.com/thelastroses/capstone/actions/runs/39862968327/job/120118021392
 
 Lint Fail URL (red): https://github.com/thelastroses/capstone/actions/runs/39863478363/job/120119735020 
-Lint Revert URL (green): 
+-   Lint failed: remove trailing spaces from the lines above. (line 5) Error: Process completed with exit code 1. (line 6 - Lint Tab)
+Lint Revert URL (green): https://github.com/thelastroses/capstone/actions/runs/39864106153/job/120121845027
 
 Reflect: how many scrolls did it take to find the real error in the CI log? If it was more than a few, what would you change about your test output so that future-you finds it faster at midnight in Week 12?
+-   A single/no scroll. I was able to find that it hit an error very quickly after it got an error nothing needed to be changed so that future me finds it faster at midnight in Week 12.
+
+## Rep 9 - Make the skeleton walk in CI
+
+Produce: a passing script/smoke in CI, plus the terminal output showing it fail with the data store stopped. 
+-   Passing: SMOKE OK: http://127.0.0.1:54321/rest/v1/artwork?select=png_name returned the seeded row (eye.jpg). The skeleton walks.
+=   Failed with Data Stored Stopped: SMOKE FAIL: nothing answered at http://127.0.0.1:54321/rest/v1/artwork?select=png_name within 30s (client -> route hop)
+
+Reflect: in one sentence, what exactly does your smoke test prove that a unit test of the same code does not?
+-   What a smoke test proves that a unit test of the same code does not is a smoke test proves that when the app is running that it is able to get seeded artwork from the database.
+
+## Rep 10 - Issues that point back at requirements
+
+Create at least eight issues on your board. Every title starts with a requirement identifier from your baselined specification. Every body carries the slice, the estimate from your Week-7 work breakdown, and acceptance criteria as checkboxes:
+
+Title: [FR-7] Add an item to the pantry from the web form
+
+Requirement: FR-7, requirements spec v1.1 (baselined Week 8)
+Slice: web form -> POST /api/items -> ItemService.add -> items table -> 201 -> refresh
+Estimate: 3.0 h (WBS task 4.2)
+
+Acceptance criteria
+- [ ] Submitting name + expiry adds exactly one row
+- [ ] An empty name is rejected and writes no row
+- [ ] `./script/test` covers the rejection case
+Then fill Part 2 of docs/skeleton-trace.md — one row per requirement, with its issue, branch, and what verifies it.
+
+Produce: eight-plus traced issues and a completed traceability table. Reflect: which requirements have no issue, and which have nothing verifying them? Those two lists are the honest state of your project. Write them down.
