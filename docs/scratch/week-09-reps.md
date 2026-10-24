@@ -119,18 +119,15 @@ Reflect: in one sentence, what exactly does your smoke test prove that a unit te
 
 ## Rep 10 - Issues that point back at requirements
 
-Create at least eight issues on your board. Every title starts with a requirement identifier from your baselined specification. Every body carries the slice, the estimate from your Week-7 work breakdown, and acceptance criteria as checkboxes:
+Reflect: which requirements have no issue, and which have nothing verifying them? Those two lists are the honest state of your project. Write them down.
+-   All the requirements have an issue. 
+-   All the requirements do not have anything verifying them because none of them are done.
 
-Title: [FR-7] Add an item to the pantry from the web form
+## Rep 11 - The secrets audit and the rotation plan
 
-Requirement: FR-7, requirements spec v1.1 (baselined Week 8)
-Slice: web form -> POST /api/items -> ItemService.add -> items table -> 201 -> refresh
-Estimate: 3.0 h (WBS task 4.2)
+-   "clean: nothing tracked"
+-   "clean: nothing in history"
+-   There were no secrets, keys, token, passwords committed
 
-Acceptance criteria
-- [ ] Submitting name + expiry adds exactly one row
-- [ ] An empty name is rejected and writes no row
-- [ ] `./script/test` covers the rejection case
-Then fill Part 2 of docs/skeleton-trace.md — one row per requirement, with its issue, branch, and what verifies it.
-
-Produce: eight-plus traced issues and a completed traceability table. Reflect: which requirements have no issue, and which have nothing verifying them? Those two lists are the honest state of your project. Write them down.
+Reflect: if a key of yours leaked at 2 a.m. tonight, what is the first thing you would do? If your answer is “delete the file and force-push,” reread 9.7 — the answer is rotate first.
+-   If a key of mine leaked at 2 a.m. tonight the first thing that I would do is to look at the runbook.md to see the steps that I would need to do, so that the Supabase key gets rotated.

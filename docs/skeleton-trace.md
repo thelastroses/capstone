@@ -24,10 +24,33 @@ with no issue is a promise nobody is keeping.
 
 | Req ID | Requirement (short) | Issue | Branch | Verified by | Status |
 |---|---|---|---|---|---|
-| `<FR-1>` | `<one line>` | `#<n>` | `<branch>` | `<test name or "manual">` | not started / in progress / done |
-| FR-4 | List items expiring within 7 days | #12 | `fr-4-expiring-list` | `tests/unit/list-expiring` | done |
-| FR-7 | Add an item from the web form | #14 | `fr-7-add-item` | — | in progress |
-| NFR-2 | First page paint under 2 s on 3G | #21 | — | — | not started |
+| FR-UPL-01 | Upload artwork within 5 minutes | I-1 #35 | — | — | not started |
+| FR-UPL-02 | Delete uploaded artworks  | I-5 #39 | — | — | not started |
+| FR-UPL-03 | Choose 2D, 3D, or both | I-4 #38 | — | — | not started |
+| FR-DATA-01 | Saves Artworks into Database to view later | I-2 #36 | — | — | not started |
+| FR-DATA-02 | Caps Artworks saved to 20 | I-2 #36 | — | — | not started |
+| FR-GALL-02 | Artwork Overview | I-4 #38 | — | — | not started |
+| FR-GALL-03 | Allows viewers to contact artist | I-6 #40 | — | — | not started |
+| FR-TDG-01 | Shows canvas information after clicking artwork in 3D scene | I-4 #38 | — | — | not started |
+| FR-TDG-02 | Allows zooming into 3D scene | I-4 #38 | — | — | not started |
+| FR-EXT-04 | Extract Procreate Canvas Information | I-3 #37 | — | — | not started |
+| FR-EXT-05 | Pairs canvas information with its artwork | I-3 #37 | — | — | not started |
+
+| NFR-PERF-01 | Loads website in p95 under 25 sections with 3G internet | I-7 #41 | — | — | not started |
+| NFR-PERF-02 | 3D gallery maintain 30 fps for 95% of a 60 second viewing session | I-7 #41 | — | — | not started |
+| NFR-REL-01 | Exceptions are handled with any failure | I-2 #36, I-5 #39 | — | — | not started |
+| NFR-AVA-02 | 19 of 20 artworks display in the galleries | I-7 #41 | — | — | not started |
+| NFR-SEC-01 | Secrets are not saved into repository | I-8 #42 | — | — | not started |
+| NFR-SEC-02 | Extracted information can not execute HTML or scripts | I-4 #38 | — | — | not started |
+| NFR-PRIV-01 | Artwork and canvas information are fully removed from database | I-5 #39 | — | — | not started |
+| NFR-DATA-01 | Corrupt and duplicate artwork are not saved | I-1 #35 | — | — | not started |
+| NFR-DATA-02 | Incomplete records are not saved | I-2 #36 | — | — | not started |
+| NFR-ACC-01 | Reach core features in at most 20 tabs | I-6 #40 | — | — | not started |
+| NFR-ACC-02 | Tab indicator is visible enough | I-6 #40 | — | — | not started |
+| NFR-ACC-03 | Tab order is logical | I-6 #40 | — | — | not started |
+| NFR-USE-01 | First time viewer is able to navigate website in 3 minutes without help | I-6 #40 | — | — | not started |
+| NFR-USE-02 | Interface has no clipped, overlapping, or unusable overlays | I-6 #40 | — | — | not started |
+| NFR-MNT-01 | Successful clean clone check in under 10 minutes | I-8 #42 | — | — | not started |
 
 ## 3. Skeleton acceptance record
 

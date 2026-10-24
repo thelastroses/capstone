@@ -1,5 +1,8 @@
 # Dependencies
 node_modules/
+venv/
+.venv/
+__pycache__/
 
 # Vite
 dist/
@@ -11,6 +14,19 @@ build/
 # Environment files
 .env
 .env*
+
+# secrets and local config
+*.pem
+*.key
+credentials.json
+service-account*.json
+
+# local data and build output
+*.sqlite
+*.sqlite3
+*.db
+target/
+out/
 
 # Vercel
 .vercel/
@@ -25,7 +41,9 @@ coverage/
 *.log
 
 # IDE settings
-.vscode/
+.idea/
+.vscode/*
+!.vscode/extensions.json
 
 # OS files
 .DS_Store
