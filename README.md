@@ -20,11 +20,12 @@ You need Node.js 22.12.0 or newer and Docker Desktop running. From the project f
 run these commands in Git Bash (or WSL):
 
 ```bash
-bash script/setup
-bash script/lint
-bash script/test
-bash script/build
-bash script/start
+./script/setup
+./script/lint
+./script/test
+./script/build
+./script/smoke
+./script/start
 ```
 
 Open the local address that it gives, in the terminal into a Chrome tab. The website is designed to be used in Chrome.
