@@ -35,7 +35,6 @@ with no issue is a promise nobody is keeping.
 | FR-TDG-02 | Allows zooming into 3D scene | I-4 #38 | — | — | not started |
 | FR-EXT-04 | Extract Procreate Canvas Information | I-3 #37 | — | — | not started |
 | FR-EXT-05 | Pairs canvas information with its artwork | I-3 #37 | — | — | not started |
-
 | NFR-PERF-01 | Loads website in p95 under 25 sections with 3G internet | I-7 #41 | — | — | not started |
 | NFR-PERF-02 | 3D gallery maintain 30 fps for 95% of a 60 second viewing session | I-7 #41 | — | — | not started |
 | NFR-REL-01 | Exceptions are handled with any failure | I-2 #36, I-5 #39 | — | — | not started |
