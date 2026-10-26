@@ -4,7 +4,7 @@ VALUES (
   'eye.jpg',
   '3D',
   'src/eye.jpg'
-);
+)
 ON CONFLICT (id) DO NOTHING;
 
 INSERT INTO public.procreate_data (
