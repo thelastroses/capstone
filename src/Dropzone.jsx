@@ -251,7 +251,7 @@ const Dropzone = ({ className }) => {
                     <li key={error.code}>Must be a .png or .procreate file</li>
                   ))}
                 </ul>
-              </div> 
+              </div>
               <button
                 type='button'
                 className='mt-1 py-1 text-[12px] uppercase tracking-wider font-bold border border-secondary-400 rounded-md px-3'
