@@ -54,7 +54,7 @@ with no issue is a promise nobody is keeping.
 ## 3. Skeleton acceptance record
 
 - **Date the skeleton first walked end to end:** `2026-10-25`
-- **Commit that made it walk:** ``
+- **Commit that made it walk:** `0cd2d59`
 - **CI run that proved it (URL):** `https://github.com/thelastroses/capstone/commit/464e9168a1d25f07ba75b01c9060ab2aaf67f36a`
 - **One red build I caused on purpose, and the fix:** `https://github.com/thelastroses/capstone/commit/52fd643a843b4c4d59df58e0d97efe87e047f1af` -> `5fcecdf`
 - **Hops still stubbed, and when they get real:** `no hops still stubbed`

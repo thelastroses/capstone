@@ -131,3 +131,8 @@ Reflect: which requirements have no issue, and which have nothing verifying them
 
 Reflect: if a key of yours leaked at 2 a.m. tonight, what is the first thing you would do? If your answer is “delete the file and force-push,” reread 9.7 — the answer is rotate first.
 -   If a key of mine leaked at 2 a.m. tonight the first thing that I would do is to look at the runbook.md to see the steps that I would need to do, so that the Supabase key gets rotated.
+
+## Rep 12 — The walk, recorded
+
+Reflect (a paragraph, in your notes — you will reuse it in the milestone): what did the skeleton teach you about your architecture that six weeks of specification did not? Name one specific thing you now know that you only believed on Friday of Week 8.
+-   What the skeleton thought me about my architecture that the 6 weeks of specification did not that I learned I needed Docker. I needed Docker so that it could run locally for the clean clone test. I thought I had done enough researching but it turns out when it began the development I had not. The one thing I only believed on Friday of Week 8 was that I had everything set up for Week 9 so that things would go smoothly with Supabase but that was not the case.
