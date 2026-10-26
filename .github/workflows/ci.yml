@@ -55,7 +55,7 @@ jobs:
       - name: Smoke test — prove the skeleton walks here too
         run: ./script/smoke
         env:
-          APP_BASE_URL: http://127.0.0.1:54321
+          APP_BASE_URL: http://127.0.0.1:8080
           SMOKE_EXPECT: "eye.jpg"
 
       - name: Show the app log when a stage fails
