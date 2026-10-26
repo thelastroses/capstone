@@ -93,7 +93,7 @@ const Dropzone = ({ className }) => {
     setRejected(files => files.filter(({ file }) => file.name !== name))
   } 
 
-    async function getImages() 
+    async function getImages()
     {
       const { data, error } = await supabase
         .from('artwork')
