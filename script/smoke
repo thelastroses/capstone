@@ -23,7 +23,7 @@ cd "$(dirname "$0")/.."
 
 BASE_URL="${APP_BASE_URL:-http://127.0.0.1:54321}"
 ENDPOINT="${SMOKE_ENDPOINT:-/rest/v1/artwork?select=png_name}"
-EXPECT="${SMOKE_EXPECT:-eye.jpg}"
+EXPECT="${SMOKE_EXPECT:-pumpkinPieImage.png}"
 TIMEOUT_SECONDS="${SMOKE_TIMEOUT:-30}"
 
 fail() {

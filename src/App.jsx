@@ -1,5 +1,5 @@
 import Gallery from "./Gallery"
-import eyeImage from "./eye.jpg";
+import pumpkinPieImage from "./pumpkinpie.png";
 import { Suspense, useState } from 'react';
 import { Canvas } from '@react-three/fiber';
 import { OrbitControls, Stage, Text} from '@react-three/drei';
@@ -50,7 +50,7 @@ const Home = () => {
         
       {view && (
               <div className="absolute inset-0 flex items-center justify-center" style={{position: 'center'}}  onClick={() => {setSelected(false), setControlsEnabled(true), setView(false)}}>
-                <img className="w-50 h-80" src={eyeImage}/>
+                <img className="w-50 h-80" src={pumpkinPieImage}/>
                 
                 <h2 color="black">Canvas Information</h2>
                   <button className="absolute top-170 ">  x </button>
