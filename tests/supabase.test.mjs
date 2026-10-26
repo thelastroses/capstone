@@ -24,6 +24,6 @@ test('local Supabase contains the seeded artwork', async () => {
     id: '00000000-0000-4000-8000-000000000001',
     png_name: 'pumpkinPieImage.png',
     gallery_type: '3D',
-    png_path: 'pumpkinPieImage.png',
+    png_path: 'src/pumpkinPieImage.png',
   }]);
 });
