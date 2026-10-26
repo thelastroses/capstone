@@ -11,7 +11,7 @@ import toast from 'react-hot-toast';
 const Dropzone = ({ className }) => {
   const [files, setFiles] = useState([])
   const [images, setImages] = useState([])
-  const [rejected, setRejected] = useState([]) 
+  const [rejected, setRejected] = useState([])
   const [activeArtworkId, setActiveArtworkId] = useState(null)
   const [extractedInfo, setExtractedInfo] = useState(null)
 
@@ -91,7 +91,7 @@ const Dropzone = ({ className }) => {
 
    const removeRejected = name => {
     setRejected(files => files.filter(({ file }) => file.name !== name))
-  } 
+  }
 
     async function getImages()
     {
@@ -198,7 +198,7 @@ const Dropzone = ({ className }) => {
         {/* Accepted files */}
         <h3 className='title text-lg font-semibold mt-10 pl-5 border-b pb-3'>
           Accepted Files
-        </h3> 
+        </h3>
               
 
         <ul className='mt-6 flex gap-10 pl-5'>
