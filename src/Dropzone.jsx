@@ -97,7 +97,7 @@ const Dropzone = ({ className }) => {
     {
       const { data, error } = await supabase
         .from('artwork')
-        .select(`id, png_name, png_path, 
+        .select(`id, png_name, png_path,
           procreate_data (
           artwork_name, width, height, dpi, stroke_count, tracked_time
           )`);
