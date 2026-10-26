@@ -56,7 +56,7 @@ jobs:
         run: ./script/smoke
         env:
           APP_BASE_URL: http://127.0.0.1:54321
-          SMOKE_EXPECT: "eye.jpg"
+          SMOKE_EXPECT: ".pumpkinPieImage.png"
 
       - name: Show the app log when a stage fails
         if: failure()
