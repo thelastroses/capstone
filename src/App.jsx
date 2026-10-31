@@ -79,13 +79,13 @@ const Home = () => {
           <h1 className="text text-4xl font-extrabold absolute mt-25">
               2D Overview
           </h1>
-        </div> 
+        </div>
 
         <div className="min-h-screen pt-50 pb-30  text-white flex items-center justify-center background " style={{overflowX: 'hidden'}}>
           
           
           <ul className='mt-6 grid grid-cols-3 gap-20 gap-y-20'>
-                    {images.filter(artwork => artwork.gallery_type === "2D") 
+                    {images.filter(artwork => artwork.gallery_type === "2D")
                     .map(artworks => {
                       const { data } = supabase.storage
                       .from('artworks')
@@ -103,7 +103,7 @@ const Home = () => {
                         </p> */}
                         
                         </div>
-                        { 
+                        {
                         <div className='font-medium text-[18px]' >
                             
                             {extractedInfo ? (
