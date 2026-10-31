@@ -25,11 +25,11 @@ with no issue is a promise nobody is keeping.
 | Req ID | Requirement (short) | Issue | Branch | Verified by | Status |
 |---|---|---|---|---|---|
 | FR-UPL-01 | Upload artwork within 5 minutes | I-1 #35 | us/jspencer/FR-UPL-01-UploadArtworkWithin5Minutes | — | in progress |
-| FR-UPL-02 | Delete uploaded artworks  | I-5 #39 | — | — | not started |
-| FR-UPL-03 | Choose 2D, 3D, or both | I-4 #38 | — | — | not started |
+| FR-UPL-02 | Delete uploaded artworks  | I-5 #39 | us/jspencer/FR-UPL-03-Choose-2D-3D-or-both | — | in progress |
+| FR-UPL-03 | Choose 2D, 3D, or both | I-4 #38 | us/jspencer/FR-UPL-03-Choose-2D-3D-or-both | — | in progress |
 | FR-DATA-01 | Saves Artworks into Database to view later | I-2 #36 |us/jspencer/FR-UPL-01-UploadArtworkWithin5Minutes | — | in progress |
-| FR-DATA-02 | Caps Artworks saved to 20 | I-2 #36 | — | — | not started |
-| FR-GALL-02 | Artwork Overview | I-4 #38 | — | — | not started |
+| FR-DATA-02 | Caps Artworks saved to 20 | I-2 #36 | us/jspencer/FR-UPL-03-Choose-2D-3D-or-both | — | in progress |
+| FR-GALL-02 | Artwork Overview | I-4 #38 | us/jspencer/FR-UPL-03-Choose-2D-3D-or-both | — | in progress |
 | FR-GALL-03 | Allows viewers to contact artist | I-6 #40 | — | — | not started |
 | FR-TDG-01 | Shows canvas information after clicking artwork in 3D scene | I-4 #38 | — | — | not started |
 | FR-TDG-02 | Allows zooming into 3D scene | I-4 #38 | — | — | not started |
@@ -41,7 +41,7 @@ with no issue is a promise nobody is keeping.
 | NFR-AVA-02 | 19 of 20 artworks display in the galleries | I-7 #41 | — | — | not started |
 | NFR-SEC-01 | Secrets are not saved into repository | I-8 #42 | — | — | not started |
 | NFR-SEC-02 | Extracted information can not execute HTML or scripts | I-4 #38 | — | — | not started |
-| NFR-PRIV-01 | Artwork and canvas information are fully removed from database | I-5 #39 | — | — | not started |
+| NFR-PRIV-01 | Artwork and canvas information are fully removed from database | I-5 #39 | us/jspencer/FR-UPL-03-Choose-2D-3D-or-both | — | in progress |
 | NFR-DATA-01 | Corrupt and duplicate artwork are not saved | I-1 #35 | — | — | not started |
 | NFR-DATA-02 | Incomplete records are not saved | I-2 #36 | — | — | not started |
 | NFR-ACC-01 | Reach core features in at most 20 tabs | I-6 #40 | — | — | not started |

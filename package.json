@@ -7,6 +7,7 @@
     "@tailwindcss/vite": "^4.3.3",
     "bootstrap-icons": "^1.13.1",
     "bplist-parser": "^0.5.0",
+    "browser-image-compression": "^2.0.2",
     "buffer": "^6.0.3",
     "jszip": "^3.10.2",
     "react": "^19.3.0",

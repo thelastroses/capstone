@@ -1,10 +1,25 @@
 @import "tailwindcss";
 
-.navigation-button {
+html {
+    scrollbar-gutter: stable;
+}
+
+.smooth-image {
+  animation: smoothLoad 0.8s ease-out forwards;
+}
+
+
+.navigation {
     display: flex;
     justify-content: flex-end;
+}
+
+.navigation-button {
     margin-right: 40px;
     margin-top: 30px;
+    padding: 10px;
+    padding-right: 15px;
+    padding-left: 15px;
 }
 
 .navigation-button:hover {
@@ -22,11 +37,15 @@
     color: #b6bfc1;
 }
 
-/* .text:hover{
-    color: #f5eddd;
-} */
-
 .warning {
     color: #f15a30;
     /* #00b49b */
+}
+
+.button-hover:hover {
+    cursor: pointer;
+}
+
+.move-trash {
+    right: 1vh;
 }
