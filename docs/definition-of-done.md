@@ -91,20 +91,20 @@ nothing on a rubric a stranger applies.
 
 ---
 
-## Worked example — PantryPilot, FR-12 (add an item by barcode)
+## Worked example — Art Gallery, FR-DATA-01 (Saves Artworks into Database)
 
 | Check | Evidence |
 |---|---|
-| 1 | AC-1 extration is able to extract canvas information from .procreate file; AC-2 the extraction is paired with its matching artwork; AC-3 missing fields display as n/a |
+| 1 | AC-1 artworks start on website after reloading; AC-2 artwork limits 20 artworks rejecting 21st; AC-3 allows another upload after deleting 20th artwork; AC-4 displays failure error if upload is not successful |
 | 2 | failed |
-| 3 | Run #211 green on `feat/fr-12-barcode` |
-| 4 | Timeout, 404, 429, and garbage-body cases handled per spec §4.3 |
-| 5 | Four passes done 3/19; 3 findings fixed, DEF-014 logged and deferred |
-| 6 | Key read from `PANTRY_API_KEY`; `git diff --staged` reviewed hunk by hunk |
-| 7 | `docs/ai-usage.md` entry 2026-03-19 (client draft, ~40 of 95 lines kept) |
-| 8 | Issue #37 closed, labeled `I-3 - [FR-EXT-04] Extract and Pair Procreate Canvas Information`, moved to Done |
-| 9 | `README.md` prerequisites updated with the new env var |
-| 10 | 3.75 h construction + 1.00 h debugging logged 3/19 |
+| 3 | Commit CI is green on c286954 `us/jspencer/FR-UPL-03-Choose-2D-3D-or-both` and 8478d2a `us/jspencer/FR-UPL-01-UploadArtworkWithin5Minutes`|
+| 4 | 400 handled / failed |
+| 5 | Four passes done 10/31; 6 findings fixed |
+| 6 | Key read from `VITE_SUPABASE_ANON_KEY`; `git diff --staged` reviewed |
+| 7 | No ai assisted code was used for this Issue |
+| 8 | Issue #36 closed, labeled `I-2 - [FR-DATA-01] Save Artworks Successfully and Ensure 20 Artwork Limit`, moved to Done |
+| 9 | `README.md`, `docs/runbook.md`, and ADR did not need to be updated since it did not change how the system was built, ran, or configured |
+| 10 | 11 hrs added the artwork into supabase; .25 limited the amount of artworks artist can upload to 20 10/30 |
 
 ---
 

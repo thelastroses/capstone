@@ -8,6 +8,10 @@ import Upload from "./Upload.jsx";
 import { supabase } from "./supabase";
 import { getImages } from "./Artwork.jsx";
 
+export function getOnly2DArtworks(artworks){
+  return artworks.filter(artwork => artwork.gallery_type === "2D");
+}
+
 const App = () => {
   return (
       <BrowserRouter>
@@ -85,7 +89,7 @@ const Home = () => {
           
           
           <ul className='mt-6 grid grid-cols-3 gap-20 gap-y-20'>
-                    {images.filter(artwork => artwork.gallery_type === "2D")
+                    {getOnly2DArtworks(images)
                     .map(artworks => {
                       const { data } = supabase.storage
                       .from('artworks')

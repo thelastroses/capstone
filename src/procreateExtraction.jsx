@@ -4,53 +4,10 @@ import { Buffer } from 'buffer'
 
 globalThis.Buffer = Buffer
 
-export async function extractProcreate(file) {
-  if (!file) {
-    throw new Error('Please select a Procreate file')
-  }
-
-  const zip = await JSZip.loadAsync(file)
-  const documentArchive = zip.file('Document.archive')
-
-  if (!documentArchive) {
-    throw new Error('The Procreate file has no Document.archive')
-  }
-
-  const archiveBytes = await documentArchive.async('uint8array')
-  const parsedPlist = parseBuffer(
-    Buffer.from(archiveBytes)
-  )
-
-  const objects = parsedPlist?.[0]?.$objects
-
-  if (!Array.isArray(objects) || !objects[1]) {
-    throw new Error('Could not read the Procreate document data')
-  }
-
-  function getObject(reference) {
-    const index =
-      reference?.UID ??
-      reference?.data ??
-      reference
-
-    if (
-      !Number.isInteger(index) ||
-      index < 0 ||
-      objects[index] === undefined
-    ) {
-      throw new Error(
-        'Could not resolve a Procreate document value'
-      )
-    }
-
-    return objects[index]
-  }
-
-  const document = objects[1]
-
-  const name = getObject(document.name)
-  const size = getObject(document.size)
-  const strokeCount = getObject(document.strokeCount)
+export function normalizeProcreateDocument(document, getObject) {
+  const name = getObject(document?.name)
+  const size = getObject(document?.size)
+  const strokeCount = getObject(document?.strokeCount)
 
   if (typeof size !== 'string') {
     throw new Error(
@@ -103,4 +60,51 @@ export async function extractProcreate(file) {
     trackedTime: `${hours} hours ${minutes} minutes`,
     trackedTimeSeconds: Math.floor(trackedTime),
   }
+}
+
+export async function extractProcreate(file) {
+  if (!file) {
+    throw new Error('Please select a Procreate file')
+  }
+
+  const zip = await JSZip.loadAsync(file)
+  const documentArchive = zip.file('Document.archive')
+
+  if (!documentArchive) {
+    throw new Error('The Procreate file has no Document.archive')
+  }
+
+  const archiveBytes = await documentArchive.async('uint8array')
+  const parsedPlist = parseBuffer(
+    Buffer.from(archiveBytes)
+  )
+
+  const objects = parsedPlist?.[0]?.$objects
+
+  if (!Array.isArray(objects) || !objects[1]) {
+    throw new Error('Could not read the Procreate document data')
+  }
+
+  function getObject(reference) {
+    const index =
+      reference?.UID ??
+      reference?.data ??
+      reference
+
+    if (
+      !Number.isInteger(index) ||
+      index < 0 ||
+      objects[index] === undefined
+    ) {
+      throw new Error(
+        'Could not resolve a Procreate document value'
+      )
+    }
+
+    return objects[index]
+  }
+
+  const document = objects[1]
+
+  return normalizeProcreateDocument(document, getObject)
 }

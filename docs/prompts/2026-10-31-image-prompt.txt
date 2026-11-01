@@ -1,0 +1,83 @@
+# Contract Prompt
+
+Given Dropzone.jsx and index.css
+
+On the upload page when going into it from the home page, the already uploaded artworks. 
+I want the artworks on my upload tab page to fade in slowly when I first go into the page from the home page. 
+I want it to be visually appealing to the eye. Call the css class selector as .smooth-load.If the images fail to 
+fade in slowly or take to long to fade in give error message. Only modify the index.css file, a place to put the 
+error message, and only modify the image <img> line in the Dropzone.jsx file. Only add the most necessary lines 
+for this task to be completed nothing extra. Then list every assumption you made that I did not state.
+
+## Wish prompt output:
+
+index.css -
+
+/* Images fade in when the upload page appears */
+.upload-image {
+    opacity: 0;
+    animation: imageFadeIn 1.5s ease-in forwards;
+}
+
+@keyframes imageFadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+Dropzone.jsx -
+
+<img
+    src={image}
+    alt="Artwork"
+    className="upload-image"
+/>
+
+Optional for index.css - 
+
+.upload-image:nth-child(1) {
+    animation-delay: 0s;
+}
+
+.upload-image:nth-child(2) {
+    animation-delay: 0.3s;
+}
+
+.upload-image:nth-child(3) {
+    animation-delay: 0.6s;
+}
+
+.upload-image:nth-child(4) {
+    animation-delay: 0.9s;
+}
+
+
+
+## Contract Prompt: 
+
+index.css -
+
+.smooth-load {
+    animation: smooth-load 1.2s ease-out forwards;
+}
+
+@keyframes smooth-load {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+Dropzone.jsx -
+
+<img className="smooth-load" src={data.publicUrl} alt={artworks.png_name}
+  onError={() => alert("Artwork failed to load.")}
+  onAnimationEnd={(event) => {
+    if (!event.currentTarget.complete) alert("Artwork took too long to load.");
+  }}
+/>

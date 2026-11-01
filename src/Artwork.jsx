@@ -1,4 +1,5 @@
 import { supabase } from "./supabase";
+import toast from 'react-hot-toast';
 
 export async function getImages()
 {
@@ -13,7 +14,6 @@ export async function getImages()
       if (error)
       {
         toast.error("Failed to retrieve artwork");
-        console.log(error);
         return null;
       }
 

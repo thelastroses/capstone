@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from 'react'
 import { useDropzone } from 'react-dropzone'
-import { supabase } from './supabase';
+import { supabase } from './supabase.js';
 import { generateUUID } from 'three/src/math/MathUtils.js';
 import { extractProcreate } from "./procreateExtraction.jsx";
 import toast from 'react-hot-toast';
@@ -10,6 +10,33 @@ import artworkCompression from 'browser-image-compression';
 
 //Got permission to use code from Hamed Bahram's repo for the dropzone/upload section of the Art Gallery: https://github.com/HamedBahram/dropzone.git
 //src/repo-permission-image/DropzoneRepoPermission.png
+
+export function getUploudArtworkError({artworkId, pngFile})
+{
+  if(!artworkId && !pngFile)
+  {
+    return 'Upload the artwork PNG before adding its Procreate file'
+  }
+  return null
+}
+
+export function getCheckLimit(images)
+{
+  if(images >= 20)
+  {
+    return 'The artwork limit has been reached (20)'
+  }
+  return null
+}
+
+export function getGalleryType(selectedGalleryType)
+{
+  if(!selectedGalleryType)
+  {
+    return 'Please select a gallery type'
+  }
+  return null
+}
 
 const Dropzone = ({ className }) => {
   const [files, setFiles] = useState([])
@@ -60,18 +87,26 @@ const Dropzone = ({ className }) => {
         }
 
         if (procreateFile) {
-          if (!artworkId || !info) {
-            throw new Error('Upload the artwork PNG before adding its Procreate file.')
+           if (!info) {
+            throw new Error('Could not read Procreate file')
           }
 
-          if(procreateFile && info && artworkId)
+          const uploadError = getUploudArtworkError({artworkId, pngFile})
+
+          if (uploadError) 
+          {
+            throw new Error(uploadError)
+          }
+
+          if(artworkId)
           {
             setExtractedInfo(info)
             await saveProcreateInfo(info, artworkId)
           }
+          
         }
       } catch (error) {
-        console.error('Could not process artwork:', error)
+        toast.error(error.message || "Could not process artwork");
       }
   }, [activeArtworkId])
 
@@ -117,17 +152,20 @@ const Dropzone = ({ className }) => {
       .eq('id', file.id)
 
     if (error) {
-      alert(error)
+      toast.error("Could not remove file");
     } else {
+      toast.success("Artwork removed successfully!");
       await loadImages()
     }
   }
 
     async function uploadImage(file)
     {
-      if(images.length >= 20)
+      const limitError = getCheckLimit(images.length)
+
+      if(limitError)
       {
-        toast.error("The artwork limit has been reached (20)");
+        toast.error(limitError);
         return null;
       }
 
@@ -150,7 +188,6 @@ const Dropzone = ({ className }) => {
 
       if(uploadError)
         {
-          console.log(uploadError);
           toast.error("Failed to upload artwork");
           return null;
         }
@@ -168,7 +205,6 @@ const Dropzone = ({ className }) => {
 
         if(insertError)
         {
-          console.log(insertError);
           toast.error("Upload Failed");
           return null
         }
@@ -198,7 +234,6 @@ const Dropzone = ({ className }) => {
         if(procreateError)
         {
           toast.error("Failed to upload canvas information");
-          console.log(procreateError);
           return;
         } else {
           toast.success("Canvas information successfully uploaded!");
@@ -209,9 +244,11 @@ const Dropzone = ({ className }) => {
       async function handleSubmit(event) {
         event.preventDefault();
 
-        if(!selectedGalleryType)
+        const galleryError = getGalleryType(selectedGalleryType)
+
+        if(galleryError)
         {
-          toast.error("Please select a gallery type");
+          toast.error(galleryError);
           return;
         }
 
@@ -221,18 +258,24 @@ const Dropzone = ({ className }) => {
           return;
         }
 
-        const { error: error } = await supabase
+        const { data: updatedArtwork, error } = await supabase
             .from('artwork')
             .update({
               gallery_type: selectedGalleryType
             })
-            .eq('id', activeArtworkId);
+            .eq('id', activeArtworkId)
+            .select('id')
+            .maybeSingle();
 
         if(error)
         {
-          console.log(error);
           toast.error("Failed to change gallery type");
           return null
+        }
+
+        if (!updatedArtwork) {
+          toast.error("Selected artwork was not found. Please upload the PNG again");
+          return;
         }
 
         await loadImages()
@@ -285,8 +328,9 @@ const Dropzone = ({ className }) => {
           return (
             <li key={artworks.id} className='relative flex'>
               <div className='flex flex-col items-center'>
-              <img src={data.publicUrl} alt={artworks.png_name}></img>
-              
+              <img className="smooth-load" src={data.publicUrl} alt={artworks.png_name} 
+                onError={() => toast.error("Artwork failed to load.")}
+              />
               <p className=' text-[12px] font-medium'>
                 {artworks.png_name}
               </p>
