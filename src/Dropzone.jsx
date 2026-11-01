@@ -93,7 +93,7 @@ const Dropzone = ({ className }) => {
 
           const uploadError = getUploudArtworkError({artworkId, pngFile})
 
-          if (uploadError) 
+          if (uploadError)
           {
             throw new Error(uploadError)
           }
@@ -328,7 +328,7 @@ const Dropzone = ({ className }) => {
           return (
             <li key={artworks.id} className='relative flex'>
               <div className='flex flex-col items-center'>
-              <img className="smooth-load" src={data.publicUrl} alt={artworks.png_name} 
+              <img className="smooth-load" src={data.publicUrl} alt={artworks.png_name}
                 onError={() => toast.error("Artwork failed to load.")}
               />
               <p className=' text-[12px] font-medium'>
