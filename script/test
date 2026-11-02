@@ -12,4 +12,5 @@ set -a
 source .env.local
 set +a
 
-node --test
+npm exec -- vitest run --exclude tests/supabase.test.mjs
+node --test tests/supabase.test.mjs
