@@ -1,9 +1,9 @@
 INSERT INTO public.artwork (id, png_name, gallery_type, png_path)
 VALUES (
   '00000000-0000-4000-8000-000000000001',
-  'pumpkinPieImage.png',
-  '3D',
-  'src/pumpkinPieImage.png'
+  'pumpkinpie.png',
+  '2D',
+  'public/pumpkinpie.png'
 )
 ON CONFLICT (id) DO NOTHING;
 

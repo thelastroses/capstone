@@ -34,3 +34,10 @@ Open the local address that it gives, in the terminal into a Chrome tab. The web
 applies migrations, seeds one artwork, and writes the local app settings to
 `.env.local`. `start` runs the app; open the local address printed in the
 terminal. The database test checks that the sample artwork is available.
+
+## Testing
+
+Run unit tests in Git Bash:
+
+```bash
+npx vitest run --exclude tests/supabase.test.mjs

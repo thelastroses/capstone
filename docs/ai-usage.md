@@ -54,3 +54,98 @@ down. For each: name the category; say what about MY project triggers it; propos
 | 2026-10-22 | Copilot Auto | I asked "Change the three defaults to match my project, and wire it into the pipeline as the last stage." | I kept what it gave me and then modified my ci.yml based off the changes it made | I did not have to change anything after reading through it, everything that it wrote made sense for why it was there. I ran the smoke script through AI since the other scripts where made by them. I thought it was fit to do to ensure that I did not miss anything | I verified that the code was right by reading through it, looking things up the individual lines to see what it did for things that I did not fully understood |
 | 2026-10-24 | ChatGPT GPT-5.6 Luna | I asked it to make the procreate Extraction for jsx and to extract as many different fields as it could. I gave it the .procreate file so that it could inspect it and see if it could get more than the dpi and fields that I had already analyzed myself that I knew it had | I kept the main extraction that it gave me but at first it wrote it in python so I had it convert it to make it jsx because I did not want to have to find a way for it to connect with my other jsx by making an api | I changed the amount of fields it gave me, it gave me a lot of unnecessary ones that would most likely only return null anytime it extracted | I verified by looking into the .procreate file and looked at what it would output with what was the in procreate canvas information settings to ensure that the fields lined up, I read through it thorughly to ensure that the code made sense and that I understood it |
 | 2026-10-25 | Copilot Auto | I asked it to make the procreate extracted information be able to work with the useCallback function in Dropzone.jsx  | I kept what it gave me after reading through it thorughly | I changed the amount it gave me I removed some unnecessary if statements it gave and added in my own code so that the it updates with the png too | I verified by reading through it thoroughly and ensuring that the extracted info was the same values as what was in the procreate canvas information settings |
+| 2026-10-31 | ChatGPT GPT-5.6 Luna | I gave it Dropzone.jsx and index.css then asked "On the upload page when going into it from the home page, the already uploaded artworks. I want the artworks on my upload tab page to fade in slowly when I first go into the page from the home page. I want it to be visually appealing to the eye. Call the css class selector as .smooth-load. If the images fail to fade in give error message. Only modify the index.css file, a place to put the error message, and only modify the image <img> line in the Dropzone.jsx file. Only add the most necessary lines for this task to be completed nothing extra. Then list every assumption you made that I did not state." | I kept everything but the onAnimationEnd because it did not work after testing it the rest of it survived around 15 lines of the 20 lines of code | I changed the error handling getting rid of the onAnimationEnd  because it did not work after testing it and changed the alert to a toast | I verified by reading through it thoroughly and testing what it gave me worked in the console |
+| 2026-10-31 | Copilot Auto | I asked it what would unit tests for the procreate extraction file look like | I kept most of what it gave me 60 lines but had to modify a lot and add more tests | I changed it from using import test from 'node:test' to import { test } from 'vitest' so that it would work with my jsx files, I also changed the values it added, and had to fix the Invalid canvas dimensions assert so that it would pass green, I added more unit tests that were missing | I verified by reading through it thoroughly and testing that the unit tests ran green |
+| 2026-11-01 | Copilot Auto | I asked it to fix the pumpkin pie image from not showing in the local database, to have it upload for me into the supabase storage | I kept what it gave me besides changing what the pumpkinpie url was | I changed the pumpkinpie url for the seed-storage.mjs | I verified by reading through it thoroughly and testing with node --env-file=.env.local script/seed-storage.mjs to see that it was successfull |
+
+
+**Log an entry whenever:** assistant-drafted code, config, schema, or prose
+survived into the repository; an assistant materially shaped a decision you
+kept; or an assistant did the debugging that produced a fix you committed.
+
+**You do not need an entry for:** autocomplete of a line you were already
+typing, spell-check, or a question you asked and did not use.
+
+
+
+
+---
+
+## Entry format
+
+```
+### YYYY-MM-DD — <short title>
+Tool: <assistant name>, <model / version if you know it>
+Asked for: <one line: the actual task, plus where the full prompt is stored>
+Accepted: <file or function, and roughly how much survived>
+Changed: <the edits you made, and why>
+Verified: <the tests or checks that proved it works, plus the requirement id>
+```
+
+---
+
+## Good entry
+
+```
+### 2026-03-19 — barcode lookup client
+Tool: <assistant name>, <model/version if known>
+Asked for: an HTTP client `lookupProduct(barcode)` for the product API, with a
+  3s timeout, one retry on 5xx only, 404 => null, never throws. Full prompt in
+  prompts/2026-03-19-lookup.txt.
+Accepted: `pantry/barcode/client.*` — the retry loop and the response mapping;
+  about 40 of 95 lines survived.
+Changed: rewrote error handling to match `pantry/items` (it swallowed timeouts
+  silently); replaced a hard-coded key with PANTRY_API_KEY; renamed three
+  variables; deleted a caching layer I did not ask for and do not need yet.
+Verified: 4 unit tests with a stubbed HTTP layer (200 / 404 / 500-then-200 /
+  timeout), green in CI on feat/fr-12-barcode. Checked against FR-12 AC-1 and
+  AC-3. DEF-014 filed for the retry-count edge case.
+```
+
+Why it earns points: it shows judgment (a rejected caching layer), verification
+(four named cases), traceability (FR-12, DEF-014), and honest proportion
+(40 of 95 lines).
+
+---
+
+## Bad entry
+
+```
+3/19 - used AI for the barcode stuff
+```
+
+Why it costs points: no tool, no file, no prompt, no proportion, no test, no
+requirement. A grader learns nothing except that you know the word "AI" — and a
+hostile reading is the only one available.
+
+---
+
+## Other entries worth logging (short forms)
+
+```
+### 2026-03-20 — explained an error message
+Tool: <assistant name>
+Asked for: what "connection reset by peer" means for my HTTP client under load.
+Accepted: nothing into the repo — explanation only.
+Changed: n/a
+Verified: n/a. Logged because it shaped the retry decision in ADR-0004.
+```
+
+```
+### 2026-03-21 — test scaffolding for FR-18
+Tool: <assistant name>
+Asked for: a table-driven test skeleton for the expiring-soon date rule.
+Accepted: the skeleton and 2 of 7 cases.
+Changed: wrote the boundary cases myself (exactly 3 days, DST change, past date)
+  because the drafted cases all sat safely in the middle of the range.
+Verified: all 7 pass; FR-18 AC-2 now has a test that fails if the rule flips to
+  inclusive.
+```
+
+---
+
+## End-of-term self-check
+
+Before the Week-16 submission, read this file straight through and ask: **where
+is the "Changed" line empty?** Those are the modules you accepted rather than
+built. Re-read them, or rewrite them, before someone asks you about them.
