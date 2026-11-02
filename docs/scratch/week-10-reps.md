@@ -63,7 +63,7 @@ Reflect: Which pass found the most? Pass 3 usually wins, and pass 4 usually find
 
 Branch, push, open a pull request in the web interface, review your own diff there, leave at least two review comments on your own code, then merge. Confirm CI ran on the branch before the merge.
 
-Branch: 
+Branch: us/jspencer/FR-UPL-03-Choose-2D-3D-or-both
 
 Reflect: Did the web diff view show you anything the editor did not? Most students find at least one thing - unfamiliar presentation is a cheap substitute for a second pair of eyes.
 -   No, it did not reveal any problems I am familiar with the diff view
