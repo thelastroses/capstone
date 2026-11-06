@@ -11,7 +11,7 @@ The project is an art gallery that is able to take artists artwork and upload it
 - `docs/hours-log.csv` — every work session, logged the day it happens
 - `docs/ai-usage.md` — which AI tools are used on this project, and how
 - `docs/` — one document per life-cycle phase; each header says the week it is written
-- `src/`, `tests/` — empty until Week 9
+- `src/`, `tests/` — application source and automated tests
 - `docs/definition-of-done.md` — a list of items that must be completed to be have a item considered as done
 
 ## How to run it
@@ -32,12 +32,55 @@ Open the local address that it gives, in the terminal into a Chrome tab. The web
 
 `setup` installs the locked dependencies, starts the local Supabase database,
 applies migrations, seeds one artwork, and writes the local app settings to
-`.env.local`. `start` runs the app; open the local address printed in the
-terminal. The database test checks that the sample artwork is available.
+`.env.local`. After setup, `npm run dev` restores the sample PNG in Supabase
+Storage before starting Vite, so the demo image is repaired if its storage
+object is missing. `./script/start` is also available as a wrapper around
+`npm run dev`. Open the local address printed in the terminal. The database
+test checks that the sample artwork is available.
 
 ## Testing
 
-Run unit tests in Git Bash:
+Regenerate the deterministic happy, boundary, and hostile test data with the
+fixed seed in `tests/fixtures/test-data.seed.json`:
 
 ```bash
-npx vitest run --exclude tests/supabase.test.mjs
+npm run seed -- --set all
+```
+
+This writes the generated fixture files under `tests/fixtures/`; it does not
+seed the local Supabase database. The unit suite includes tests against the
+hostile fixture set. To regenerate the data and verify it in PowerShell, run:
+
+```powershell
+npm.cmd run seed -- --set all
+npm.cmd test
+```
+
+In Git Bash or WSL, use `npm run seed -- --set all` and `npm test`.
+
+Run the 43 unit tests:
+
+```bash
+npm test
+```
+
+Run the 15 integration tests after `./script/setup` has started local Supabase
+and configured the environment:
+
+```bash
+npm run test:integration
+```
+
+Run both automated tiers with one command:
+
+```bash
+npm run test:all
+```
+
+The manual acceptance cases in `docs/test-cases.md` cover all 22 Must
+requirements. Run them in Chrome and record results in `docs/traceability.csv`.
+The traceability report reads that file; it does not run tests or update statuses:
+
+```bash
+python tools/coverage_report.py docs/traceability.csv
+```

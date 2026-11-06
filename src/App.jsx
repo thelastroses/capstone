@@ -9,7 +9,9 @@ import { supabase } from "./supabase";
 import { getImages } from "./Artwork.jsx";
 
 export function getOnly2DArtworks(artworks){
-  return artworks.filter(artwork => artwork.gallery_type === "2D");
+  return artworks.filter(artwork =>
+    artwork.gallery_type === "2D" || artwork.gallery_type === "both"
+  );
 }
 
 const App = () => {

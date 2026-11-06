@@ -7,6 +7,11 @@ import toast from 'react-hot-toast';
 import deleteIcon from "./trash3-fill.svg";
 import { getImages } from "./Artwork.jsx";
 import artworkCompression from 'browser-image-compression';
+import {
+  removeArtworkAndFile,
+  saveProcreateInfo as persistProcreateInfo,
+  uploadArtwork as persistArtwork,
+} from './artworkPersistence.mjs';
 
 //Got permission to use code from Hamed Bahram's repo for the dropzone/upload section of the Art Gallery: https://github.com/HamedBahram/dropzone.git
 //src/repo-permission-image/DropzoneRepoPermission.png
@@ -31,7 +36,7 @@ export function getCheckLimit(images)
 
 export function getGalleryType(selectedGalleryType)
 {
-  if(!selectedGalleryType)
+  if(!['2D', '3D', 'both'].includes(selectedGalleryType))
   {
     return 'Please select a gallery type'
   }
@@ -62,21 +67,34 @@ const Dropzone = ({ className }) => {
         file.name.toLowerCase().endsWith('.procreate')
     )
     
-      const artworkPromise = pngFile
-      ? uploadImage(pngFile)
-      : Promise.resolve(activeArtworkId)
-
-      const extractionPromise = procreateFile
-      ? extractProcreate(procreateFile)
-      : Promise.resolve(null)
-
       try {
-        const [artworkId, info] = await Promise.all([
-          artworkPromise,
-          extractionPromise
-        ])
+        const info = procreateFile
+          ? await extractProcreate(procreateFile)
+          : null
 
-        if (pngFile) {
+        if (procreateFile) {
+          if (!info) {
+            throw new Error('Could not read Procreate file')
+          }
+        }
+
+        const artworkId = pngFile
+          ? await uploadImage(pngFile, { deferSuccess: Boolean(procreateFile) })
+          : activeArtworkId
+
+        if (procreateFile) {
+          const uploadError = getUploudArtworkError({ artworkId, pngFile })
+          if (uploadError) {
+            throw new Error(uploadError)
+          }
+
+          if (artworkId) {
+            await saveProcreateInfo(info, artworkId)
+            setExtractedInfo(info)
+          }
+        }
+
+        if (pngFile && artworkId) {
           setActiveArtworkId(artworkId)
           setFiles(previous => [
             ...previous,
@@ -84,26 +102,6 @@ const Dropzone = ({ className }) => {
               preview: URL.createObjectURL(pngFile), artworkId
             })
           ])
-        }
-
-        if (procreateFile) {
-           if (!info) {
-            throw new Error('Could not read Procreate file')
-          }
-
-          const uploadError = getUploudArtworkError({artworkId, pngFile})
-
-          if (uploadError)
-          {
-            throw new Error(uploadError)
-          }
-
-          if(artworkId)
-          {
-            setExtractedInfo(info)
-            await saveProcreateInfo(info, artworkId)
-          }
-          
         }
       } catch (error) {
         toast.error(error.message || "Could not process artwork");
@@ -142,24 +140,16 @@ const Dropzone = ({ className }) => {
   }
 
   async function removeFile(file) {
-    const {error} = await supabase.storage
-      .from('artworks')
-      .remove([file.png_path])
-
-    const { error: databasError } = await supabase
-      .from('artwork')
-      .delete()
-      .eq('id', file.id)
-
-    if (error) {
-      toast.error("Could not remove file");
-    } else {
+    try {
+      await removeArtworkAndFile(supabase, file)
       toast.success("Artwork removed successfully!");
       await loadImages()
+    } catch (error) {
+      toast.error(error.message || "Could not remove file");
     }
   }
 
-    async function uploadImage(file)
+    async function uploadImage(file, { deferSuccess = false } = {})
     {
       const limitError = getCheckLimit(images.length)
 
@@ -178,67 +168,29 @@ const Dropzone = ({ className }) => {
         file, options
       );
 
-      const { data: upload, error: uploadError } = await supabase
-        .storage
-        .from('artworks')
-        .upload(`public/${file.name}`, compressedFile, {
-          contentType: 'image/png',
-          upsert: true,
-        });
+      try {
+        const artwork = await persistArtwork(supabase, {
+          id: generateUUID(),
+          file: compressedFile,
+          galleryType: selectedGalleryType || '2D',
+        })
 
-      if(uploadError)
-        {
-          toast.error("Failed to upload artwork");
-          return null;
+        if (!deferSuccess) {
+          toast.success("Artwork successfully uploaded!");
+          await loadImages()
         }
-
-      const artworkId = generateUUID()
-
-        const { error: insertError } = await supabase
-            .from('artwork')
-            .insert({
-              id: artworkId,
-              png_name: file.name,
-              gallery_type: selectedGalleryType || '2D',
-              png_path: upload.path
-            })
-
-        if(insertError)
-        {
-          toast.error("Upload Failed");
-          return null
-        }
-
-        toast.success("Artwork successfully uploaded!");
-
-        await loadImages()
-        return artworkId
+        return artwork.id
+      } catch (error) {
+        toast.error(error.message || "Failed to upload artwork")
+        return null
       }
+    }
 
       async function saveProcreateInfo(info, artworkId)
       {
-        const { error: procreateError } = await supabase
-            .from('procreate_data')
-            .insert({
-              id: generateUUID(),
-              artwork_id: artworkId,
-              artwork_name: info.name,
-              width: info.width,
-              height: info.height,
-              dpi: info.dpi,
-              stroke_count: info.strokeCount,
-              tracked_time_seconds: info.trackedTimeSeconds,
-              tracked_time: info.trackedTime,
-            })
-
-        if(procreateError)
-        {
-          toast.error("Failed to upload canvas information");
-          return;
-        } else {
-          toast.success("Canvas information successfully uploaded!");
-          await loadImages()
-        }
+        await persistProcreateInfo(supabase, artworkId, info)
+        toast.success("Canvas information successfully uploaded!");
+        await loadImages()
       }
 
       async function handleSubmit(event) {

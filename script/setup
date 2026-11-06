@@ -19,6 +19,6 @@ fi
 printf 'VITE_SUPABASE_URL=%s\nVITE_SUPABASE_ANON_KEY=%s\n' \
   "$api_url" "$anon_key" > .env.local
 
-node --env-file=.env.local script/seed-storage.mjs
+node script/seed-storage.mjs
 
-printf '%s\n' "Setup complete. Start the app with ./script/start"
+printf '%s\n' "Setup complete. Start the app with npm run dev"

@@ -1,0 +1,72 @@
+[
+  {
+    "id": "45e36641-2ebe-4a93-9063-3b5bd4674dd1",
+    "png_name": "happy-45e36641.png",
+    "artwork_name": "Happy artwork 01",
+    "gallery_type": "3D",
+    "mime_type": "image/png"
+  },
+  {
+    "id": "897224d7-e907-48b3-b775-8251c8ae4791",
+    "png_name": "happy-897224d7.png",
+    "artwork_name": "Happy artwork 02",
+    "gallery_type": "both",
+    "mime_type": "image/png"
+  },
+  {
+    "id": "2a2f6685-aac3-421b-9226-864bf6914ace",
+    "png_name": "happy-2a2f6685.png",
+    "artwork_name": "Happy artwork 03",
+    "gallery_type": "both",
+    "mime_type": "image/png"
+  },
+  {
+    "id": "0e7a8e7c-1598-44be-83e2-f724948a7bf9",
+    "png_name": "happy-0e7a8e7c.png",
+    "artwork_name": "Happy artwork 04",
+    "gallery_type": "3D",
+    "mime_type": "image/png"
+  },
+  {
+    "id": "431a0d83-6f72-4c77-ba60-909fa956c4a2",
+    "png_name": "happy-431a0d83.png",
+    "artwork_name": "Happy artwork 05",
+    "gallery_type": "both",
+    "mime_type": "image/png"
+  },
+  {
+    "id": "6526734a-144b-497a-8378-4b6cb44f23b7",
+    "png_name": "happy-6526734a.png",
+    "artwork_name": "Happy artwork 06",
+    "gallery_type": "3D",
+    "mime_type": "image/png"
+  },
+  {
+    "id": "418ff373-aa5b-41d3-a608-1b0f3961b584",
+    "png_name": "happy-418ff373.png",
+    "artwork_name": "Happy artwork 07",
+    "gallery_type": "both",
+    "mime_type": "image/png"
+  },
+  {
+    "id": "e1c8f9b3-44b1-4806-a856-69c02d40d48e",
+    "png_name": "happy-e1c8f9b3.png",
+    "artwork_name": "Happy artwork 08",
+    "gallery_type": "3D",
+    "mime_type": "image/png"
+  },
+  {
+    "id": "2e43520a-e214-41b8-9ed4-8b82822c8c52",
+    "png_name": "happy-2e43520a.png",
+    "artwork_name": "Happy artwork 09",
+    "gallery_type": "3D",
+    "mime_type": "image/png"
+  },
+  {
+    "id": "b6f07dca-8bbd-4641-809c-51b9a5e1df4f",
+    "png_name": "happy-b6f07dca.png",
+    "artwork_name": "Happy artwork 10",
+    "gallery_type": "3D",
+    "mime_type": "image/png"
+  }
+]

@@ -1,0 +1,54 @@
+[
+  {
+    "id": "26e02108-e54d-4997-9f2c-3a5157ed869e",
+    "case": "empty",
+    "input": [],
+    "expectedCount": 0
+  },
+  {
+    "id": "cc7ed6a6-6cb8-467e-a6fa-d453aa2f3a24",
+    "case": "one",
+    "input": {
+      "artworkCount": 1
+    },
+    "expectedCount": 1
+  },
+  {
+    "id": "41ddf7b1-bec0-4119-8784-c4b713a1eff1",
+    "case": "max",
+    "input": {
+      "artworkCount": 20
+    },
+    "expectedCount": 20
+  },
+  {
+    "id": "abb858cd-faf1-4f42-ac59-fc77425e5891",
+    "case": "zero",
+    "input": {
+      "value": 0
+    },
+    "expectedValue": 0
+  },
+  {
+    "id": "ccfbaf9c-b75b-4461-a38c-75499137de99",
+    "case": "negative",
+    "input": {
+      "value": -1
+    },
+    "expectedValue": -1
+  },
+  {
+    "id": "20e041c8-1aaa-426d-9ce1-2b033ab8f8d3",
+    "case": "earliest",
+    "input": {
+      "date": "0001-01-01T00:00:00.000Z"
+    }
+  },
+  {
+    "id": "ba1de213-b457-44c1-89f7-4a6a66daae0d",
+    "case": "latest",
+    "input": {
+      "date": "9999-12-31T23:59:59.999Z"
+    }
+  }
+]

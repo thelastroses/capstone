@@ -1,12 +1,15 @@
 import { readFile } from 'node:fs/promises'
 import { fileURLToPath } from 'node:url'
 import { createClient } from '@supabase/supabase-js'
+import { loadEnv } from 'vite'
 
-const supabaseUrl = process.env.VITE_SUPABASE_URL
-const supabaseKey = process.env.VITE_SUPABASE_ANON_KEY
+const { VITE_SUPABASE_URL: supabaseUrl, VITE_SUPABASE_ANON_KEY: supabaseKey } =
+  loadEnv('development', process.cwd())
 
 if (!supabaseUrl || !supabaseKey) {
-  throw new Error('Supabase URL and anon key are required to seed Storage')
+  throw new Error(
+    'Supabase URL and anon key are missing. Run ./script/setup first to start local Supabase and create .env.local.',
+  )
 }
 
 const imagePath = fileURLToPath(new URL('../src/pumpkinpie.png', import.meta.url))
