@@ -214,16 +214,36 @@ test('TC-010 cleans up Storage when the artwork database save fails', async () =
 
 test('TC-011 creates no artwork when Storage rejects the PNG upload', async () => {
   const artworkId = randomUUID()
-  const name = `${artworkId}.txt`
-  await assert.rejects(
-    uploadArtwork(supabase, {
-      id: artworkId,
-      file: pngFile(name),
-      galleryType: '2D',
-    }),
-    /Failed to upload artwork/,
-  )
-  await assertArtworkAbsent(artworkId)
+  const name = `${artworkId}.png`
+  const path = `public/${name}`
+  const { error: storageError } = await supabase.storage
+    .from('artworks')
+    .upload(path, makePngBuffer(), {
+      contentType: 'image/png',
+      upsert: false,
+    })
+  assert.ifError(storageError)
+
+  try {
+    await assert.rejects(
+      uploadArtwork(supabase, {
+        id: artworkId,
+        file: pngFile(name),
+        galleryType: '2D',
+      }),
+      /Failed to upload artwork/,
+    )
+    await assertArtworkAbsent(artworkId)
+    const { error: retainedStorageError } = await supabase.storage
+      .from('artworks')
+      .download(path)
+    assert.ifError(retainedStorageError)
+  } finally {
+    const { error: cleanupError } = await supabase.storage
+      .from('artworks')
+      .remove([path])
+    assert.ifError(cleanupError)
+  }
 })
 
 test('TC-011 rolls back artwork and PNG when Procreate metadata save fails', async () => {

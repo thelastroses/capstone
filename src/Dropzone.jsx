@@ -55,6 +55,7 @@ const Dropzone = ({ className }) => {
     
     if (rejectedFiles?.length) {
       setRejected(previousFiles => [...previousFiles, ...rejectedFiles])
+      toast.error("Failed to upload canvas information upload a .procreate file");
     }
     
     //Extraction
@@ -249,7 +250,7 @@ const Dropzone = ({ className }) => {
         <input {...getInputProps()} />
         
           {isDragActive ? (
-            <p >Drop the files here ...</p>
+            <p className='w-100 h-15 border-dashed border-2 text button-hover flex items-center justify-center'>Drop the files here ...</p>
           ) : (
             <p className='w-100 h-15 border-dashed border-2 text button-hover flex items-center justify-center'>Drag & drop files here, or click to select files</p>
           )}

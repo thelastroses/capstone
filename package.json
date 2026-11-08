@@ -31,7 +31,7 @@
     "build": "vite build",
     "preview": "vite preview",
     "test": "npm run test:unit",
-    "test:unit": "vitest run tests/app.test.mjs tests/dropzone.test.mjs tests/procreateExtraction.test.mjs tests/hostileData.test.mjs",
+    "test:unit": "vitest run tests/app.test.mjs tests/dropzone.test.mjs tests/procreateExtraction.test.mjs tests/hostileData.test.mjs tests/artworkPersistence.test.mjs",
     "test:integration": "node --env-file=.env.local --test tests/supabase.test.mjs tests/supabase.integration.test.mjs",
     "test:all": "npm run test:unit && npm run test:integration"
   }

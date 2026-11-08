@@ -58,7 +58,7 @@ npm.cmd test
 
 In Git Bash or WSL, use `npm run seed -- --set all` and `npm test`.
 
-Run the 43 unit tests:
+Run the unit tests:
 
 ```bash
 npm test
