@@ -50,3 +50,18 @@ seed --set boundary -> 7 records   (empty, one, max, zero, negative, earliest, l
 seed --set hostile  -> 7 records   (unicode, emoji, apostrophes, 10k chars, injection
                                        strings, path traversal, wrong file type)
 
+## Rep 8 - Triage ten defects with a real deadline
+
+FIX ORDER:
+  1. DEF-001  2. DEF-002  3. DEF-003  4. DEF-004  5. DEF-005  6. DEF-006  7. DEF-007  8. DEF-008  9. DEF-009  10. DEF-010
+
+SHIPS WITH KNOWN DEFECTS (with the workaround a user needs):
+  All Defects have been fixed
+
+Reflect: Which defect did you want to fix that you cannot? Write one sentence defending the decision to a user who is affected by it. If you cannot write that sentence, re-triage — you got the priority wrong.
+-   All defects were able to be fixed. Users were going to be affected by it at first glanced in the demo so all were quickly fixed.
+
+## Rep 12 - The pesticide check
+
+Reflect: How many defects did a green suite fail to catch? Beizer’s pesticide paradox says the bugs your existing methods can find are already gone.
+-   9/10

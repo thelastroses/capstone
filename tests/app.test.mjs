@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict'
 import { test } from 'vitest'
 
-import { getOnly2DArtworks } from '../src/App.jsx'
+import { getOnly2DArtworks, getOnly3DArtworks } from '../src/App.jsx'
 
 test('TC-047 returns 2D and both-gallery artworks for the 2D gallery', () => {
     const artworks = [
@@ -47,4 +47,17 @@ test('TC-048 does not mutate the source artwork list while filtering', () => {
   getOnly2DArtworks(artworks)
 
   assert.deepEqual(artworks, original)
+})
+
+test('3D gallery includes 3D and both-gallery artworks exactly once', () => {
+  const artworks = [
+    { id: '2d', gallery_type: '2D' },
+    { id: '3d', gallery_type: '3D' },
+    { id: 'both', gallery_type: 'both' },
+  ]
+
+  assert.deepEqual(getOnly3DArtworks(artworks), [
+    { id: '3d', gallery_type: '3D' },
+    { id: 'both', gallery_type: 'both' },
+  ])
 })

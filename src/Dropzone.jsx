@@ -112,9 +112,8 @@ const Dropzone = ({ className }) => {
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     accept: {
       'image/png': ['.png'],
-      'application/octet-stream': ['.procreate']
+      'application/x-procreate': ['.procreate']
     },
-   /*  maxSize: 1024 * 1000, */
     onDrop
   })
 
@@ -240,19 +239,19 @@ const Dropzone = ({ className }) => {
       }
       
   return (
-    <div className='mb-15 '>
+    <div className='mb-15 ' >
       <div className='flex flex-col items-center justify-center gap-4 '>
         <div
           {...getRootProps({
             className: className
           })}
         >
-        <input {...getInputProps()} />
+        <input {...getInputProps({ accept: '.png,.procreate' })} />
         
           {isDragActive ? (
-            <p className='w-100 h-15 border-dashed border-2 text button-hover flex items-center justify-center'>Drop the files here ...</p>
+            <p className='w-100 h-25 mt-10 border-dashed border-4 text font-bold button-hover flex items-center justify-center'>Drop the files here ...</p>
           ) : (
-            <p className='w-100 h-15 border-dashed border-2 text button-hover flex items-center justify-center'>Drag & drop files here, or click to select files</p>
+            <p className='w-100 h-25 mt-10 border-dashed border-4 text font-bold button-hover flex items-center justify-center'>Drag & drop files here, or click to select files</p>
           )}
         </div>
       </div>
@@ -261,7 +260,7 @@ const Dropzone = ({ className }) => {
       <section className='mt-10'>
         
         <div className='flex items-end justify-between'>
-          <h2 className='title text-3xl font-semibold pl-5'>Uploaded Artworks - {images.length} </h2>
+          <h2 className='title text-[30px] font-bold pl-5'>Uploaded Artworks - {images.length} </h2>
         </div>
         
 
@@ -334,7 +333,7 @@ const Dropzone = ({ className }) => {
               </div>
               <button
                 type='button'
-                className='mt-1 py-1 text-[12px] uppercase tracking-wider font-bold border border-secondary-400 rounded-md px-3'
+                className='button-hover mt-1 py-1 text-[12px] uppercase tracking-wider font-bold border border-secondary-400 rounded-md px-3'
                 onClick={() => removeRejected(file.name)}
               >
                 remove
@@ -344,6 +343,7 @@ const Dropzone = ({ className }) => {
         </ul>
 
           <form onSubmit={handleSubmit}>
+            <h2 className='text-[24px] font-bold flex items-center justify-center my-10 '> Choose Gallery Type</h2>
               <div className='flex items-center justify-center'>
                   <label>
                       <input className='button-hover ml-1' type="radio" value="2D" name="galleryType" checked={ selectedGalleryType === '2D' } onChange={handleChange}/>

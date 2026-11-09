@@ -46,7 +46,7 @@ Unsupported file types - I will not support file types that are not png and .pro
 - [ ] The build under test is tagged and pushed; CI is green on the pipeline from Chapter 9.
 - [ ] Every Must requirement has at least one written test case.
 - [ ] The test data set is checked in and loads without manual steps.
-- [ ] <your own>
+- [ ] Priority work is finished/done first
 
 ## 6. Exit criteria — verification is DONE when
 

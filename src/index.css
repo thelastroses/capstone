@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 html {
-    scrollbar-gutter: stable;
+    background-color: #473c33;
 }
 
 .navigation {
@@ -39,6 +39,10 @@ html {
 
 .button-hover:hover {
     cursor: pointer;
+}
+
+.button-default:hover {
+    cursor: default;
 }
 
 .move-trash {
