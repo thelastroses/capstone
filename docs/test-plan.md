@@ -2,7 +2,7 @@
 
 # Test Plan — Art Gallery
 
-**Version:** 1.0  ·  **Author:** Jennifer Spencer  ·  **Date:** 2026-11-02  ·  **Baseline commit:** <sha>
+**Version:** 1.0  ·  **Author:** Jennifer Spencer  ·  **Date:** 2026-11-02  ·  **Baseline commit:** 377cb84
 
 ---
 
