@@ -139,7 +139,7 @@ Owner:    Jennifer Spencer
 ID:          DEF-006
 Title:       When there are no artworks, the scroll bar is no longer there, the white space is not there on the right side of the page
 Reported:    2026-11-06 by Jennifer Spencer
-Environment: commit -, Windows 11, Node runtime 22.12.0, seed data set small - 1 artwork
+Environment: commit 0976b82, Windows 11, Node runtime 22.12.0, seed data set small - 1 artwork
 Requirement: NFR-USE-02 / AC1   Test case: TC-041
 
 Steps to reproduce:
@@ -155,7 +155,7 @@ Evidence: TC-041 fails; leaving white space on the right side of the screen when
 Severity: S4 — is a cosmetic change that affects the inital viewing of the website
 Priority: P1 — it is on the demo path and the fix looks like a one-line change.
 
-Status:   Fixed — commit -. Acceptance test: TC-041.
+Status:   Fixed — commit 0976b82. Acceptance test: TC-041.
 Owner:    Jennifer Spencer
 
 ```
@@ -163,7 +163,7 @@ Owner:    Jennifer Spencer
 ID:          DEF-007
 Title:       Limit only .png and .procreate when clicking on the drop zone to open file explorer
 Reported:    2026-11-06 by Jennifer Spencer
-Environment: commit , Windows 11, Node runtime 22.12.0, seed data set small - 1 artwork
+Environment: commit 0976b82, Windows 11, Node runtime 22.12.0, seed data set small - 1 artwork
 Requirement: FR-EXT-04 / AC1   Test case: TC-025
 
 Steps to reproduce:
@@ -179,7 +179,7 @@ Evidence: TC-025 fails; Shows Custom Files allowing .exe, .com, .bin, and an add
 Severity: S4 — Changes what the artist views not what the artist can actually upload
 Priority: P1 — is visual in any non drag and drop upload fix is simple
 
-Status:   Fixed — commit -. Acceptance test: TC-025.
+Status:   Fixed — commit 0976b82. Acceptance test: TC-025.
 Owner:    Jennifer Spencer
 
 ```
@@ -211,7 +211,7 @@ Owner:    Jennifer Spencer
 ID:          DEF-009
 Title:       Choose Gallery Type not indicated
 Reported:    2026-11-08 by Jennifer Spencer
-Environment: commit -, Windows 11, Node runtime 22.12.0, seed data set small - 1 artwork
+Environment: commit 0976b82, Windows 11, Node runtime 22.12.0, seed data set small - 1 artwork
 Requirement: NFR-USE-01 / AC1   Test case: TC-040
 
 Steps to reproduce:
@@ -227,7 +227,7 @@ Evidence: TC-040 fails; First time artist would not understand what the radio bu
 Severity: S4 — Is easily seen when opening upload page
 Priority: P1 — it is on the demo path and the fix looks like a one-line change.
 
-Status:   Fixed — commit -. Acceptance test: TC-040.
+Status:   Fixed — commit 0976b82. Acceptance test: TC-040.
 Owner:    Jennifer Spencer
 
 ```
@@ -235,7 +235,7 @@ Owner:    Jennifer Spencer
 ID:          DEF-010
 Title:       Hover over remove button for the reject files is not there
 Reported:    2026-11-08 by Jennifer Spencer
-Environment: commit -, Windows 11, Node runtime 22.12.0, seed data set small - 1 artwork
+Environment: commit 0976b82, Windows 11, Node runtime 22.12.0, seed data set small - 1 artwork
 Requirement: NFR-USE-01 / AC1 Test case: TC-040
 
 Steps to reproduce:
@@ -251,7 +251,7 @@ Evidence: TC-040 fails; First time artist may be tripped up by the missing UI
 Severity: S4 — Can be confusing if a rejected file is attempted to be deleted and very easy fix
 Priority: P1 — it is on the demo path and the fix is a one-line change.
 
-Status:   Fixed — commit -. Integration test: TC-011; Unit test: TC-011.
+Status:   Fixed — commit 0976b82. Integration test: TC-011; Unit test: TC-011.
 Owner:    Jennifer Spencer
 
 ```
@@ -291,8 +291,8 @@ two different hats here — write down which hat you were wearing.
 | DEF-003 | After deleting the 20th artwork allow another upload | FR-DATA-02 / AC2 | S3 | P1 | Jennifer Spencer | Fixed | e4f5a6b | TC-044 |
 | DEF-004 | Do not allow duplicate artworks | FR-UPL-01 / AC2 | S3 | P1 | Jennifer Spencer | Fixed | ec7bfb4 | TC-002 |
 | DEF-005 | Selecting the both radio button uploads it to the 2D gallery as well | FR-UPL-03 / AC1 | S3 | P1 | Jennifer Spencer | Fixed | ec7bfb4 | TC-006 |
-| DEF-006 | When there are no artworks, the scroll bar is no longer there, the white space is not there on the right side of the page | NFR-USE-02 / AC1 | S4 | P1 | Jennifer Spencer | Fixed | - | TC-041 |
-| DEF-007 | Limit only .png and .procreate when clicking on the drop zone to open file explorer | FR-EXT-04 / AC1 | S4 | P1 | Jennifer Spencer | Fixed | - | TC-025 |
+| DEF-006 | When there are no artworks, the scroll bar is no longer there, the white space is not there on the right side of the page | NFR-USE-02 / AC1 | S4 | P1 | Jennifer Spencer | Fixed | 0976b82 | TC-041 |
+| DEF-007 | Limit only .png and .procreate when clicking on the drop zone to open file explorer | FR-EXT-04 / AC1 | S4 | P1 | Jennifer Spencer | Fixed | 0976b82 | TC-025 |
 | DEF-008 | TC-011 integration test failing | FR-DATA-01 / AC1 | S3 | P1 | Jennifer Spencer | Fixed | 70a7523 | TC-011 |
-| DEF-009 | Choose Gallery Type not indicated | NFR-USE-01 / AC1 | S4 | P1 | Jennifer Spencer | Fixed | - | TC-040 |
-| DEF-010 | Hover over remove button for the reject files is not there | NFR-USE-01 / AC1 | S4 | P1 | Jennifer Spencer | Fixed | - | TC-011 |
+| DEF-009 | Choose Gallery Type not indicated | NFR-USE-01 / AC1 | S4 | P1 | Jennifer Spencer | Fixed | 0976b82 | TC-040 |
+| DEF-010 | Hover over remove button for the reject files is not there | NFR-USE-01 / AC1 | S4 | P1 | Jennifer Spencer | Fixed | 0976b82 | TC-011 |

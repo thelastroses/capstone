@@ -59,13 +59,7 @@ Unsupported file types - I will not support file types that are not png and .pro
 - [ ] The automated unit and integration tiers run from `npm run test:all`.
 - [ ] Accessibility checks NFR-ACC-01 through NFR-ACC-03 are tested 3/3 passed to allow for a better user experience
 
-## 7. Risks to the testing itself
-
-| Risk | Trigger | Response |
-|---|---|---|
-| <e.g. third-party sandbox unavailable> | <how you'd notice> | <stub + a manual test before release> |
-
-## 8. Schedule
+## 7. Schedule
 
 | When | What |
 |---|---|
@@ -73,8 +67,8 @@ Unsupported file types - I will not support file types that are not png and .pro
 | Week 11, days 3–5 | Write and automate the suite; first full pass |
 | Week 11, days 6–7 | Triage, fix S1/S2, regression tests, log |
 
-## 9. Approval
+## 8. Approval
 
 I have read this plan and I am accountable for the exit criteria above.
 
-Signed: Jennifer Spencer  ·  Date: 2026-11-02
+Signed: Jennifer Spencer  ·  Date: 2026-11-08
