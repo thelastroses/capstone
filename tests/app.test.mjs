@@ -2,6 +2,7 @@ import assert from 'node:assert/strict'
 import { test } from 'vitest'
 
 import { getOnly2DArtworks, getOnly3DArtworks } from '../src/App.jsx'
+import { getDisplayedArtworks, SAMPLE_ARTWORKS } from '../src/sampleArtworks.js'
 
 test('TC-047 returns 2D and both-gallery artworks for the 2D gallery', () => {
     const artworks = [
@@ -60,4 +61,12 @@ test('3D gallery includes 3D and both-gallery artworks exactly once', () => {
     { id: '3d', gallery_type: '3D' },
     { id: 'both', gallery_type: 'both' },
   ])
+})
+
+test('offline gallery uses sample artwork only when no real artworks are available', () => {
+  assert.deepEqual(getDisplayedArtworks([], true), SAMPLE_ARTWORKS)
+
+  const savedArtworks = [{ id: 'saved-artwork', gallery_type: 'both' }]
+  assert.equal(getDisplayedArtworks(savedArtworks, true), savedArtworks)
+  assert.deepEqual(getDisplayedArtworks([], false), [])
 })
