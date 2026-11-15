@@ -12,6 +12,7 @@ import {
   saveProcreateInfo as persistProcreateInfo,
   uploadArtwork as persistArtwork,
 } from './artworkPersistence.mjs';
+import { SAMPLE_ARTWORKS } from './sampleArtworks.js';
 
 //Got permission to use code from Hamed Bahram's repo for the dropzone/upload section of the Art Gallery: https://github.com/HamedBahram/dropzone.git
 //src/repo-permission-image/DropzoneRepoPermission.png
@@ -47,6 +48,8 @@ const Dropzone = ({ className }) => {
   const [files, setFiles] = useState([])
   const [images, setImages] = useState([])
   const [rejected, setRejected] = useState([])
+  const [databaseUnavailable, setDatabaseUnavailable] = useState(false)
+  const [isLoadingImages, setIsLoadingImages] = useState(true)
   const [activeArtworkId, setActiveArtworkId] = useState(null)
   const [extractedInfo, setExtractedInfo] = useState(null)
   const [selectedGalleryType, setSelectedGalleryType] = useState('');
@@ -127,11 +130,20 @@ const Dropzone = ({ className }) => {
   }, [])
 
   async function loadImages() {
-    const data = await getImages();
-
-    if (data != null)
-    {
+    setIsLoadingImages(true)
+    try {
+      const data = await getImages()
+      if (data === null) {
+        setDatabaseUnavailable(true)
+        return
+      }
       setImages(data);
+      setDatabaseUnavailable(false)
+    } catch (error) {
+      setDatabaseUnavailable(true)
+      toast.error(error.message || "Failed to retrieve artwork")
+    } finally {
+      setIsLoadingImages(false)
     }
   }
 
@@ -237,10 +249,12 @@ const Dropzone = ({ className }) => {
       const handleChange = (event) => {
         setSelectedGalleryType(event.target.value);
       }
+
+      
       
   return (
     <div className='mb-15 ' >
-      <div className='flex flex-col items-center justify-center gap-4 '>
+      <div className='flex flex-col items-center justify-center gap-4'>
         <div
           {...getRootProps({
             className: className
@@ -248,11 +262,12 @@ const Dropzone = ({ className }) => {
         >
         <input {...getInputProps({ accept: '.png,.procreate' })} />
         
-          {isDragActive ? (
-            <p className='w-100 h-25 mt-10 border-dashed border-4 text font-bold button-hover flex items-center justify-center'>Drop the files here ...</p>
-          ) : (
-            <p className='w-100 h-25 mt-10 border-dashed border-4 text font-bold button-hover flex items-center justify-center'>Drag & drop files here, or click to select files</p>
-          )}
+            {isDragActive ? (
+              <p className='w-100 h-25 border-dashed border-4 text font-bold button-hover flex items-center justify-center'>Drop the files here ...</p>
+            ) : (
+              <p className='w-100 h-25 border-dashed border-4 text font-bold button-hover flex items-center justify-center'>Drag & drop files here, or click to select files</p>
+            )}
+
         </div>
       </div>
 
@@ -268,7 +283,55 @@ const Dropzone = ({ className }) => {
         <h3 className='title text-lg font-semibold mt-10 pl-5 border-b pb-3'>
           Accepted Files
         </h3>
-              
+        {databaseUnavailable && (
+          <div role='alert' className='mx-10 mt-6 rounded-[20px] border p-5'>
+            <p>
+              Could not connect to the artwork database. {images.length === 0
+                ? 'The sample below is for display only; it is not saved artwork.'
+                : 'Showing artwork already loaded.'}
+            </p>
+            <button
+              type='button'
+              className='button-hover mt-3 rounded-[20px] border px-3 py-1'
+              onClick={loadImages}
+              disabled={isLoadingImages}
+            >
+              {isLoadingImages ? 'Retrying...' : 'Retry connection'}
+            </button>
+          </div>
+        )}
+
+        {databaseUnavailable && images.length === 0 && (
+          <ul className='my-10 px-10 grid gap-10 grid-cols-5' aria-label='Sample artwork and canvas information'>
+            {SAMPLE_ARTWORKS.map(artwork => (
+              <li key={artwork.id} className='relative flex'>
+                <div className='flex flex-col items-center'>
+                  <img className='smooth-load' src={artwork.image_url} alt={artwork.png_name} />
+                  <p className='text-[12px] font-medium'>{artwork.png_name} (sample)</p>
+                </div>
+                <div className='pl-3 pt-7 text-[14px]'>
+                  <div className='whitespace-nowrap'>
+                    <p>Title: {artwork.procreate_data.artwork_name}</p>
+                    <p>Canvas Size: {artwork.procreate_data.width} x {artwork.procreate_data.height}</p>
+                    <p>DPI: {artwork.procreate_data.dpi}</p>
+                    <p>Strokes: {artwork.procreate_data.stroke_count}</p>
+                    <p>Time: {artwork.procreate_data.tracked_time}</p>
+                  </div>
+                </div>
+              </li>
+            ))}
+          </ul>
+        )}
+
+        {!databaseUnavailable && !isLoadingImages && images.length === 0 && ( 
+      
+        <div>
+            <h2 className='text-[20px] warning justify-center items-center flex pt-40'>
+              To begin uploading choose an artwork and drop it into the dashed box above
+            </h2>
+        </div>
+
+        )}
 
         <ul className='my-10 px-10 grid gap-10 grid-cols-5'>
           {images.map(artworks => {
@@ -277,6 +340,20 @@ const Dropzone = ({ className }) => {
             .getPublicUrl(artworks.png_path)
              
             const extractedInfo = artworks.procreate_data
+
+            const displayValue = (value) => {
+              if(
+                value === null || 
+                value === undefined || 
+                value === "$null" || 
+                value === "" ||
+                value === " "
+              ) {
+                return "n/a";
+              }
+
+              return value;
+            }
           return (
             <li key={artworks.id} className='relative flex'>
               <div className='flex flex-col items-center'>
@@ -290,8 +367,7 @@ const Dropzone = ({ className }) => {
               </div>
 
               
-              <button
-                type='button'
+              <button   
                 className='w-7 h-7 border rounded-full flex justify-center items-center absolute button-hover move-trash'
                 onClick={() => removeFile(artworks)}
               >
@@ -301,11 +377,11 @@ const Dropzone = ({ className }) => {
               <div className='pl-3 pt-7 text-[14px]'>
                   {extractedInfo && (
                     <div className='whitespace-nowrap'>
-                      <p>Title: {extractedInfo.artwork_name}</p>
-                      <p>Canvas Size: {extractedInfo.width} x {extractedInfo.height}</p>
-                      <p>DPI: {extractedInfo.dpi}</p>
-                      <p>Strokes: {extractedInfo.stroke_count}</p>
-                      <p>Time: {extractedInfo.tracked_time}</p>
+                      <p>Title: {displayValue(extractedInfo.artwork_name)}</p>
+                      <p>Canvas Size: {displayValue(extractedInfo.width)} x {displayValue(extractedInfo.height)}</p>
+                      <p>DPI: {displayValue(extractedInfo.dpi)}</p>
+                      <p>Strokes: {displayValue(extractedInfo.stroke_count)}</p>
+                      <p>Time: {displayValue(extractedInfo.tracked_time)}</p>
                     </div>
                   )}
                 </div>
