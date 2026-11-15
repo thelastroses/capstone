@@ -5,7 +5,7 @@ import { OrbitControls, Stage, Text} from '@react-three/drei';
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 import Upload from "./Upload.jsx";
 import { supabase } from "./supabase";
-import { getImages } from "./Artwork.jsx";
+import { getArtworkLoadErrorMessage, getImages } from "./Artwork.jsx";
 import envelopeIcon from "./envelope-fill.svg";
 import { getDisplayedArtworks } from "./sampleArtworks.js";
 import toast from "react-hot-toast";
@@ -38,8 +38,9 @@ const Home = () => {
   const [controlsEnabled, setControlsEnabled] =  useState(true);
   const [selectedArtwork, setSelectedArtwork] = useState(null);
   const [images, setImages] = useState([])
-  const [databaseUnavailable, setDatabaseUnavailable] = useState(false)
+  const [loadErrorMessage, setLoadErrorMessage] = useState(null)
   const [isLoadingImages, setIsLoadingImages] = useState(true)
+  const databaseUnavailable = loadErrorMessage !== null
   const displayedArtworks = getDisplayedArtworks(images, databaseUnavailable)
   const showingSampleArtworks = databaseUnavailable && images.length === 0
   const threeDArtworks = getOnly3DArtworks(displayedArtworks);
@@ -54,15 +55,12 @@ const Home = () => {
       setIsLoadingImages(true)
       try {
         const data = await getImages()
-        if (data === null) {
-          setDatabaseUnavailable(true)
-          return
-        }
         setImages(data);
-        setDatabaseUnavailable(false)
+        setLoadErrorMessage(null)
       } catch (error) {
-        setDatabaseUnavailable(true)
-        toast.error(error.message || "Failed to retrieve artwork")
+        const message = getArtworkLoadErrorMessage(error)
+        setLoadErrorMessage(message)
+        toast.error(message)
       } finally {
         setIsLoadingImages(false)
       }
@@ -94,7 +92,7 @@ const Home = () => {
         {databaseUnavailable && (
           <div role="alert" className="fixed left-4 top-4 z-20 max-w-sm rounded-[20px] bg-[#111314] p-4 text-white">
             <p>
-              The artwork database is unavailable. {showingSampleArtworks
+              {loadErrorMessage} {showingSampleArtworks
                 ? "Showing sample artwork for demonstration only."
                 : "Showing the artwork already loaded."}
             </p>
@@ -170,6 +168,16 @@ const Home = () => {
                   </group>
                 );
               })}
+
+              {!databaseUnavailable && !isLoadingImages && images.length === 0 && (
+      
+      
+            <Text color="#f15a30" fontSize={0.5} position={[1,.5,1]} rotation={[0,.75,0]}>
+              To begin uploading choose an artwork and drop it into the dashed box above
+            </Text>
+       
+
+        )}
             </Stage>
           </Suspense>
           <Text position={[5, 0, 5]} rotation={[0,.75,0]}>Gallery</Text>
@@ -229,10 +237,10 @@ const Home = () => {
           </h1>
         </div>
 
-        <div className="min-h-screen pt-50 text-white flex items-center justify-center background " style={{overflowX: 'hidden'}}>
+        <div className="min-h-screen w-full pt-50 text-white flex flex-col items-center justify-center background px-50" style={{overflowX: 'hidden'}}>
           
           
-          <ul className='mt-6 grid grid-cols-3 gap-20 gap-y-20'>
+          <ul className='mt-6 grid w-full grid-cols-3 justify-items-center gap-20 gap-y-20'>
                     {getOnly2DArtworks(displayedArtworks)
                     .map(artworks => {
                       const imageUrl = artworks.image_url || supabase.storage
@@ -272,12 +280,23 @@ const Home = () => {
                       </li>
                     )
                   })}
+
+                  
                   </ul>
+
+                  {!databaseUnavailable && !isLoadingImages && images.length === 0 && (
+                  <div>
+                      <h2 className='text-center text-[20px] warning'>
+                        To begin uploading choose an artwork and drop it into the dashed box above
+                      </h2>
+                  </div>
+
+                  )}
            
         </div>
 
-        <div className="px-125 py-20 pt-50 font-medium" style={{background:'#111314'}}>
-          <div className='py-20 grid place-items-center rounded-[20px] ' style={{background:'#b6bfc1'}}>
+        <div className="px-4 py-20 pt-50 font-medium sm:px-8 lg:px-12" style={{background:'#111314'}}>
+          <div className='mx-auto grid w-full max-w-3xl place-items-center rounded-[20px] py-20' style={{background:'#b6bfc1'}}>
                   <h2 className="text-[28px] font-black" >Contact Me!</h2>
                   <h2 className="pt-10">G-Mail:</h2>
                   <a href='mailto:jspencer0709@gmail.com'>

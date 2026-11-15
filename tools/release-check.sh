@@ -4,7 +4,7 @@
 # Stack-agnostic. Point it at YOUR real commands and run it from the root of
 # your repository, on the branch you intend to tag:
 #
-#   TEST_CMD="npm test" SETUP_CMD="npm ci" sh release-check.sh
+#   TEST_CMD="./script/setup lint test build" SETUP_CMD="npm ci" sh tools/release-check.sh
 #   TEST_CMD="pytest -q" SETUP_CMD="pip install -r requirements.txt" sh release-check.sh
 #
 # It never modifies your repository: it clones a throwaway copy into a temp
@@ -34,11 +34,14 @@ else
 fi
 
 say "== 2. Secrets =="
-if git grep -nIE "$SECRET_RE" -- . >/dev/null 2>&1; then
-  fail "possible credential in tracked files - rerun: git grep -nIE '$SECRET_RE'"
+if git grep -nIE "$SECRET_RE" -- . | \
+   grep -vE '=[[:space:]]*"env\([A-Za-z_][A-Za-z0-9_]*\)"[[:space:]]*$' \
+   >/dev/null; then
+  fail "possible credential in tracked files - inspect matching lines"
 else
   pass "no obvious credential literals in tracked files"
 fi
+
 if git ls-files --error-unmatch .env >/dev/null 2>&1; then
   fail ".env is tracked - ignore it and commit a .env.example instead"
 else

@@ -5,7 +5,7 @@ import { generateUUID } from 'three/src/math/MathUtils.js';
 import { extractProcreate } from "./procreateExtraction.jsx";
 import toast from 'react-hot-toast';
 import deleteIcon from "./trash3-fill.svg";
-import { getImages } from "./Artwork.jsx";
+import { getArtworkLoadErrorMessage, getImages } from "./Artwork.jsx";
 import artworkCompression from 'browser-image-compression';
 import {
   removeArtworkAndFile,
@@ -48,8 +48,10 @@ const Dropzone = ({ className }) => {
   const [files, setFiles] = useState([])
   const [images, setImages] = useState([])
   const [rejected, setRejected] = useState([])
-  const [databaseUnavailable, setDatabaseUnavailable] = useState(false)
+  const [isUploading, setIsUploading] = useState(false)
+  const [loadErrorMessage, setLoadErrorMessage] = useState(null)
   const [isLoadingImages, setIsLoadingImages] = useState(true)
+  const databaseUnavailable = loadErrorMessage !== null
   const [activeArtworkId, setActiveArtworkId] = useState(null)
   const [extractedInfo, setExtractedInfo] = useState(null)
   const [selectedGalleryType, setSelectedGalleryType] = useState('');
@@ -70,7 +72,12 @@ const Dropzone = ({ className }) => {
     const procreateFile = acceptedFiles.find(file =>
         file.name.toLowerCase().endsWith('.procreate')
     )
+
+    if (!pngFile && !procreateFile) {
+      return
+    }
     
+    setIsUploading(true)
       try {
         const info = procreateFile
           ? await extractProcreate(procreateFile)
@@ -109,10 +116,13 @@ const Dropzone = ({ className }) => {
         }
       } catch (error) {
         toast.error(error.message || "Could not process artwork");
+      } finally {
+        setIsUploading(false)
       }
   }, [activeArtworkId])
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
+    disabled: isUploading,
     accept: {
       'image/png': ['.png'],
       'application/x-procreate': ['.procreate']
@@ -133,15 +143,12 @@ const Dropzone = ({ className }) => {
     setIsLoadingImages(true)
     try {
       const data = await getImages()
-      if (data === null) {
-        setDatabaseUnavailable(true)
-        return
-      }
       setImages(data);
-      setDatabaseUnavailable(false)
+      setLoadErrorMessage(null)
     } catch (error) {
-      setDatabaseUnavailable(true)
-      toast.error(error.message || "Failed to retrieve artwork")
+      const message = getArtworkLoadErrorMessage(error)
+      setLoadErrorMessage(message)
+      toast.error(message)
     } finally {
       setIsLoadingImages(false)
     }
@@ -262,7 +269,15 @@ const Dropzone = ({ className }) => {
         >
         <input {...getInputProps({ accept: '.png,.procreate' })} />
         
-            {isDragActive ? (
+            {isUploading ? (
+              <div role='status' aria-live='polite' className='w-100 h-25 border-dashed border-4 text font-bold flex flex-col items-center justify-center gap-2'>
+                <svg className='h-7 w-7 animate-spin' viewBox='0 0 24 24' aria-hidden='true'>
+                  <circle cx='12' cy='12' r='10' fill='none' stroke='currentColor' strokeWidth='4' opacity='0.25' />
+                  <path fill='currentColor' opacity='0.75' d='M4 12a8 8 0 0 1 8-8V0C5.4 0 0 5.4 0 12h4z' />
+                </svg>
+                <span>Uploading artwork...</span>
+              </div>
+            ) : isDragActive ? (
               <p className='w-100 h-25 border-dashed border-4 text font-bold button-hover flex items-center justify-center'>Drop the files here ...</p>
             ) : (
               <p className='w-100 h-25 border-dashed border-4 text font-bold button-hover flex items-center justify-center'>Drag & drop files here, or click to select files</p>
@@ -286,8 +301,8 @@ const Dropzone = ({ className }) => {
         {databaseUnavailable && (
           <div role='alert' className='mx-10 mt-6 rounded-[20px] border p-5'>
             <p>
-              Could not connect to the artwork database. {images.length === 0
-                ? 'The sample below is for display only; it is not saved artwork.'
+              {loadErrorMessage} {images.length === 0
+                ? 'Showing sample artwork and canvas information for demonstration.'
                 : 'Showing artwork already loaded.'}
             </p>
             <button
