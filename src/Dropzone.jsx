@@ -323,7 +323,7 @@ const Dropzone = ({ className }) => {
           </ul>
         )}
 
-        {!databaseUnavailable && !isLoadingImages && images.length === 0 && ( 
+        {!databaseUnavailable && !isLoadingImages && images.length === 0 && (
       
         <div>
             <h2 className='text-[20px] warning justify-center items-center flex pt-40'>
@@ -343,9 +343,9 @@ const Dropzone = ({ className }) => {
 
             const displayValue = (value) => {
               if(
-                value === null || 
-                value === undefined || 
-                value === "$null" || 
+                value === null ||
+                value === undefined ||
+                value === "$null" ||
                 value === "" ||
                 value === " "
               ) {
@@ -367,7 +367,7 @@ const Dropzone = ({ className }) => {
               </div>
 
               
-              <button   
+              <button
                 className='w-7 h-7 border rounded-full flex justify-center items-center absolute button-hover move-trash'
                 onClick={() => removeFile(artworks)}
               >

@@ -70,9 +70,9 @@ const Home = () => {
 
     const displayValue = (value) => {
       if(
-        value === null || 
-        value === undefined || 
-        value === "$null" || 
+        value === null ||
+        value === undefined ||
+        value === "$null" ||
         value === "" ||
         value === " "
       ) {
