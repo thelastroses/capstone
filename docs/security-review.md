@@ -73,7 +73,7 @@ routine failure mode. No ID in the database, no line in this table.
 ## Sign-off
 
 ```
-Security pass performed by: ____________________  Date: __________
-Areas covered: 1 2 3 4 5 6 7      Findings opened: ____   Fixed: ____   Accepted: ____
-Highest-severity issue shipping in this release candidate: ____________________
+Security pass performed by: Jennifer Spencer  Date: 2026-11-09
+Areas covered: 1 2 3 4 5 6 7      Findings opened: 0   Fixed: 0   Accepted: 0
+Highest-severity issue shipping in this release candidate: 0
 ```
