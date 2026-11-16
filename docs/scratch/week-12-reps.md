@@ -34,7 +34,7 @@ Exit criteria:
 [ ] a clean clone sets up, runs, and passes tests using only documented steps
 Then run the gate with your real commands and tag:
 
-TEST_CMD="./script/setup lint test build" SETUP_CMD="npm ci" sh tools/release-check.sh
+SETUP_CMD="./script/setup" TEST_CMD="./script/lint && ./script/test && ./script/build && ./script/smoke" sh tools/release-check.sh
 
 git tag -a v0.9.0-rc.1 -m "Release candidate 1: integrated system, Milestone 12"
 git push origin v0.9.0-rc.1
